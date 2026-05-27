@@ -1,0 +1,16 @@
+# Dependencias y caché de compilación
+node_modules/
+dist/
+.vite/
+
+# Variables de entorno (Datos sensibles/Contraseñas)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archivos del sistema operativo o editores
+.DS_Store
+Thumbs.db
+.editorconfig

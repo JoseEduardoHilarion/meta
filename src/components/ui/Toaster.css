@@ -1,0 +1,83 @@
+/**************** INTEGRACIÓN DEL TOASTER CON TU MOTOR NEUMÓRFICO ****************/
+@layer components {
+  .notification-toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 999999;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 280px;
+    max-width: 400px;
+    padding: 16px 20px;
+    border-radius: 12px;
+
+    /* USAMOS TUS VARIABLES GLOBALES: Se adapta si estás en modo claro u oscuro */
+    background-color: var(--base-color);
+    color: var(--text-main);
+    box-shadow: var(--neumo-shadow);
+
+    /* Animación con curva premium */
+    animation: slideInToaster 2s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+      forwards;
+  }
+
+  /* El texto de la notificación hereda tu color principal */
+  .notification-toast p {
+    margin: 0;
+    font-size: 1.05rem; /* El estándar que dejamos */
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* El círculo del ícono con un sutil contraste */
+  .notification-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    font-size: 2.5rem;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  /* VARIACIONES DE COLOR UTILIZANDO MEZCLA DE COLOR SOBRE TU BASE */
+  .notification-toast.success {
+    border-left: 6px solid hsl(120, 50%, 45%);
+  }
+  .notification-toast.success .notification-icon {
+    background-color: color-mix(in srgb, var(--base-color), #4caf50 15%);
+    color: #4caf50;
+  }
+
+  .notification-toast.error {
+    border-left: 6px solid hsl(0, 70%, 50%);
+  }
+  .notification-toast.error .notification-icon {
+    background-color: color-mix(in srgb, var(--base-color), #f44336 15%);
+    color: #f44336;
+  }
+
+  .notification-toast.info {
+    border-left: 6px solid hsl(210, 80%, 50%);
+  }
+  .notification-toast.info .notification-icon {
+    background-color: color-mix(in srgb, var(--base-color), #2196f3 15%);
+    color: #2196f3;
+  }
+
+  @keyframes slideInToaster {
+    from {
+      transform: translateX(600%) scale(0.3);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+    }
+  }
+}

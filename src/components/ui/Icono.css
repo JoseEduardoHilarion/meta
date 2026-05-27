@@ -1,0 +1,29 @@
+@layer components {
+  .icono{
+    /* IMPORTANTE: Rehabilitamos el centrado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 2.5rem;
+    height: 2.5rem;
+    overflow: hidden;
+
+    /*EMOJIES o caracteres, vean del tamaño correcto */
+    font-size: 1.5rem;
+    line-height: 1;
+    /* Evita que el interlineado mueva el emoji hacia abajo */
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    & svg {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
+  }
+}

@@ -1,0 +1,69 @@
+@layer utilities {
+  /* Usamos nombres que describan la escala, no solo el valor fijo */
+  .m-1 {margin: 5px;}
+  .m-2 {margin: 10px;}
+  .m-3 {margin: 20px;}
+
+
+  .mt-2 {margin-top: 10px;}
+  .mt-4 {margin-top: 20px;}
+
+  .mb-2 {margin-bottom: 10px;}
+
+  .p-1 {padding: 5px;}
+  .p-2 {padding: 10px;}
+
+  /* --- Layout Pro --- */
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;}
+
+  .flex-col {
+    display: flex;
+    flex-direction: column;}
+
+  .flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;}
+  .flex-around {
+    display: flex;
+    justify-content: space-around; /* Deja espacio en las puntas */
+    align-items: center;}
+    
+
+  .gap-1 {gap: 5px;}
+  .gap-2 {gap: 10px;}
+
+  .w-full {width: 100%;}
+
+  /* --- Tipografía (Impecable como lo tenías) --- */
+  .txt-center {text-align: center;}
+  /* --- Colores y Bordes --- */
+  .txt-main { color: var(--text-main); }
+  .txt-muted { color: var(--text-muted); }
+  .txt-grey {color: var(--text-muted); }
+
+  .txt-xs {font-size: var(--text-xs);}
+  .txt-sm {font-size: var(--text-sm);}
+  .txt-md {font-size: var(--text-md);}
+  .txt-lg {font-size: var(--text-lg);}
+  .txt-xl {font-size: var(--text-xl);}
+  .txt-2xl {font-size: var(--text-2xl);}
+
+  .fw-light {font-weight: 300;}
+  .fw-normal {font-weight: 400;}
+  .fw-medium {font-weight: 500;}
+  .fw-bold {font-weight: 700;}
+  
+  /* Cambié tc-grey por dark para que sea más descriptivo */
+  .rounded-sm {border-radius: 8px;}
+  .rounded-md {border-radius: 15px;}
+  .rounded-full {border-radius: 9999px;}
+  /* El estándar para círculos perfectos */
+
+  .bg-w {background: white;} 
+
+  .circulo{border-radius: 50%;}
+  }

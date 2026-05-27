@@ -1,0 +1,141 @@
+/*/*******************Reset*******************/
+@layer reset {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/*******************BASE*************************/
+@layer base {
+
+  :root {
+    /* MODO CLARO (Default) */
+    --base-color: hsl(210, 20%, 95%);
+    --intensity: 18%;
+
+    /* Gris muy oscuro */
+    --text-main: hsl(210, 20%, 20%);
+    /* Gris medio para detalles */
+    --text-muted: hsl(210, 10%, 45%);
+
+
+    /* 1. Define tu color de base aquí */
+    /*--base-color: hsl(0, 0%, 99%);
+    --base-color: hsl(16, 59%, 58%);
+    --base-color: hsl(210, 20%, 93%);
+    --base-color: hsl(210, 20%, 12%);
+
+    /*luz: mezclando la base con blanco */
+    --shadow-light: color-mix(in srgb, var(--base-color), white var(--intensity));
+    /*sombra: mezclando la base con negro */
+    --shadow-dark: color-mix(in srgb, var(--base-color), black var(--intensity));
+
+    /*distancia de la sombra*/
+    --distance: 5px;
+    --blur: 5px;
+
+    /*Recto ELEVADO*/
+    --neumo-shadow:
+      var(--distance) var(--distance) var(--blur) var(--shadow-dark),
+      calc(var(--distance) * -1) calc(var(--distance) * -1) var(--blur) var(--shadow-light);
+
+    /*Recto UNDIDO*/
+    --neumo-shadow-inset:
+      inset var(--distance) var(--distance) var(--blur) var(--shadow-dark),
+      inset calc(var(--distance) * -1) calc(var(--distance) * -1) var(--blur) var(--shadow-light);
+
+    /*convex y concabe se cambia Backgroud-color es un Gradiente*/
+    --base-color-convex: linear-gradient(145deg, var(--shadow-light), var(--shadow-dark));
+    --base-color-concave: linear-gradient(145deg, var(--shadow-dark), var(--shadow-light));
+
+    /* Tokens de validación suaves */
+    --color-error-soft: rgba(231, 76, 60, 0.25);
+    --color-success-soft: rgba(46, 204, 113, 0.2);
+    --color-info-soft: rgba(52, 152, 219, 0.2);
+
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-md: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+  }
+
+  html[data-theme="light"] {
+    --base-color: hsl(210, 20%, 93%);
+    --text-main: hsl(210, 20%, 20%);
+  }
+
+  /* Bloque para el Modo Noche explícito */
+  html[data-theme="dark"] {
+    --base-color: hsl(210, 20%, 12%);
+    --text-main: hsl(210, 20%, 95%);
+  }
+
+  button,
+  input,
+  select,
+  textarea,
+  a {
+    color: inherit;
+    /* Hereda el --text-main del body */
+    font-family: inherit;
+    /* También hereda tu tipografía Gill Sans */
+  }
+
+
+  body {
+    background-color: var(--base-color);
+    color: var(--text-main);
+    /* El texto base ahora es dinámico */
+    transition: background-color 4s ease, color 0.4s ease;
+    font-family:
+      'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  .layout {
+    display: grid;
+    height: 100vh;
+    /* En el celu, solo una columna que ocupe todo */
+    grid-template-columns: 1fr;
+    /* Una fila debajo de la otra */
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      'cabecera'
+      'lateral'
+      'principal'
+      'pie';
+  }
+
+  @media (min-width: 600px) {
+    .layout {
+      /* Aquí redefinimos a dos columnas */
+      grid-template-columns: auto 1fr;
+      /* Ajustamos las filas para que el medio sea 1fr */
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas:
+        'cabecera cabecera'
+        'lateral   principal'
+        'pie       pie';
+    }
+  }
+
+  /* Usamos el nombre de la etiqueta directamente */
+  header {
+    grid-area: cabecera;
+  }
+
+  aside {
+    grid-area: lateral;
+  }
+
+  main {
+    grid-area: principal;
+  }
+
+  footer {
+    grid-area: pie;
+  }
+}

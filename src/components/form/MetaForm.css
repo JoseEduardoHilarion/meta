@@ -1,0 +1,36 @@
+@layer components {
+	/* El estilo de tu ventana emergente / modal */
+	.modal-emergente {
+		width: 80%;
+		/* O 80vw, ocupa el 80% de la pantalla */
+		max-width: 900px;
+		/* Un tope opcional para que no sea gigante */
+		margin: auto;
+		background: #fff;
+		padding: 24px;
+	}
+
+	.formulario {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		border-radius: 8px;
+		overflow: hidden;
+		margin: 15px;
+		/*CLAVE: Le avisa a los Inputs de su interior 
+       que midan el ancho de ESTE modal, no de la pantalla completa.*/
+		container-type: inline-size;
+
+		& fieldset {
+			border: none;
+			display: flex;
+			/* Para alinear el input y el select uno al lado del otro */
+			gap: 15px;
+			/* Espacio entre el input y el select */
+			border-radius: 15px;
+			justify-content: space-between;
+			/* Empuja los elementos a los extremos */
+			align-items: center;
+		}
+	}
+}
