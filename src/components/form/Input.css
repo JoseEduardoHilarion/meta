@@ -1,51 +1,74 @@
 @layer components {
-    /*  Mobile-First */
+  /*  Mobile-First */
+  .field {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    margin: 4px;
+  }
+
+  @container (min-width: 560px) {
     .field {
-        display: flex;
-        flex-direction: column;
-        font-weight: 600;
-        margin: 4px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
     }
 
-    @container (min-width: 560px) {
-        .field {
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-        .field__label-text {
-            width: auto;
-            max-width: 35%;
-            /* Evita que Flexbox intente aplastarlo más de la cuenta */
-            flex-shrink: 0;
-        }
+    .field__label-text {
+      width: auto;
+      max-width: 35%;
+      /* Evita que Flexbox intente aplastarlo más de la cuenta */
+      flex-shrink: 0;
+    }
+  }
+
+  .field__input {
+    padding: 10px;
+    border: none;
+    /*outline: none; pero se escribe &:focus */
+    border-radius: 15px;
+    font-size: var(--text-md);
+    /* Usamos tus tokens de texto */
+    flex-grow: 1;
+    /* Obliga al input a rellenar TODO el espacio que sobra */
+    width: auto;
+    /* Deja que flex-grow maneje el ancho */
+
+    /* 1. Inválido y con contenido */
+    &:not(:placeholder-shown):not(:focus):invalid {
+      --base-color: var(--color-error-soft);
     }
 
-    .field__input {
-        padding: 10px;
-        border: none;
-        /*outline: none; pero se escribe &:focus */
-        border-radius: 15px;
-        font-size: var(--text-md); /* Usamos tus tokens de texto */
-        flex-grow: 1;
-        /* Obliga al input a rellenar TODO el espacio que sobra */
-        width: auto;
-        /* Deja que flex-grow maneje el ancho */
-
-        /* 1. Inválido y con contenido */
-        &:not(:placeholder-shown):not(:focus):invalid {
-            --base-color: var(--color-error-soft);
-        }
-
-        /* 2. Válido y con contenido */
-        &:not(:placeholder-shown):not(:focus):valid {
-            --base-color: var(--color-success-soft);
-        }
-
-        /* 3. Foco (escribiendo) */
-        &:focus {
-            --base-color: var(--color-info-soft);
-        }
+    /* 2. Válido y con contenido */
+    &:not(:placeholder-shown):not(:focus):valid {
+      --base-color: var(--color-success-soft);
     }
+
+    /* 3. Foco (escribiendo) */
+    &:focus {
+      --base-color: var(--color-info-soft);
+    }
+  }
+
+  .field__input.field__input--error {
+    background-color: var(--color-error-soft);
+    border: 1px solid rgba(230, 57, 70, 0.4);
+    box-shadow: var(--neumo-shadow-inset);
+
+    /* ¿Qué pasa si el usuario hace foco mientras hay un error? 
+      Forzamos a que mantenga el color de error tapando el de info-soft:
+    */
+    &:focus {
+      --base-color: var(--color-error-soft);
+      border: 1px solid rgba(230, 57, 70, 0.7);
+      /* Ponemos el borde un cachito más intenso */
+    }
+  }
+
+  .field__error-text {
+    font-size: 0.85rem;
+    color: #e63946;
+    padding-left: 5px;
+  }
 }

@@ -69,10 +69,10 @@ export const listaMock = [
 
 export const metaVacia = {
   detalles: '',
-  eventos: 1,
+  eventos: 0,
   periodo: '',
   icono: '🏃',
-  meta: 52,
+  meta: 0,
   plazo: '2030-01-01',
   completado: 0,
 };

@@ -1,0 +1,64 @@
+@layer components {
+    /*  Mobile-First */
+    .field {
+        display: flex;
+        flex-direction: column;
+        font-weight: 600;
+        margin: 4px;
+    }
+
+    @container (min-width: 560px) {
+        .field {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .field__label-text {
+            width: auto;
+            max-width: 35%;
+            /* Evita que Flexbox intente aplastarlo más de la cuenta */
+            flex-shrink: 0;
+        }
+    }
+
+    .field__input {
+        padding: 10px;
+        border: none;
+        /*outline: none; pero se escribe &:focus */
+        border-radius: 15px;
+        font-size: var(--text-md); /* Usamos tus tokens de texto */
+        flex-grow: 1;
+        /* Obliga al input a rellenar TODO el espacio que sobra */
+        width: auto;
+        /* Deja que flex-grow maneje el ancho */
+
+        /* 1. Inválido y con contenido */
+        &:not(:placeholder-shown):not(:focus):invalid {
+            --base-color: var(--color-error-soft);
+        }
+
+        /* 2. Válido y con contenido */
+        &:not(:placeholder-shown):not(:focus):valid {
+            --base-color: var(--color-success-soft);
+        }
+
+        /* 3. Foco (escribiendo) */
+        &:focus {
+            --base-color: var(--color-info-soft);
+        }
+    }
+    /* Ejemplo sutil para tu Input.css */
+    .field__input--error {
+        border: 1px solid #ff4d4d !important;
+        box-shadow:
+            inset 2px 2px 5px #ffb3b3,
+            inset -2px -2px 5px #ffffff !important;
+    }
+
+    .field__error-text {
+        font-size: 0.85rem;
+        color: #e63946;
+        padding-left: 5px;
+    }
+}
