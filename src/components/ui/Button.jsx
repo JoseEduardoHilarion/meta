@@ -1,5 +1,4 @@
 import { cn } from './../../utils';
-
 import './Button.css';
 
 export default function Button({
@@ -11,11 +10,6 @@ export default function Button({
   className,
   ...rest
 }) {
-  const handleClickInterno = (e) => {
-    e.stopPropagation(); // Frenamos la propagación
-    onClick?.(e); // Ejecutamos si existe
-  };
-
   return (
     <button
       className={cn(
@@ -26,8 +20,8 @@ export default function Button({
         gradiente && 'buttonGradient',
         className,
       )}
-      onClick={handleClickInterno}
-      type = {type}
+      onClick={onClick} // <-- Se lo pasamos directo, sin frenar a nadie
+      type={type}
       {...rest}
     >
       {children}

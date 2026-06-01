@@ -12,7 +12,9 @@ export default function Lista() {
         <Meta
           key={meta.id}
           {...meta}
-          onClick={() => navegar(`/Lista/${meta.id}`)}
+          onClick={() => {
+            navegar(`/Lista/${meta.id}`);
+          }}
         />
       ))}
       <Outlet />

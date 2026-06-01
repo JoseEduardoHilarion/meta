@@ -15,46 +15,37 @@ export default function MetaForm({
   children,
 }) {
   const [form, setForm] = useState(initialValues);
-
-  // NUEVO: Estado local exclusivo del formulario para los errores de los campos
   const [erroresCampos, setErroresCampos] = useState({});
-
   const { detalles, eventos, periodo, icono, meta, plazo, completado } = form;
 
   const handleChange = (e) => {
-    const { name, value,nodeName } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-      if (nodeName === 'SELECT') {
-      // Creamos el nuevo estado en una variable local (¡Fresco e instantáneo!)
-  const nuevoForm = { ...form, [name]: value };
-
-  // Actualizamos el estado de forma pura
-  setForm(() => nuevoForm);
-      handleBlur();
+    const { name, value, nodeName } = e.target;
+    const nuevoForm = { ...form, [name]: value };
+    setForm(() => nuevoForm);
+    if (nodeName === 'SELECT') {
+      const { errores } = validarMeta(nuevoForm);
+      setErroresCampos(errores);
     }
   };
-
   // NUEVO: Validación en caliente al salir (onBlur) usando tu validador central
   const handleBlur = () => {
     const { errores } = validarMeta(form);
-    setErroresCampos(errores); 
+    setErroresCampos(errores);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // CAPA DE SEGURIDAD FINAL
-    const { esValido ,errores} = validarMeta(form);
-
+    const { esValido, errores } = validarMeta(form);
     if (!esValido) {
       // Si hay un error colgado, notificamos el primero y frenamos
-      setErroresCampos(errores); 
+      setErroresCampos(errores);
       notificar(
-        '⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.','error'
+        '⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.',
+        'error',
       );
       return;
     }
-
-
     onSubmit(form); // Si todo está impecable, viaja al padre limpio
   };
 
@@ -81,7 +72,6 @@ export default function MetaForm({
           onChange={handleChange}
           onBlur={handleBlur} // <-- Agregamos el validador al salir
           error={erroresCampos.eventos} // <-- Le pasamos el string del error si existe
-          required
         />
         <InputSelect
           name="periodo"
@@ -91,7 +81,6 @@ export default function MetaForm({
           required
         />
       </fieldset>
-
       <Input
         label="¿Cuántas veces deseas completar esta meta?"
         type="number"
@@ -109,8 +98,9 @@ export default function MetaForm({
         type="date"
         name="plazo"
         value={plazo}
-        onChange={handleChange} onBlur={handleBlur} // <-- Agregamos el validador al salir
-          error={erroresCampos.plazo} // <-- Le pasamos el string del error si existe
+        onChange={handleChange}
+        onBlur={handleBlur} // <-- Agregamos el validador al salir
+        error={erroresCampos.plazo} // <-- Le pasamos el string del error si existe
       />
 
       <InputSelect
@@ -134,7 +124,6 @@ export default function MetaForm({
           error={erroresCampos.completado} // <-- Muestra el error en caliente
         />
       )}
-
       <footer className="flex-between neumo-gradient">{children}</footer>
     </form>
   );
