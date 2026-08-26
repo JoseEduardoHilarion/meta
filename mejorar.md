@@ -1,3 +1,7 @@
+    "hot_exit": false,
+
+"remember_open_files": false
+
 Ya leí todo el proyecto a fondo. Acá va un análisis completo de cómo estás:
 
 ---

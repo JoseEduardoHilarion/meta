@@ -1,14 +1,16 @@
 import './Input.css';
 
-export default function InputSelect({
-  label,
-  name,
-  value,
-  onChange,
-  className = 'neumo-inset',
-  options,
-  ...props
-}) {
+export const InputSelect = (
+  {
+    label,
+    name,
+    value,
+    onChange,
+    className = 'neumo-inset',
+    options,
+    ...props
+  }
+) => {
   return (
     /* Cambiamos la clase del label a 'formulario__grupo' */
     <label className="field" htmlFor={`id-${name}`}>
@@ -34,4 +36,4 @@ export default function InputSelect({
       </select>
     </label>
   );
-}
+};

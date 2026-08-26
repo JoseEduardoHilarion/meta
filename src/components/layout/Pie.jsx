@@ -1,4 +1,4 @@
-export default function Pie() {
+export const Pie = () => {
 	return (
 		<footer className={'neumo-inset'}>
 			<small>
@@ -7,4 +7,4 @@ export default function Pie() {
 			</small>
 		</footer>
 	);
-}
+};

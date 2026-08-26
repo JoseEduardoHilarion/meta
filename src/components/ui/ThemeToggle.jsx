@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import Button from './Button';
+import { Button } from './Button';
 
-export default function ThemeToggle() {
+export const ThemeToggle = () => {
   const [isDark, setIsDark] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
   });
@@ -19,4 +19,4 @@ export default function ThemeToggle() {
       {isDark ? '🌙 Modo Noche' : '☀️ Modo Día'}
     </Button>
   );
-}
+};

@@ -1,6 +1,6 @@
 import './ProgressBar.css';
 
-export default function ProgressBar({ completadas, total }) {
+export const ProgressBar = ({ completadas, total }) => {
   const porcentaje = total > 0 ? (completadas / total) * 100 : 0;
 
   return (
@@ -16,4 +16,4 @@ export default function ProgressBar({ completadas, total }) {
       </div>
     </div>
   );
-}
+};

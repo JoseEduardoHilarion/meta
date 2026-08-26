@@ -1,10 +1,10 @@
-import Item from '../ui/Item';
-import Icono from "../ui/Icono"
-import ThemeToggle from '../ui/ThemeToggle';
-import Spacer from '../ui/Spacer';
+import { Item } from '../ui/Item';
+import { Icono } from "../ui/Icono";
+import { ThemeToggle } from '../ui/ThemeToggle';
+import { Spacer } from '../ui/Spacer';
 
 
-export default function Encabezamiento() {
+export const Encabezamiento = () => {
 	return (
 		<header className={'neumo-concave txt-grey fw-bold'}>
 			<Item>				
@@ -17,4 +17,4 @@ export default function Encabezamiento() {
 			</Item>
 		</header>
 	);
-}
+};

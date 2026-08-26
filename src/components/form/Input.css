@@ -23,6 +23,19 @@
     }
   }
 
+  /* Modificador: siempre en columna, sin importar el ancho */
+  .field--column {
+    flex-direction: column;
+    align-items: stretch;
+    /* que el input ocupe todo el ancho */
+    justify-content: flex-start;
+  }
+  /* Anula el max-width del label que impone el @container */
+  .field--column .field__label-text {
+    max-width: none;
+    flex-shrink: 1;
+  }
+
   .field__input {
     padding: 10px;
     border: none;

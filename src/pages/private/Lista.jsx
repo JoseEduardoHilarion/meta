@@ -1,9 +1,9 @@
 import { Outlet, useNavigate } from 'react-router';
 
-import Meta from './Meta.jsx';
+import { Meta } from './Meta.jsx';
 import { useMetas } from '../../components/hooks/useMetas.js';
 
-export default function Lista() {
+export const Lista = () => {
   const { metas } = useMetas(); // Tu hook de lectura
   const navegar = useNavigate();
   return (
@@ -20,4 +20,4 @@ export default function Lista() {
       <Outlet />
     </>
   );
-}
+};

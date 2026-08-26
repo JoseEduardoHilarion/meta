@@ -1,14 +1,16 @@
-import Encabezamiento from './components/layout/Encabezamiento';
-import Principal from './components/layout/Principal';
-import Pie from './components/layout/Pie';
+// App.jsx — providers y router
+import { BrowserRouter } from 'react-router';
+import { Memoria } from './servicios/Memoria.jsx';
+import { Toaster } from './components/ui/Toaster.jsx';
+import { AppRouter } from './routes/AppRouter.jsx';
 
-////////////////////////////////////////////////////////////
-export default function App() {
+export function App() {
     return (
-        <div className="layout">
-            <Encabezamiento />
-            <Principal />
-            <Pie />
-        </div>
+        <Memoria>
+            <Toaster />
+            <BrowserRouter>
+                <AppRouter />
+            </BrowserRouter>
+        </Memoria>
     );
 }

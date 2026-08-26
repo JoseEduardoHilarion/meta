@@ -1,15 +1,4 @@
 @layer components {
-	/* El estilo de tu ventana emergente / modal */
-	.modal-emergente {
-		width: 80%;
-		/* O 80vw, ocupa el 80% de la pantalla */
-		max-width: 900px;
-		/* Un tope opcional para que no sea gigante */
-		margin: auto;
-		background: #fff;
-		padding: 24px;
-	}
-
 	.formulario {
 		display: flex;
 		flex-direction: column;

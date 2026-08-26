@@ -1,6 +1,6 @@
 import './Modal.css';
 
-export default function Modal({ children, alCerrar }) {
+export const Modal = ({ children, alCerrar }) => {
   return (
     <div className="modal-overlay" onClick={alCerrar}>
       <div
@@ -17,4 +17,4 @@ export default function Modal({ children, alCerrar }) {
       </div>
     </div>
   );
-}
+};

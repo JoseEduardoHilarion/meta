@@ -1,19 +1,20 @@
-// src/components/form/MetaForm.jsx
 import { useState } from 'react';
-import Input from '../form/Input';
-import InputSelect from '../form/InputSelect';
-import './MetaForm.css';
+import { Input } from '../form/Input';
+import { InputSelect } from '../form/InputSelect';
+import './Form.css';
 
 import { listaPeriodo, iconos } from '../../data/mocks.js';
-import { validarMeta } from '../../servicios/metaReglas.js'; // <-- Importamos tu validador central
+import { validarMeta } from '../../servicios/metaReglas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
+import { FormContainer } from './FormContainer.jsx';
 
-export default function MetaForm({
+export const MetaForm = ({
   initialValues,
   mostrarCompletado,
   onSubmit,
-  children,
-}) {
+  header,
+  footer,
+}) => {
   const [form, setForm] = useState(initialValues);
   const [erroresCampos, setErroresCampos] = useState({});
   const { detalles, eventos, periodo, icono, meta, plazo, completado } = form;
@@ -27,15 +28,13 @@ export default function MetaForm({
       setErroresCampos(errores);
     }
   };
-  // NUEVO: Validación en caliente al salir (onBlur) usando tu validador central
+  //Validación en caliente al salir (onBlur) usando tu validador central
   const handleBlur = () => {
     const { errores } = validarMeta(form);
     setErroresCampos(errores);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // CAPA DE SEGURIDAD FINAL
+  const handleSubmit = () => {
     const { esValido, errores } = validarMeta(form);
     if (!esValido) {
       // Si hay un error colgado, notificamos el primero y frenamos
@@ -50,81 +49,81 @@ export default function MetaForm({
   };
 
   return (
-    <form className="formulario neumo-flat" onSubmit={handleSubmit} noValidate>
-      <Input
-        label="Describe tu meta"
-        name="detalles"
-        value={detalles}
-        onChange={handleChange}
-        onBlur={handleBlur} // <-- Agregamos el validador al salir
-        error={erroresCampos.detalles} // <-- Le pasamos el string del error si existe
-        required
-      />
-
-      <fieldset className="neumo-flat">
-        <Input
-          label="¿Con qué frecuencia deseas cumplir tu meta?"
-          type="number"
-          min="0"
-          required
-          name="eventos"
-          value={eventos}
-          onChange={handleChange}
-          onBlur={handleBlur} // <-- Agregamos el validador al salir
-          error={erroresCampos.eventos} // <-- Le pasamos el string del error si existe
-        />
-        <InputSelect
-          name="periodo"
-          value={periodo}
-          onChange={handleChange}
-          options={listaPeriodo}
-          required
-        />
-      </fieldset>
-      <Input
-        label="¿Cuántas veces deseas completar esta meta?"
-        type="number"
-        min="0"
-        required
-        name="meta"
-        value={meta}
-        onChange={handleChange}
-        onBlur={handleBlur} // <-- Monitoreamos este campo clave
-        error={erroresCampos.meta} // <-- Mandamos el error si se rompe la relación
-      />
-
-      <Input
-        label="¿Tienes una fecha límite?"
-        type="date"
-        name="plazo"
-        value={plazo}
-        onChange={handleChange}
-        onBlur={handleBlur} // <-- Agregamos el validador al salir
-        error={erroresCampos.plazo} // <-- Le pasamos el string del error si existe
-      />
-
-      <InputSelect
-        label="Escoge el icono para la meta"
-        name="icono"
-        value={icono}
-        onChange={handleChange}
-        options={iconos}
-      />
-
-      {mostrarCompletado && (
-        <Input
-          label="¿Cuántas veces has completado ya esta meta?"
-          type="number"
-          min="0"
-          required
-          name="completado"
-          value={completado}
-          onChange={handleChange}
-          onBlur={handleBlur} // <-- Monitoreamos el otro extremo de la relación
-          error={erroresCampos.completado} // <-- Muestra el error en caliente
-        />
-      )}
-      <footer className="flex-between neumo-gradient">{children}</footer>
-    </form>
+    <FormContainer
+      onSubmit={handleSubmit}
+      header={header}
+      footer={footer}
+      body={
+        <>
+          <Input
+            label="Describe tu meta"
+            name="detalles"
+            value={detalles}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={erroresCampos.detalles}
+            required
+          />
+          <fieldset className="neumo-flat">
+            <Input
+              label="¿Con qué frecuencia deseas cumplir tu meta?"
+              type="number"
+              min="0"
+              required
+              name="eventos"
+              value={eventos}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={erroresCampos.eventos}
+            />
+            <InputSelect
+              name="periodo"
+              value={periodo}
+              onChange={handleChange}
+              options={listaPeriodo}
+              required
+            />
+          </fieldset>
+          <Input
+            label="¿Cuántas veces deseas completar esta meta?"
+            type="number"
+            min="0"
+            required
+            name="meta"
+            value={meta}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={erroresCampos.meta}
+          />
+          <Input
+            label="¿Tienes una fecha límite?"
+            type="date"
+            name="plazo"
+            value={plazo}
+            onChange={handleChange}
+          />
+          <InputSelect
+            label="Escoge el icono para la meta"
+            name="icono"
+            value={icono}
+            onChange={handleChange}
+            options={iconos}
+          />
+          {mostrarCompletado && (
+            <Input
+              label="¿Cuántas veces has completado ya esta meta?"
+              type="number"
+              min="0"
+              required
+              name="completado"
+              value={completado}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={erroresCampos.completado}
+            />
+          )}
+        </>
+      }
+    />
   );
-}
+};

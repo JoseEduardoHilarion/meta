@@ -1,3 +1,3 @@
-export default function Spacer() {
+export const Spacer = () => {
 	return <span className={'separador'}></span>;
-}
+};

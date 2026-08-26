@@ -1,13 +1,10 @@
-// src/components/ui/Toaster.jsx
 import { useSyncExternalStore } from 'react';
 import {
   obtenerNotificacion,
   suscribirNotificacion,
 } from '../../servicios/sistemaNotificaciones';
 import './Toaster.css';
-//////////////////////////////////////////////////////
-//////////////////////////////////////////////////////
-export function Toaster() {
+export const Toaster = () => {
   // Leemos directamente la alerta del almacén externo
   const alerta = useSyncExternalStore(
     suscribirNotificacion,
@@ -25,4 +22,4 @@ export function Toaster() {
       <p>{alerta.mensaje}</p>
     </div>
   );
-}
+};

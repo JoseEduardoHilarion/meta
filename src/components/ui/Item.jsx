@@ -1,25 +1,19 @@
-import './Item.css';
-import { cn } from './../../utils';
+import "./Item.css";
+import { cn } from "./../../utils";
 
-export default function Item({
-  children,
-  variant,
-  interactive,
-  className,
-  onClick,
-}) {
+export const Item = ({ children, variant, clickable, className, onClick }) => {
   const neumo = variant ? `neumo-${variant}` : null;
   const handleClickInterno = (e) => {
     e.stopPropagation(); // Frenamos la propagación
-    onClick?.(e); // Ejecutamos si existe
+    onClick?.(e); // el ?. significa "ejecutá solo si existe"
   };
 
   return (
     <div
-      className={cn('item', neumo, interactive && 'interactive', className)}
+      className={cn("item", neumo, clickable && "clickable", className)}
       onClick={handleClickInterno}
     >
       {children}
     </div>
   );
-}
+};

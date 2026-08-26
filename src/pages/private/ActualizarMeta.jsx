@@ -1,16 +1,14 @@
 import { useNavigate, useParams } from 'react-router';
 import { useEffect } from 'react';
 
-import MetaForm from '../form/MetaForm';
-import Button from '../ui/Button';
-import Modal from '../ui/Modal.jsx';
+import { MetaForm } from '../../components/form/MetaForm.jsx';
+import { Button } from '../../components/ui/Button.jsx';
+import { Modal } from '../../components/ui/Modal.jsx';
 
 import { useMetas, useMetasActions } from '../../components/hooks/useMetas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
 
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-export default function ActualizarMeta() {
+export const ActualizarMeta = () => {
   const { id } = useParams();
   const navegar = useNavigate();
 
@@ -26,13 +24,16 @@ export default function ActualizarMeta() {
 
   const handleActualizar = (datosModificados) => {
     actualizarMeta(datosModificados);
-    notificar('OK, se pudo modificar la meta: ' + datosModificados.detalles, 'success');
+    notificar(
+      'OK, se pudo modificar la meta: ' + datosModificados.detalles,
+      'success',
+    );
     navegar('/Lista');
   };
 
   const handleEliminar = () => {
     borrarMeta(id);
-    notificar("Ok, se ELIMINO la meta", 'success');
+    notificar('Ok, se ELIMINO la meta', 'success');
     navegar('/Lista');
   };
 
@@ -43,17 +44,20 @@ export default function ActualizarMeta() {
         initialValues={meta}
         onSubmit={handleActualizar}
         mostrarCompletado
-      >
-        <Button className="fuerza-oscuro m-3" type="submit">
-          Guardar Cambios
-        </Button>
-        <Button className="m-3" onClick={handleEliminar}>
-          Eliminar
-        </Button>
-        <Button className="m-3" onClick={() => navegar('/Lista')}>
-          Cancelar
-        </Button>
-      </MetaForm>
+        footer={
+          <>
+            <Button className="fuerza-oscuro m-3" type="submit">
+              Guardar Cambios
+            </Button>
+            <Button className="m-3" onClick={handleEliminar}>
+              Eliminar
+            </Button>
+            <Button className="m-3" onClick={() => navegar('/Lista')}>
+              Cancelar
+            </Button>
+          </>
+        }
+      />
     </Modal>
   );
-}
+};

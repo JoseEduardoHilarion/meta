@@ -1,6 +1,6 @@
 import './Input.css';
 
-export default function Input({
+export const Input = ({
   label,
   name,
   type = 'text',
@@ -9,12 +9,16 @@ export default function Input({
   onBlur, // <-- RECEPTOR: Atajamos el evento de salida
   error, // <-- RECEPTOR: Atajamos el texto del error si existe
   className = 'neumo-inset',
+  column,
   ...props
-}) {
+}) => {
   const TipoInput = type === 'textarea' ? 'textarea' : 'input';
 
   return (
-    <label className="field" htmlFor={`id-${name}`}>
+    <label
+      className={column ? 'field field--column' : 'field'}
+      htmlFor={`id-${name}`}
+    >
       <span className="field__label-text">{label}</span>
       <TipoInput
         // Si hay un error, le sumamos una clase CSS para pintarlo de rojo de forma neumórfica
@@ -28,7 +32,6 @@ export default function Input({
         placeholder=" "
         {...props}
       />
-
       {/* CAPA VISUAL: Si el formulario nos manda un error, lo dibujamos abajo */}
       {error && (
         <span className="field__error-text text-danger d-block mt-1">
@@ -37,4 +40,4 @@ export default function Input({
       )}
     </label>
   );
-}
+};

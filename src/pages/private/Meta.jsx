@@ -1,13 +1,13 @@
-import Button from '../ui/Button';
-import Item from '../ui/Item';
-import Spacer from '../ui/Spacer';
-import ProgressBar from '../ui/ProgressBar';
-import Icono from '../ui/Icono';
+import { Button } from '../../components/ui/Button.jsx';
+import { Item } from '../../components/ui/Item.jsx';
+import { Spacer } from '../../components/ui/Spacer.jsx';
+import { ProgressBar } from '../../components/ui/ProgressBar.jsx';
+import { Icono } from '../../components/ui/Icono.jsx';
 
 import { useMetasActions } from '../../components/hooks/useMetas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
 
-export default function Meta({
+export const Meta = ({
   id,
   icono,
   eventos,
@@ -16,10 +16,11 @@ export default function Meta({
   meta,
   completado,
   onClick,
-}) {
+}) => {
   const { actualizarMeta } = useMetasActions();
   const handleBotonCompletado = (e) => {
     e.stopPropagation();
+    console.log('comletado');
     const completadoMas = completado + 1;
     if (completadoMas > meta)
       notificar('Esta meta: ' + detalles + ' ya esta COMPLETA', 'success');
@@ -37,7 +38,7 @@ export default function Meta({
 
   return (
     <Item
-      interactive
+      clickable
       variant="flat"
       className="m-1 p-1 rounded-md"
       onClick={onClick}
@@ -57,4 +58,4 @@ export default function Meta({
       <Button onClick={handleBotonCompletado}>Completado</Button>
     </Item>
   );
-}
+};
