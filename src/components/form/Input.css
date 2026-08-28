@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     font-weight: 600;
-    margin: 4px;
+    margin-left: 10px;
   }
 
   @container (min-width: 560px) {
@@ -12,7 +12,6 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
     }
 
     .field__label-text {
@@ -30,17 +29,20 @@
     /* que el input ocupe todo el ancho */
     justify-content: flex-start;
   }
+
   /* Anula el max-width del label que impone el @container */
   .field--column .field__label-text {
     max-width: none;
     flex-shrink: 1;
   }
 
+  /*///////////////////////////////////////////*/
   .field__input {
     padding: 10px;
     border: none;
     /*outline: none; pero se escribe &:focus */
     border-radius: 15px;
+    margin: 0 10px;
     font-size: var(--text-md);
     /* Usamos tus tokens de texto */
     flex-grow: 1;

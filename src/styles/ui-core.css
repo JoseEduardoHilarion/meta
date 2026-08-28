@@ -1,47 +1,23 @@
 @layer components {
   .item-activo {
     box-shadow: var(--neumo-shadow-inset);
-    background-color: rgba(0, 0, 0, 0.15);
   }
 
+  /* Clase genérica para cualquier elemento clickeable */
   .clickable {
-    position: relative;
-    /* Necesario para posicionar la máscara encima */
-    overflow: hidden;
-    /* Para que el efecto no se salga de los bordes redondeados */
-    transition: transform 0.2s ease;
+    transition:
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+    cursor: pointer;
 
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0);
-      /* Invisible por defecto */
-      transition: background-color 0.2s ease;
-      pointer-events: none;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
     }
 
-    /* Efecto al pasar el mouse (Hover) */
-    &:hover::after {
-      background-color: rgba(0, 0, 0, 0.1);
-      /* Un gris muy suave */
-    }
-
-    /* 1. EFECTO DE HUNDIMIENTO Si el elemento tiene alguna de estas clases Y está activo... */
-    &:is(.neumo-flat, .neumo-convex, .neumo-concave):active:not(
-        :has(button:active, a:active, input:active)
-      ) {
-      transform: scale(0.99);
-    }
-
-    &:is(.neumo-flat, .neumo-convex, .neumo-concave):active:not(
-        :has(button:active, a:active, input:active)
-      )::after {
+    &:active {
       box-shadow: var(--neumo-shadow-inset);
       background-color: rgba(0, 0, 0, 0.05);
+      transform: scale(0.98);
     }
 
     /* 2. EFECTO DE SOMBRA SIMPLE (Para todo lo que NO tenga esas clases) */
@@ -49,7 +25,7 @@
       background-color: rgba(0, 0, 0, 0.17);
       /*box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);*/
       /* Sombra externa nomás */
-      /*transform: translateY(-2px);*/
+      transform: translateY(-2px);
     }
   }
 
@@ -76,18 +52,18 @@
 
   .neumo-gradient {
     background: linear-gradient(
-      110deg,
-      hsl(0, 0%, 20%) 20%,
-      var(--base-color) 60%,
-      var(--shadow-light) 100%
+      to right,
+      hsl(0, 0%, 30%) 20%,
+      color-mix(in srgb, var(--shadow-light), black 10%) 55%,
+      color-mix(in srgb, var(--base-color), black 5%)
     );
   }
 
-  .fuerza-oscuro {
+  .dark {
     /* 1. Forzamos los colores oscuros */
-    --base-color: hsl(210, 20%, 12%);
-    --text-main: hsl(210, 20%, 95%);
-    --intensity: 30%;
+    --base-color: var(--base-color-dark);
+    --text-main: var(--text-main-dark);
+    --intensity: var(--intensity-dark);
 
     /* 2. RE-CALCULAMOS las sombras individuales para este botón */
     --shadow-light: color-mix(
@@ -119,7 +95,6 @@
           var(--shadow-light);
 
       box-shadow: var(--neumo-shadow-inset);
-      transform: scale(0.97);
     }
   }
 

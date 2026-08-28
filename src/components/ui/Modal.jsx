@@ -1,17 +1,13 @@
+import { Button } from './Button';
 import './Modal.css';
 
 export const Modal = ({ children, alCerrar }) => {
   return (
     <div className="modal-overlay" onClick={alCerrar}>
-      <div
-        className="modal-content neumo-flat"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* El botón de la cruz "X" clásico para cerrar por si el usuario no hace clic afuera */}
-        <button className="modal-cerrar-btn neumo-inset" onClick={alCerrar}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <Button className="modal-cerrar-btn" onClick={alCerrar}>
           ×
-        </button>
-
+        </Button>
         {/* Acá se inyecta dinámicamente el contenido (tu Form, un texto, etc.) */}
         {children}
       </div>

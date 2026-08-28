@@ -1,10 +1,13 @@
 @layer components {
   .item {
     display: flex;
+    justify-content: center;
     align-items: center;
-    /* Para que estén centrados verticalmente */
-    gap: 15px;
+    flex-wrap: wrap;
+
     border-style: none;
+    gap: 15px;
     padding: 5px;
+    margin: 2px;
   }
 }

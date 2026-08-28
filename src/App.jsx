@@ -1,4 +1,3 @@
-// App.jsx — providers y router
 import { BrowserRouter } from 'react-router';
 import { Memoria } from './servicios/Memoria.jsx';
 import { Toaster } from './components/ui/Toaster.jsx';

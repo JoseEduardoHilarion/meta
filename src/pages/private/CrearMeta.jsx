@@ -25,12 +25,10 @@ export const CrearMeta = () => {
       onSubmit={handleCrear}
       footer={
         <>
-          <Button className="fuerza-oscuro m-3" type="submit">
+          <Button className="dark" type="submit">
             Crear
           </Button>
-          <Button className="m-3" onClick={() => navegar('/Lista')}>
-            Cancelar
-          </Button>
+          <Button onClick={() => navegar('/Lista')}>Cancelar</Button>
         </>
       }
     />

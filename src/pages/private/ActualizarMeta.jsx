@@ -44,17 +44,14 @@ export const ActualizarMeta = () => {
         initialValues={meta}
         onSubmit={handleActualizar}
         mostrarCompletado
+        header={<h2>MODIFICAR META</h2>}
         footer={
           <>
-            <Button className="fuerza-oscuro m-3" type="submit">
+            <Button className="dark" type="submit">
               Guardar Cambios
             </Button>
-            <Button className="m-3" onClick={handleEliminar}>
-              Eliminar
-            </Button>
-            <Button className="m-3" onClick={() => navegar('/Lista')}>
-              Cancelar
-            </Button>
+            <Button onClick={handleEliminar}>Eliminar</Button>
+            <Button onClick={() => navegar('/Lista')}>Cancelar</Button>
           </>
         }
       />

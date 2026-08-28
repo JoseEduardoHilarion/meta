@@ -1,8 +1,8 @@
-import { cn } from "./../../utils";
-import "./Button.css";
+import { cn } from './../../utils';
+import './Button.css';
 
 export const Button = ({
-  type = "button",
+  type = 'button',
   children,
   onClick,
   red,
@@ -13,12 +13,12 @@ export const Button = ({
   return (
     <button
       className={cn(
-        "button",
-        "clickable",
-        "neumo-flat",
-        red && "buttonRed",
-        gradiente && "buttonGradient",
         className,
+        'clickable',
+        'button',
+        'neumo-flat',
+        red && 'buttonRed',
+        gradiente && 'buttonGradient',
       )}
       onClick={onClick} // <-- Se lo pasamos directo, sin frenar a nadie
       type={type}

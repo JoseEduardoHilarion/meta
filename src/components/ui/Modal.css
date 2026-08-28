@@ -1,96 +1,62 @@
+/******************* COMPONENTES (MODAL) *************************/
 @layer components {
-  /******************* COMPONENTES (MODAL) *************************/
-  @layer components {
-    /* 1. EL FONDO OSCURO (OVERLAY) */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+  /* 1. EL FONDO OSCURO (OVERLAY) */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* Usamos un negro translúcido */
+    background-color: rgba(0, 0, 0, 0.45);
 
-      /* Usamos un negro translúcido para el modo claro, pero podés usar 
-       una variante de tu color de texto para que sea más orgánico */
-      background-color: rgba(0, 0, 0, 0.45);
+    /* Capa por encima de tu CSS Grid Layout */
+    z-index: 1000;
 
-      /* Capa por encima de tu CSS Grid Layout */
-      z-index: 1000;
+    /* Centrado absoluto del formulario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-      /* Centrado absoluto del formulario */
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  /* 2. EL CUERPO DEL MODAL (APLICADO AL PROPIO <form> O SU CONTENEDOR) */
+  .modal-content {
+    /* Dimensiones adaptables para dispositivos móviles */
+    width: 85%;
+    max-width: 900px;
+    max-height: 95vh;
+    /* Scroll interno si el formulario es muy largo */
+    overflow-y: auto;
 
-      /* Efecto Glassmorphism sutil para desenfocar la lista de metas de fondo */
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px); /* Soporte para Safari en iOS */
+    /* Animación sutil de entrada para que no aparezca de golpe */
+    animation: neumo-modal-aparecer 1s ease-out forwards;
+
+    /* Para posicionar el boton cruz */
+    position: relative;
+  }
+
+  .modal-cerrar-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  @keyframes neumo-modal-aparecer {
+    0% {
+      opacity: 0;
+      transform: scale(0.01);
     }
 
-    /* 2. EL CUERPO DEL MODAL (APLICADO AL PROPIO <form> O SU CONTENEDOR) */
-    .modal-content {
-      /* Mantiene el color de fondo dinámico de tu sistema (:root / dark) */
-      background-color: var(--base-color);
-      color: var(--text-main);
-
-      /* Dimensiones adaptables para dispositivos móviles */
-      width: 70%;
-      max-width: 900px;
-      max-height: 95vh; /* Evita que se desborde en pantallas muy bajas */
-      overflow-y: auto; /* Scroll interno si el formulario es muy largo */
-
-      /* Espaciado interno generoso 
-      padding: 2rem;
-      border-radius: 20px;*/
-
-      /* Aplicamos tu token exacto de sombra neumórfica elevada */
-      box-shadow: var(--neumo-shadow);
-
-      /* Para posicionar la cruz si decidís usarla a futuro */
-      position: relative;
-
-      /* Animación sutil de entrada para que no aparezca de golpe */
-      animation: neumo-modal-aperecer 0.3s ease-out;
+    70% {
+      opacity: 1;
+      transform: scale(1.03);
+      /* ← Se pasa un poquito */
     }
 
-    /* OPCIONAL: Si dejas la cruz superior adaptada a tu Neumorfismo */
-    .modal-cerrar-btn {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: none;
-
-      /* Tu fondo dinámico */
-      background: var(--base-color);
-      color: var(--text-muted);
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: var(--text-xl);
-
-      /* Efecto hundido neumórfico usando tu token */
-      box-shadow: var(--neumo-shadow-inset);
-      transition: color 0.2s ease;
-    }
-
-    .modal-cerrar-btn:hover {
-      color: var(--text-main);
-    }
-
-    /* Animación suave de escala */
-    @keyframes neumo-modal-aperecer {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+      /* ← Vuelve a su tamaño real */
     }
   }
 }

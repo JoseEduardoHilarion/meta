@@ -41,6 +41,8 @@ export function validarMeta(datos) {
     errores, // Devolvemos el diccionario de errores por campo
   };
 }
+////////////////////////////////////////
+////////////////////////////////////////
 export function validarCredenciales(datos) {
   const errores = {};
 
@@ -60,7 +62,7 @@ export function validarCredenciales(datos) {
   if (
     !datos.password ||
     !datos.password2 ||
-    datos.password === datos.password2
+    !(datos.password === datos.password2)
   ) {
     errores.password = 'Deben ser iguales las contraseñas';
     errores.password2 = errores.password;

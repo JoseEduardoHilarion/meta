@@ -6,6 +6,7 @@ import { Button } from '../../components/ui/Button.jsx';
 
 import { validarCredenciales } from '../../servicios/metaReglas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
+import { NavLink } from 'react-router';
 
 export const Login = () => {
 	const [form, setForm] = useState({ usuario: '', password: '' });
@@ -23,11 +24,10 @@ export const Login = () => {
 		setErroresCampos(errores);
 	};
 
-	const handleSubmit = () => {
-		// CAPA DE SEGURIDAD FINAL
+	const handleLogin = () => {
 		const { esValido, errores } = validarCredenciales(form);
 		if (!esValido) {
-			// Si hay un error colgado, notificamos el primero y frenamos
+			// Si hay un error colgado, notificamos y frenamos
 			setErroresCampos(errores);
 			notificar(
 				'⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.',
@@ -40,7 +40,7 @@ export const Login = () => {
 
 	return (
 		<FormContainer
-			onSubmit={handleSubmit}
+			onSubmit={handleLogin}
 			header={<h2>ACCESO</h2>}
 			body={
 				<>
@@ -68,9 +68,12 @@ export const Login = () => {
 				</>
 			}
 			footer={
-				<Button className="fuerza-oscuro m-3" type="submit">
-					Acceder
-				</Button>
+				<>
+					<Button className="dark" type="submit">
+						Acceder
+					</Button>
+					<NavLink to="/Registro">Registrarse</NavLink>
+				</>
 			}
 		/>
 	);

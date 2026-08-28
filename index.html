@@ -5,6 +5,25 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mis Metas</title>
+    <!-- ✅ Este script corre ANTES que el CSS pinte la pantalla -->
+    <script>
+      (function () {
+        const guardado = localStorage.getItem('theme');
+        if (guardado) {
+          document.documentElement.setAttribute('data-theme', guardado);
+          return;
+        }
+        // Si no hay preferencia guardada, usa la del sistema operativo
+        const prefiereDark = window.matchMedia(
+          '(prefers-color-scheme: dark)',
+        ).matches;
+        document.documentElement.setAttribute(
+          'data-theme',
+          prefiereDark ? 'dark' : 'light',
+        );
+      })();
+    </script>
+    <link rel="stylesheet" href="/src/styles/reset_base.css" />
   </head>
   <body>
     <div id="root"></div>

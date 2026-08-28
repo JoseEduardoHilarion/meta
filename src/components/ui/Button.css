@@ -2,9 +2,8 @@
     .button {
         border: none;
         border-radius: 15px;
-        /* 7px arriba y abajo | 20px izquierda y derecha */
         padding: 7px 15px;
-        margin: 7px;
+        margin: 10px;
         font-weight: 700;
     }
 

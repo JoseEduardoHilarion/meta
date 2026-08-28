@@ -2,10 +2,10 @@
 	.formulario {
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
-		border-radius: 8px;
+		border-radius: 15px;
 		overflow: hidden;
-		margin: 15px;
+		margin: 10px;
+		gap: 10px;
 		/*CLAVE: Le avisa a los Inputs de su interior 
        que midan el ancho de ESTE modal, no de la pantalla completa.*/
 		container-type: inline-size;
@@ -13,13 +13,20 @@
 		& fieldset {
 			border: none;
 			display: flex;
+			flex-direction: column;
 			/* Para alinear el input y el select uno al lado del otro */
-			gap: 15px;
+			margin: 10px;
 			/* Espacio entre el input y el select */
-			border-radius: 15px;
+			border-radius: 10px;
 			justify-content: space-between;
 			/* Empuja los elementos a los extremos */
 			align-items: center;
+		}
+
+		@container (min-width: 560px) {
+			& fieldset {
+				flex-direction: row;
+			}
 		}
 	}
 }

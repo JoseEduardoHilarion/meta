@@ -37,12 +37,7 @@ export const Meta = ({
   };
 
   return (
-    <Item
-      clickable
-      variant="flat"
-      className="m-1 p-1 rounded-md"
-      onClick={onClick}
-    >
+    <Item clickable variant="flat" onClick={onClick} className="m-2 rounded-sm">
       <Icono variant="inset" className="circulo">
         {icono}
       </Icono>
