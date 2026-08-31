@@ -1,21 +1,21 @@
 @layer components {
-    .button {
-        border: none;
-        border-radius: 15px;
-        padding: 7px 15px;
-        margin: 10px;
-        font-weight: 700;
-    }
+  .button {
+    border: none;
+    border-radius: var(--neumo-radius-sm);
+    padding: 7px 15px;
+    margin: 10px;
+    font-weight: 700;
+  }
 
-    .buttonRed {
-        --base-color: #ff6b6b;
-        color: white;
-    }
+  .buttonRed {
+    --base-color: #ff6b6b;
+    color: white;
+  }
 
-    .buttonGradient {
-        /* Aquí sobrescribimos el background para poner el degradado */
-        background: linear-gradient(145deg, #ff9a9e, #fad0c4);
-        /* Y ajustamos el texto para que se lea mejor */
-        color: #333;
-    }
+  .buttonGradient {
+    /* Aquí sobrescribimos el background para poner el degradado */
+    background: linear-gradient(145deg, #ff9a9e, #fad0c4);
+    /* Y ajustamos el texto para que se lea mejor */
+    color: #333;
+  }
 }

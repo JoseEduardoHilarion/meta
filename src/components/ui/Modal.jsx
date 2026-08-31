@@ -1,5 +1,5 @@
-import { Button } from './Button';
-import './Modal.css';
+import { Button } from "./Button";
+import "./Modal.css";
 
 export const Modal = ({ children, alCerrar }) => {
   return (

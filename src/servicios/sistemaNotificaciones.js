@@ -12,7 +12,7 @@ export const suscribirNotificacion = (callback) => {
 };
 
 // La función mágica ahora maneja su propio tiempo
-export function notificar(mensaje, tipo = 'success') {
+export function notificar(mensaje, tipo = "success") {
   // Si había un temporizador corriendo de una notificación anterior, lo cancelamos
   if (timerId) clearTimeout(timerId);
 

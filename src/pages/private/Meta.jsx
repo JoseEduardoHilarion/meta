@@ -1,11 +1,11 @@
-import { Button } from '../../components/ui/Button.jsx';
-import { Item } from '../../components/ui/Item.jsx';
-import { Spacer } from '../../components/ui/Spacer.jsx';
-import { ProgressBar } from '../../components/ui/ProgressBar.jsx';
-import { Icono } from '../../components/ui/Icono.jsx';
+import { Button } from "../../components/ui/Button.jsx";
+import { Item } from "../../components/ui/Item.jsx";
+import { Spacer } from "../../components/ui/Spacer.jsx";
+import { ProgressBar } from "../../components/ui/ProgressBar.jsx";
+import { Icono } from "../../components/ui/Icono.jsx";
 
-import { useMetasActions } from '../../components/hooks/useMetas.js';
-import { notificar } from '../../servicios/sistemaNotificaciones.js';
+import { useMetasActions } from "../../components/hooks/useMetas.js";
+import { notificar } from "../../servicios/sistemaNotificaciones.js";
 
 export const Meta = ({
   id,
@@ -18,12 +18,12 @@ export const Meta = ({
   onClick,
 }) => {
   const { actualizarMeta } = useMetasActions();
+
   const handleBotonCompletado = (e) => {
-    e.stopPropagation();
-    console.log('comletado');
+    e.stopPropagation(); // Frenamos la propagación
     const completadoMas = completado + 1;
     if (completadoMas > meta)
-      notificar('Esta meta: ' + detalles + ' ya esta COMPLETA', 'success');
+      notificar("Esta meta: " + detalles + " ya esta COMPLETA", "success");
     else
       actualizarMeta({
         id,
@@ -37,7 +37,12 @@ export const Meta = ({
   };
 
   return (
-    <Item clickable variant="flat" onClick={onClick} className="m-2 rounded-sm">
+    <Item
+      clickable
+      variant="convex"
+      onClick={onClick}
+      className="m-2 rounded-sm"
+    >
       <Icono variant="inset" className="circulo">
         {icono}
       </Icono>

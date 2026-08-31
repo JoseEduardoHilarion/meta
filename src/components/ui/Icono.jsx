@@ -1,15 +1,16 @@
-import './Icono.css';
-import { cn } from './../../utils';
+import "./Icono.css";
+import { cn } from "./../../utils";
 
-export const Icono = ({ variant, children, clickable, className }) => {
+export const Icono = ({ variant, children, clickable, className, ...rest }) => {
   return (
     <div
       className={cn(
-        'icono',
-        `neumo-${variant}`,
-        clickable && 'clickable',
         className,
+        "icono",
+        `neumo-${variant}`,
+        clickable && "clickable",
       )}
+      {...rest}
     >
       {children}
     </div>

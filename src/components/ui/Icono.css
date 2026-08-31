@@ -1,5 +1,5 @@
 @layer components {
-  .icono{
+  .icono {
     /* IMPORTANTE: Rehabilitamos el centrado */
     display: flex;
     justify-content: center;
@@ -24,6 +24,5 @@
       width: 1.2rem;
       height: 1.2rem;
     }
-
   }
 }

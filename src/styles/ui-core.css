@@ -9,23 +9,24 @@
       box-shadow 0.2s ease,
       transform 0.2s ease;
     cursor: pointer;
+    position: relative;
 
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+    /*Un overlay con pseudo-elemento (más control, no afecta box-shadow ni hijos)*/
+    &:hover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: inherit;
+      pointer-events: none;
     }
 
-    &:active {
+    &:is(.neumo-convex):active:not(:has(button:active)) {
+      background: var(--base-color-concave);
+    }
+
+    &:is(.neumo-flat, .neumo-convex):active:not(:has(button:active)) {
       box-shadow: var(--neumo-shadow-inset);
-      background-color: rgba(0, 0, 0, 0.05);
-      transform: scale(0.98);
-    }
-
-    /* 2. EFECTO DE SOMBRA SIMPLE (Para todo lo que NO tenga esas clases) */
-    &:not(:is(.neumo-flat, .neumo-convex, .neumo-concave)):active {
-      background-color: rgba(0, 0, 0, 0.17);
-      /*box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);*/
-      /* Sombra externa nomás */
-      transform: translateY(-2px);
     }
   }
 
@@ -83,19 +84,13 @@
       calc(var(--distance) * -1) calc(var(--distance) * -1) var(--blur)
         var(--shadow-light);
 
+    --neumo-shadow-inset:
+      inset var(--distance) var(--distance) var(--blur) var(--shadow-dark),
+      inset calc(var(--distance) * -1) calc(var(--distance) * -1) var(--blur)
+        var(--shadow-light);
+
     /* 4. Aplicamos al botón */
-    background-color: var(--base-color);
     color: var(--text-main);
-    box-shadow: var(--neumo-shadow);
-
-    &:active {
-      --neumo-shadow-inset:
-        inset var(--distance) var(--distance) var(--blur) var(--shadow-dark),
-        inset calc(var(--distance) * -1) calc(var(--distance) * -1) var(--blur)
-          var(--shadow-light);
-
-      box-shadow: var(--neumo-shadow-inset);
-    }
   }
 
   .separador {

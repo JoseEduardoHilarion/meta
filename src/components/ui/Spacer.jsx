@@ -1,3 +1,3 @@
 export const Spacer = () => {
-	return <span className={'separador'}></span>;
+  return <span className={"separador"}></span>;
 };

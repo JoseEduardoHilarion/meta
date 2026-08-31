@@ -79,16 +79,16 @@ const estadoInicial = memoriaLocal ? JSON.parse(memoriaLocal) : respaldoVacio;
 
 export const Memoria = ({ children }) => {
   /*const [state, dispatch] = useReducer(metasReducer, listaMock, (lista) => {
-		return metasReducer(estadoInicial, {
-			type: 'INICIALIZAR',
-			payload: lista,
-		});
-	});*/
+    return metasReducer(estadoInicial, {
+      type: 'INICIALIZAR',
+      payload: lista,
+    });
+  });*/
   const [state, dispatch] = useReducer(metasReducer, estadoInicial);
   // Cada vez que 'state' cambie, este efecto guarda la lista ordenada completa
   useEffect(() => {
     localStorage.setItem("metas_app", JSON.stringify(state));
-  }, [state]); // <--- Clave: reacciona a cualquier cambio en el estado
+  }, [state]);
   return (
     <MetasStateContext.Provider value={state}>
       <MetasDispatchContext.Provider value={dispatch}>

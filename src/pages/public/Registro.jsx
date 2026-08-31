@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { FormContainer } from '../../components/form/FormContainer.jsx';
-import { Input } from '../../components/form/Input.jsx';
-import { Button } from '../../components/ui/Button.jsx';
+import { FormContainer } from "../../components/form/FormContainer.jsx";
+import { Input } from "../../components/form/Input.jsx";
+import { Button } from "../../components/ui/Button.jsx";
 
-import { validarCredenciales } from '../../servicios/metaReglas.js';
-import { notificar } from '../../servicios/sistemaNotificaciones.js';
+import { validarCredenciales } from "../../servicios/metaReglas.js";
+import { notificar } from "../../servicios/sistemaNotificaciones.js";
 
 export const Registro = () => {
   const [form, setForm] = useState({
-    usuario: '',
-    password: '',
-    password2: '',
+    usuario: "",
+    password: "",
+    password2: "",
   });
   const [erroresCampos, setErroresCampos] = useState({});
   const { usuario, password, password2 } = form;
@@ -33,8 +33,8 @@ export const Registro = () => {
       // Si hay un error colgado, notificamos el primero y frenamos
       setErroresCampos(errores);
       notificar(
-        '⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.',
-        'error',
+        "⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.",
+        "error",
       );
       return;
     }

@@ -1,59 +1,83 @@
 @layer components {
   .notification-toast {
     position: fixed;
-    /* Centrado absoluto en la pantalla */
     top: 50%;
     left: 50%;
-    /* El transform inicial ahora lo maneja la animación, pero necesitamos el origen en el centro */
     transform-origin: center center;
     z-index: 999999;
 
     display: flex;
     align-items: center;
     gap: 14px;
+
     min-width: 280px;
     max-width: 400px;
     padding: 16px 20px;
-    border-radius: 12px;
 
-    background-color: var(--base-color);
-    color: var(--text-main);
-    box-shadow: var(--neumo-shadow);
+    border-radius: var(--neumo-radius-md);
 
-    /* Mantenemos tu curva premium, pero con nuestra nueva animación central */
-    animation: zoomAndSettle 4.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: zoomAndSettle 4.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+      forwards;
   }
 
-  /* ... El resto de tus estilos (.notification-toast p, .notification-icon, etc.) quedan exactamente IGUAL ... */
+  /* MENSAJE */
+  .notification-toast p {
+    margin: 0;
+    line-height: 1.4;
+    font-size: 15px;
+  }
 
-  /* NUEVA ANIMACIÓN CENTRAL */
+  /* ÉXITO */
+  .notification-toast.success {
+    border-left: 4px solid #22c55e;
+  }
+
+  .notification-toast.success .notification-icon {
+    color: #22c55e;
+  }
+
+  /* ERROR */
+  .notification-toast.error {
+    border-left: 4px solid #ef4444;
+  }
+
+  .notification-toast.error .notification-icon {
+    color: #ef4444;
+  }
+
+  /* ICONO */
+  .notification-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  /* ANIMACIÓN */
   @keyframes zoomAndSettle {
-
-    /* 0% al 15%: Movimiento explosivo y rápido (Dura más o menos 0.6 segundos) */
     0% {
-      transform: translate(-50%, -50%) scale(4.5);
-      opacity: 0;
-      filter: blur(4px);
+      transform: translate(-50%, -50%) scale(1.6);
     }
 
     10% {
       transform: translate(-50%, -50%) scale(1.5);
-      opacity: 1;
-      filter: blur(0);
     }
 
-    /* 15% al 85%: El cartel se queda CONGELADO en el centro para que el usuario lo lea */
-    95% {
-      transform: translate(-50%, -50%) scale(1.5);
-      opacity: 1;
-      filter: blur(0);
+    20% {
+      transform: translate(-50%, -50%) scale(1.3);
     }
 
-    /* 85% al 100%: Desaparece suavemente al final antes de que React lo desmonte */
+    80% {
+      transform: translate(-50%, -50%) scale(1.3);
+    }
+
     100% {
-      transform: translate(-50%, -50%) scale(0.8);
-      opacity: 0;
-      filter: blur(2px);
+      transform: translate(-50%, -50%) scale(1);
     }
   }
 }

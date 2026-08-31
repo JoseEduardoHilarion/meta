@@ -1,16 +1,14 @@
 import './Input.css';
 
-export const InputSelect = (
-  {
-    label,
-    name,
-    value,
-    onChange,
-    className = 'neumo-inset',
-    options,
-    ...props
-  }
-) => {
+export const InputSelect = ({
+  label,
+  name,
+  value,
+  onChange,
+  className = 'neumo-inset',
+  options,
+  ...props
+}) => {
   return (
     /* Cambiamos la clase del label a 'formulario__grupo' */
     <label className="field" htmlFor={`id-${name}`}>

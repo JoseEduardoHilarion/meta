@@ -1,32 +1,32 @@
 @layer components {
-	.formulario {
-		display: flex;
-		flex-direction: column;
-		border-radius: 15px;
-		overflow: hidden;
-		margin: 10px;
-		gap: 10px;
-		/*CLAVE: Le avisa a los Inputs de su interior 
+  .formulario {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--neumo-radius-lg);
+    overflow: hidden;
+    margin: 10px;
+    gap: 10px;
+    /*CLAVE: Le avisa a los Inputs de su interior 
        que midan el ancho de ESTE modal, no de la pantalla completa.*/
-		container-type: inline-size;
+    container-type: inline-size;
 
-		& fieldset {
-			border: none;
-			display: flex;
-			flex-direction: column;
-			/* Para alinear el input y el select uno al lado del otro */
-			margin: 10px;
-			/* Espacio entre el input y el select */
-			border-radius: 10px;
-			justify-content: space-between;
-			/* Empuja los elementos a los extremos */
-			align-items: center;
-		}
+    & fieldset {
+      border: none;
+      display: flex;
+      flex-direction: column;
+      /* Para alinear el input y el select uno al lado del otro */
+      margin: 10px;
+      /* Espacio entre el input y el select */
+      border-radius: 10px;
+      justify-content: space-between;
+      /* Empuja los elementos a los extremos */
+      align-items: center;
+    }
 
-		@container (min-width: 560px) {
-			& fieldset {
-				flex-direction: row;
-			}
-		}
-	}
+    @container (min-width: 560px) {
+      & fieldset {
+        flex-direction: row;
+      }
+    }
+  }
 }

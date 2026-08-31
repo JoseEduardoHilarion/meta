@@ -1,5 +1,5 @@
-import './Item.css';
-import { cn } from './../../utils';
+import "./Item.css";
+import { cn } from "./../../utils";
 
 export const Item = ({ children, variant, clickable, className, onClick }) => {
   const neumo_variant = variant ? `neumo-${variant}` : null;
@@ -9,7 +9,7 @@ export const Item = ({ children, variant, clickable, className, onClick }) => {
   };
   return (
     <div
-      className={cn('item', neumo_variant, clickable && 'clickable', className)}
+      className={cn("item", neumo_variant, clickable && "clickable", className)}
       onClick={handleClickInterno}
     >
       {children}

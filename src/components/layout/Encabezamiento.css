@@ -1,0 +1,10 @@
+@layer components {
+  @media (min-width: 600px) {
+    .aside-menu {
+      display: none;
+    }
+    aside {
+      display: block;
+    }
+  }
+}

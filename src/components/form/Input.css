@@ -39,12 +39,14 @@
   /*///////////////////////////////////////////*/
   .field__input {
     padding: 10px;
-    border: none;
     /*outline: none; pero se escribe &:focus */
-    border-radius: 15px;
-    margin: 0 10px;
-    font-size: var(--text-md);
+    border: none;
     /* Usamos tus tokens de texto */
+    border-radius: var(--neumo-radius-sm);
+    font-size: var(--text-md);
+
+    margin: 0 10px;
+
     flex-grow: 1;
     /* Obliga al input a rellenar TODO el espacio que sobra */
     width: auto;

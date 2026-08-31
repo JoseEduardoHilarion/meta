@@ -15,9 +15,11 @@
 
   .progressBar--barra {
     height: 100%;
-    background: linear-gradient(145deg,
-        hsl(211, 100%, 45%),
-        hsl(360, 97%, 95%));
+    background: linear-gradient(
+      145deg,
+      hsl(211, 100%, 45%),
+      hsl(360, 97%, 95%)
+    );
     /* Un color que destaque */
     border-radius: 5px;
     transition: width 0.5s ease-in-out;

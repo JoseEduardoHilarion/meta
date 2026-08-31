@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { Input } from '../form/Input';
-import { InputSelect } from '../form/InputSelect';
-import './Form.css';
+import { useState } from "react";
+import { Input } from "../form/Input";
+import { InputSelect } from "../form/InputSelect";
+import "./Form.css";
 
-import { listaPeriodo, iconos } from '../../data/mocks.js';
-import { validarMeta } from '../../servicios/metaReglas.js';
-import { notificar } from '../../servicios/sistemaNotificaciones.js';
-import { FormContainer } from './FormContainer.jsx';
+import { listaPeriodo, iconos } from "../../data/mocks.js";
+import { validarMeta } from "../../servicios/metaReglas.js";
+import { notificar } from "../../servicios/sistemaNotificaciones.js";
+import { FormContainer } from "./FormContainer.jsx";
 
 export const MetaForm = ({
   initialValues,
@@ -22,8 +22,8 @@ export const MetaForm = ({
   const handleChange = (e) => {
     const { name, value, nodeName } = e.target;
     const nuevoForm = { ...form, [name]: value };
-    setForm(() => nuevoForm);
-    if (nodeName === 'SELECT') {
+    setForm(nuevoForm);
+    if (nodeName === "SELECT") {
       const { errores } = validarMeta(nuevoForm);
       setErroresCampos(errores);
     }
@@ -40,8 +40,8 @@ export const MetaForm = ({
       // Si hay un error colgado, notificamos el primero y frenamos
       setErroresCampos(errores);
       notificar(
-        '⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.',
-        'error',
+        "⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.",
+        "error",
       );
       return;
     }

@@ -1,8 +1,8 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo } from "react";
 import {
   MetasStateContext,
   MetasDispatchContext,
-} from '../../servicios/MetasContext.js';
+} from "../../servicios/MetasContext.js";
 
 // Transforma el diccionario y el orden en un array simple para el .map()
 const getAllMetas = (estado) => estado.orden.map((id) => estado.objetos[id]);
@@ -12,7 +12,7 @@ const getMetaById = (estado, id) => estado.objetos[id];
 /////////////////////////////////////////////////////////////////////////
 export function useMetas() {
   const estado = useContext(MetasStateContext);
-  if (!estado) throw new Error('useMetas debe usarse dentro de MetasProvider');
+  if (!estado) throw new Error("useMetas debe usarse dentro de MetasProvider");
 
   // Leer por metas o por id.
   const metas = useMemo(() => getAllMetas(estado), [estado]);
@@ -31,13 +31,14 @@ export function useMetas() {
 export function useMetasActions() {
   const dispatch = useContext(MetasDispatchContext);
   if (!dispatch)
-    throw new Error('useMetasActions debe usarse dentro de MetasProvider');
+    throw new Error("useMetasActions debe usarse dentro de MetasProvider");
 
   // Crear (Create)
   const crearMeta = (nuevaMeta) => {
-    const id = self.crypto.randomUUID();
+    const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
+    //const id = self.crypto.randomUUID();
     dispatch({
-      type: 'CREAR',
+      type: "CREAR",
       payload: { id, ...nuevaMeta },
     });
   };
@@ -45,7 +46,7 @@ export function useMetasActions() {
   // Actualizar (Update)
   const actualizarMeta = (datosActualizados) => {
     dispatch({
-      type: 'ACTUALIZAR',
+      type: "ACTUALIZAR",
       payload: { ...datosActualizados },
     });
   };
@@ -53,7 +54,7 @@ export function useMetasActions() {
   // Borrar (Delete)
   const borrarMeta = (id) => {
     dispatch({
-      type: 'BORRAR',
+      type: "BORRAR",
       payload: id,
     });
   };
