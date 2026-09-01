@@ -1,75 +1,105 @@
-/////////////////////////////////////////////////////////////////////////
-////////////////////////Validador Central////////////////////////////////
-/**
- * Valida de forma centralizada las reglas de negocio de una Meta.
- * @param {Object} datos - Objeto con { detalles, meta, completado }
- * @returns {Object} { esValido: boolean, errores: Object }
- */
-export function validarMeta(datos) {
+export function validarMeta(datos, campo = null) {
   const errores = {};
+  const reglas = {
+    detalles: () => {
+      if (!datos.detalles?.trim())
+        errores.detalles = 'La descripción no puede estar vacía.';
+      else errores.detalles = '';
+    },
+    periodo: () => {
+      if (!datos.periodo?.trim())
+        errores.periodo = 'Debe seleccionar un período';
+      else errores.periodo = '';
+    },
+    eventos: () => {
+      if (!datos.eventos?.trim())
+        errores.eventos = 'La frecuencia no puede estar vacia.';
+      else if (Number(datos.eventos) <= 0)
+        errores.eventos = 'La frecuencia debe ser mayor a 0.';
+      else errores.eventos = '';
+    },
+    meta: () => {
+      if (!datos.meta?.trim()) errores.meta = 'La Meta no puede estar vacia.';
+      else if (Number(datos.meta) <= 0)
+        errores.meta = 'El objetivo total debe ser mayor a 0.';
+      else errores.meta = '';
+    },
+    completado: () => {
+      if (!datos.completado?.trim())
+        errores.completado = 'Completado no puede estar vacia.';
+      else if (Number(datos.completado) < 0)
+        errores.completado = 'El progreso no puede ser un número negativo.';
+      else errores.completado = '';
+    },
+  };
+  const relacionMetaCompletado = () => {
+    const completadoNum = Number(datos.completado);
+    const metaNum = Number(datos.meta);
+    if (completadoNum > metaNum)
+      errores.completado = `No podés haber completado (${completadoNum}) más de tu objetivo total (${metaNum}).`;
+  };
 
-  const completadoNum = Number(datos.completado || 0);
-  const metaNum = Number(datos.meta || 0);
+  if (!campo) {
+    Object.values(reglas).forEach((regla) => regla());
 
-  // Regla detalles
-  if (!datos.detalles || datos.detalles.trim() === "") {
-    errores.detalles = "La descripción de la meta no puede estar vacía.";
+    if (!errores.meta && !errores.completado) relacionMetaCompletado();
+  } else if (reglas[campo]) {
+    reglas[campo]();
+    if (
+      (campo === 'meta' || campo === 'completado') &&
+      !errores.meta &&
+      !errores.completado
+    )
+      relacionMetaCompletado();
   }
-  if (!datos.periodo || datos.periodo.trim() === "") {
-    // Le ponés un string común. No pasa nada si no lo usás en la pantalla.
-    errores.periodo = "Debe seleccionar un período";
-  }
-  // Regla frecuncia
-  if (datos.eventos <= 0) {
-    errores.eventos = "La frecuencia debe ser mayor a 0.";
-  }
-
-  // Regla meta
-  if (metaNum <= 0) {
-    errores.meta = "El objetivo total debe ser mayor a 0.";
-  }
-
-  // Regla "RELACIÓN MUTUA completado <= meta"
-  if (completadoNum < 0) {
-    errores.completado = "El progreso no puede ser un número negativo.";
-  } else if (completadoNum > metaNum) {
-    errores.completado = `No podés haber completado (${completadoNum}) más de tu objetivo total (${metaNum}).`;
-  }
-
   return {
-    esValido: Object.keys(errores).length === 0, // Es válido si no hay ningún error en el objeto
-    errores, // Devolvemos el diccionario de errores por campo
+    esValido: Object.values(errores).every((valor) => !valor),
+    errores,
   };
 }
-////////////////////////////////////////
-////////////////////////////////////////
-export function validarCredenciales(datos) {
+/////////////////////////
+export function validarCredenciales(datos, campo = null) {
   const errores = {};
+  const reglas = {
+    usuario: () => {
+      if (!datos.usuario?.trim())
+        errores.usuario =
+          'Debe ingresar nombre de Usuario o bien correo, no puede estar vacía.';
+      else errores.usuario = '';
+    },
+    password: () => {
+      if (!datos.password?.trim())
+        errores.password =
+          'Debe ingresar Contraseña password, no puede estar vacía.';
+      else errores.password = '';
+    },
+    password2: () => {
+      if (!datos.password2?.trim())
+        errores.password2 =
+          'Debe ingresar Contraseña password, no puede estar vacía.';
+      else errores.password2 = '';
+    },
+  };
+  const igualdadPassword = () => {
+    if (datos.password !== datos.password2)
+      errores.password2 = 'Deben ser iguales las contraseñas';
+  };
 
-  if (!datos.usuario || datos.usuario.trim() === "") {
-    errores.usuario =
-      "Debe ingresar nombre de Usuario o bien correo, no puede estar vacía.";
-  }
-
-  if (!datos.password || datos.password.trim() === "") {
-    errores.password =
-      "Debe ingresar Contraseña password, no puede estar vacía.";
-  }
-  if (!datos.password2 || datos.password2.trim() === "") {
-    errores.password2 =
-      "Debe ingresar Contraseña password, no puede estar vacía.";
-  }
-  if (
-    !datos.password ||
-    !datos.password2 ||
-    !(datos.password === datos.password2)
-  ) {
-    errores.password = "Deben ser iguales las contraseñas";
-    errores.password2 = errores.password;
+  if (!campo) {
+    Object.values(reglas).forEach((regla) => regla());
+    if (!errores.password && !errores.password2) igualdadPassword();
+  } else if (reglas[campo]) {
+    reglas[campo]();
+    if (
+      (campo === 'password' || campo === 'password2') &&
+      !errores.password &&
+      !errores.password2
+    )
+      igualdadPassword();
   }
 
   return {
-    esValido: Object.keys(errores).length === 0, // Es válido si no hay ningún error en el objeto
-    errores, // Devolvemos el diccionario de errores por campo
+    esValido: Object.values(errores).every((valor) => !valor),
+    errores,
   };
 }

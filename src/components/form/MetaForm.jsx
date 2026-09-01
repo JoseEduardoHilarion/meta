@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { Input } from "../form/Input";
-import { InputSelect } from "../form/InputSelect";
-import "./Form.css";
+import { useState } from 'react';
+import { Input } from '../form/Input';
+import { InputSelect } from '../form/InputSelect';
+import './Form.css';
 
-import { listaPeriodo, iconos } from "../../data/mocks.js";
-import { validarMeta } from "../../servicios/metaReglas.js";
-import { notificar } from "../../servicios/sistemaNotificaciones.js";
-import { FormContainer } from "./FormContainer.jsx";
+import { listaPeriodo, iconos } from '../../data/mocks.js';
+import { validarMeta } from '../../servicios/metaReglas.js';
+import { notificar } from '../../servicios/sistemaNotificaciones.js';
+import { FormContainer } from './FormContainer.jsx';
 
 export const MetaForm = ({
   initialValues,
@@ -23,15 +23,16 @@ export const MetaForm = ({
     const { name, value, nodeName } = e.target;
     const nuevoForm = { ...form, [name]: value };
     setForm(nuevoForm);
-    if (nodeName === "SELECT") {
-      const { errores } = validarMeta(nuevoForm);
-      setErroresCampos(errores);
+    if (nodeName === 'SELECT') {
+      const { errores } = validarMeta(nuevoForm, name);
+      setErroresCampos((prev) => ({ ...prev, ...errores }));
     }
   };
-  //Validación en caliente al salir (onBlur) usando tu validador central
-  const handleBlur = () => {
-    const { errores } = validarMeta(form);
-    setErroresCampos(errores);
+  //Validación al salir
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    const { errores } = validarMeta(form, name);
+    setErroresCampos((prev) => ({ ...prev, ...errores }));
   };
 
   const handleSubmit = () => {
@@ -40,8 +41,8 @@ export const MetaForm = ({
       // Si hay un error colgado, notificamos el primero y frenamos
       setErroresCampos(errores);
       notificar(
-        "⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.",
-        "error",
+        '⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.',
+        'error',
       );
       return;
     }
