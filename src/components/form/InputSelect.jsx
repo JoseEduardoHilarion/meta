@@ -1,11 +1,11 @@
-import './Input.css';
+import "./Input.css";
 
 export const InputSelect = ({
   label,
   name,
   value,
   onChange,
-  className = 'neumo-inset',
+  className = "neumo-inset",
   options,
   ...props
 }) => {
