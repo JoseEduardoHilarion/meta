@@ -1,9 +1,9 @@
-import { useReducer, useEffect } from "react";
-import { MetasStateContext, MetasDispatchContext } from "./MetasContext.js";
+import { useReducer, useEffect } from 'react';
+import { MetasStateContext, MetasDispatchContext } from './MetasContext.js';
 
 function metasReducer(state, action) {
   switch (action.type) {
-    case "INICIALIZAR": {
+    case 'INICIALIZAR': {
       const metas = action.payload;
       const objetosBase = {};
       const idBase = []; // Usamos un array normal
@@ -21,7 +21,7 @@ function metasReducer(state, action) {
         objetos: objetosBase,
       };
     }
-    case "CREAR": {
+    case 'CREAR': {
       const id = action.payload.id;
       const nuevaMetaConId = { ...action.payload, id }; // Inyectamos el ID en el objeto
 
@@ -31,7 +31,7 @@ function metasReducer(state, action) {
         objetos: { ...state.objetos, [id]: nuevaMetaConId },
       };
     }
-    case "BORRAR": {
+    case 'BORRAR': {
       const id = action.payload;
 
       // 1. CREAMOS COPIA del diccionario (Inmutabilidad)
@@ -49,7 +49,7 @@ function metasReducer(state, action) {
         objetos: nuevosObjetos, // Ahora sí, es una referencia nueva
       };
     }
-    case "ACTUALIZAR": {
+    case 'ACTUALIZAR': {
       const id = action.payload.id;
 
       return {
@@ -73,7 +73,7 @@ const respaldoVacio = {
   objetos: {},
 };
 // Intentamos leer lo que haya guardado en el navegador
-const memoriaLocal = localStorage.getItem("metas_app");
+const memoriaLocal = localStorage.getItem('metas_app');
 // Si hay algo, lo transformamos de texto a objeto. Si no, usamos el vacío.
 const estadoInicial = memoriaLocal ? JSON.parse(memoriaLocal) : respaldoVacio;
 
@@ -87,8 +87,9 @@ export const Memoria = ({ children }) => {
   const [state, dispatch] = useReducer(metasReducer, estadoInicial);
   // Cada vez que 'state' cambie, este efecto guarda la lista ordenada completa
   useEffect(() => {
-    localStorage.setItem("metas_app", JSON.stringify(state));
+    localStorage.setItem('metas_app', JSON.stringify(state));
   }, [state]);
+
   return (
     <MetasStateContext.Provider value={state}>
       <MetasDispatchContext.Provider value={dispatch}>
