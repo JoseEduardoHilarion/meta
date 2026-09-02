@@ -94,16 +94,19 @@
     }
   }
 
-  html[data-theme="light"] {
+  html[data-theme='light'] {
     --base-color: var(--base-color-light);
     --text-main: var(--text-main-light);
     --intensity: var(--intensity-light);
   }
 
-  html[data-theme="dark"] {
+  html[data-theme='dark'] {
     --base-color: var(--base-color-dark);
     --text-main: var(--text-main-dark);
     --intensity: var(--intensity-dark);
+  }
+  [data-theme='dark'] img[src$='.svg'] {
+    filter: invert(1) opacity(0.85);
   }
 
   button,
@@ -125,7 +128,7 @@
       background-color 0.4s ease,
       color 0.4s ease;
     font-family:
-      "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+      'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 
   .layout {
@@ -136,10 +139,10 @@
     /* Una fila debajo de la otra */
     grid-template-rows: auto auto 1fr auto;
     grid-template-areas:
-      "cabecera"
-      "lateral"
-      "principal"
-      "pie";
+      'cabecera'
+      'lateral'
+      'principal'
+      'pie';
   }
   aside {
     grid-area: lateral;
@@ -165,9 +168,9 @@
       /* Ajustamos las filas para que el medio sea 1fr */
       grid-template-rows: auto 1fr auto;
       grid-template-areas:
-        "cabecera cabecera"
-        "lateral   principal"
-        "pie       pie";
+        'cabecera cabecera'
+        'lateral   principal'
+        'pie       pie';
     }
   }
 }

@@ -1,13 +1,13 @@
-import { Item } from "../ui/Item";
-import { Icono } from "../ui/Icono";
-import { ThemeToggle } from "../ui/ThemeToggle";
-import { Spacer } from "../ui/Spacer";
-import { useState } from "react";
-import { Drawer } from "../ui/Drawer";
-import { Aside } from "./Aside";
+import { Item } from '../ui/Item';
+import { Icono } from '../ui/Icono';
+import { ThemeToggle } from '../ui/ThemeToggle';
+import { Spacer } from '../ui/Spacer';
+import { useState } from 'react';
+import { Drawer } from '../ui/Drawer';
+import { Aside } from './Aside';
 
-import "./Encabezamiento.css";
-import { Button } from "../ui/Button";
+import './Encabezamiento.css';
+import { Button } from '../ui/Button';
 
 export const Encabezamiento = () => {
   const [menuAbierto, setMenuAbierto] = useState(false);
@@ -17,7 +17,7 @@ export const Encabezamiento = () => {
   };
 
   return (
-    <header className={"neumo-convex"}>
+    <header className={'neumo-flat'}>
       <Item>
         <Button
           className="aside-menu"

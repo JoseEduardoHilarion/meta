@@ -114,7 +114,6 @@ export const MetaForm = ({
             <Input
               label="¿Cuántas veces has completado ya esta meta?"
               type="number"
-              min="0"
               required
               name="completado"
               value={completado}
