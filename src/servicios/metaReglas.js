@@ -63,26 +63,23 @@ export function validarCredenciales(datos, campo = null) {
   const reglas = {
     usuario: () => {
       if (!datos.usuario?.trim())
-        errores.usuario =
-          'Debe ingresar nombre de Usuario o bien correo, no puede estar vacía.';
+        errores.usuario = 'Debe ingresar nombre de Usuario o bien correo';
       else errores.usuario = '';
     },
     password: () => {
       if (!datos.password?.trim())
-        errores.password =
-          'Debe ingresar Contraseña password, no puede estar vacía.';
+        errores.password = 'Debe ingresar Contraseña password';
       else errores.password = '';
     },
     password2: () => {
       if (!datos.password2?.trim())
-        errores.password2 =
-          'Debe ingresar Contraseña password, no puede estar vacía.';
+        errores.password2 = 'Debe ingresar Contraseña password';
       else errores.password2 = '';
     },
   };
   const igualdadPassword = () => {
     if (datos.password !== datos.password2)
-      errores.password2 = 'Deben ser iguales las contraseñas';
+      errores.password2 = 'Las contraseñas deben ser iguales ';
   };
 
   if (!campo) {
