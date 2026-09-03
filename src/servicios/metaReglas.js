@@ -103,3 +103,18 @@ export function validarCredenciales(datos, campo = null) {
     errores,
   };
 }
+///////////////////////////////
+export function adaptarMetaParaFormulario(metaBackend) {
+  return {
+    id: String(metaBackend.id ?? ''),
+    detalles: String(metaBackend.detalles ?? ''),
+    eventos: String(metaBackend.eventos ?? '0'),
+    periodo: String(metaBackend.periodo ?? ''),
+    icono: String(metaBackend.icono ?? '🏃'),
+    meta: String(metaBackend.meta ?? '0'),
+    plazo: metaBackend.plazo
+      ? String(metaBackend.plazo).split('T')[0]
+      : '2030-01-01',
+    completado: String(metaBackend.completado ?? '0'),
+  };
+}

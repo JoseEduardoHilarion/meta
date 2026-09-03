@@ -17,10 +17,10 @@ export const Encabezamiento = () => {
   };
 
   return (
-    <header className={'neumo-flat'}>
+    <header className={'neumo-gradient'}>
       <Item>
         <Button
-          className="aside-menu"
+          className="aside-menu dark"
           onClick={onMenu}
           aria-label="Abrir menú lateral"
         >

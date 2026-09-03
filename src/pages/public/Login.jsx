@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { FormContainer } from "../../components/form/FormContainer.jsx";
-import { Input } from "../../components/form/Input.jsx";
-import { Button } from "../../components/ui/Button.jsx";
+import { FormContainer } from '../../components/form/FormContainer.jsx';
+import { Input } from '../../components/form/Input.jsx';
+import { Button } from '../../components/ui/Button.jsx';
 
-import { validarCredenciales } from "../../servicios/metaReglas.js";
-import { notificar } from "../../servicios/sistemaNotificaciones.js";
-import { NavLink } from "react-router";
+import { validarCredenciales } from '../../servicios/metaReglas.js';
+import { notificar } from '../../servicios/sistemaNotificaciones.js';
+import { NavLink } from 'react-router';
 
 export const Login = () => {
-  const [form, setForm] = useState({ usuario: "", password: "" });
+  const [form, setForm] = useState({ usuario: '', password: '' });
   const [erroresCampos, setErroresCampos] = useState({});
   const { usuario, password } = form;
 
@@ -18,10 +18,11 @@ export const Login = () => {
     const nuevoForm = { ...form, [name]: value };
     setForm(() => nuevoForm);
   };
-  //Validación en caliente al salir (onBlur) usando tu validador central
-  const handleBlur = () => {
-    const { errores } = validarCredenciales(form);
-    setErroresCampos(errores);
+  //Validación al salir
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    const { errores } = validarCredenciales(form, name);
+    setErroresCampos((prev) => ({ ...prev, ...errores }));
   };
 
   const handleLogin = () => {
@@ -30,8 +31,8 @@ export const Login = () => {
       // Si hay un error colgado, notificamos y frenamos
       setErroresCampos(errores);
       notificar(
-        "⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.",
-        "error",
+        '⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.',
+        'error',
       );
       return;
     }
@@ -41,7 +42,7 @@ export const Login = () => {
   return (
     <FormContainer
       onSubmit={handleLogin}
-      header={<h2>ACCESO</h2>}
+      header={<h2 className="p-2">ACCESO</h2>}
       body={
         <>
           <Input

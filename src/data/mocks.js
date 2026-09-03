@@ -74,5 +74,5 @@ export const metaVacia = {
   icono: '🏃',
   meta: '0',
   plazo: '2030-01-01',
-  completado: '',
+  completado: '0',
 };
