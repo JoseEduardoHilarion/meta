@@ -4,8 +4,8 @@ import { FormContainer } from '../../components/form/FormContainer.jsx';
 import { Input } from '../../components/form/Input.jsx';
 import { Button } from '../../components/ui/Button.jsx';
 
-import { validarCredenciales } from '../../servicios/meta/metaReglas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
+import { authReglas } from '../../servicios/auth/authReglas.js';
 
 export const Registro = () => {
   const [form, setForm] = useState({
@@ -13,6 +13,7 @@ export const Registro = () => {
     password: '',
     password2: '',
   });
+
   const [erroresCampos, setErroresCampos] = useState({});
   const { usuario, password, password2 } = form;
 
@@ -23,12 +24,12 @@ export const Registro = () => {
   };
   //Validación en caliente al salir (onBlur) usando tu validador central
   const handleBlur = () => {
-    const { errores } = validarCredenciales(form);
+    const { errores } = authReglas(form);
     setErroresCampos(errores);
   };
 
   const handleSubmit = () => {
-    const { esValido, errores } = validarCredenciales(form);
+    const { esValido, errores } = authReglas(form);
     if (!esValido) {
       // Si hay un error colgado, notificamos el primero y frenamos
       setErroresCampos(errores);

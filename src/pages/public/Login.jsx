@@ -4,7 +4,7 @@ import { FormContainer } from '../../components/form/FormContainer.jsx';
 import { Input } from '../../components/form/Input.jsx';
 import { Button } from '../../components/ui/Button.jsx';
 
-import { validarCredenciales } from '../../servicios/meta/metaReglas.js';
+import { authReglas } from '../../servicios/auth/authReglas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
 import { NavLink } from 'react-router';
 
@@ -21,12 +21,13 @@ export const Login = () => {
   //Validación al salir
   const handleBlur = (e) => {
     const { name } = e.target;
-    const { errores } = validarCredenciales(form, name);
+    const { errores } = authReglas(form, name);
+    authRe;
     setErroresCampos((prev) => ({ ...prev, ...errores }));
   };
 
   const handleLogin = () => {
-    const { esValido, errores } = validarCredenciales(form);
+    const { esValido, errores } = authReglas(form);
     if (!esValido) {
       // Si hay un error colgado, notificamos y frenamos
       setErroresCampos(errores);

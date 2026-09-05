@@ -4,7 +4,7 @@ import { InputSelect } from '../form/InputSelect';
 import './Form.css';
 
 import { listaPeriodo, iconos } from '../../data/mocks.js';
-import { validarMeta } from '../../servicios/meta/metaReglas.js';
+import { metaReglas } from '../../servicios/meta/metaReglas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
 import { FormContainer } from './FormContainer.jsx';
 
@@ -24,19 +24,19 @@ export const MetaForm = ({
     const nuevoForm = { ...form, [name]: value };
     setForm(nuevoForm);
     if (nodeName === 'SELECT') {
-      const { errores } = validarMeta(nuevoForm, name);
+      const { errores } = metaReglas(nuevoForm, name);
       setErroresCampos((prev) => ({ ...prev, ...errores }));
     }
   };
   //Validación al salir
   const handleBlur = (e) => {
     const { name } = e.target;
-    const { errores } = validarMeta(form, name);
+    const { errores } = metaReglas(form, name);
     setErroresCampos((prev) => ({ ...prev, ...errores }));
   };
 
   const handleSubmit = () => {
-    const { esValido, errores } = validarMeta(form);
+    const { esValido, errores } = metaReglas(form);
     if (!esValido) {
       // Si hay un error colgado, notificamos el primero y frenamos
       setErroresCampos(errores);
