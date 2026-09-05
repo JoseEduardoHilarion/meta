@@ -5,7 +5,7 @@ import { MetaForm } from '../../components/form/MetaForm.jsx';
 import { Button } from '../../components/ui/Button.jsx';
 import { Modal } from '../../components/ui/Modal.jsx';
 
-import { useMetas, useMetasActions } from '../../components/hooks/useMetas.js';
+import { useMetas, useMetasActions } from '../../servicios/meta/useMetas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
 
 export const ActualizarMeta = () => {

@@ -1,10 +1,7 @@
 import { useContext, useMemo } from 'react';
-import {
-  MetasStateContext,
-  MetasDispatchContext,
-} from '../../servicios/MetasContext.js';
+import { MetasStateContext, MetasDispatchContext } from './MetasContext.js';
 import { useCallback } from 'react';
-import { adaptarMetaParaFormulario } from '../../servicios/metaReglas.js';
+import { adaptarMetaParaFormulario } from './metaReglas.js';
 
 // Transforma el diccionario y el orden en un array simple para el .map()
 const getAllMetas = (estado) => estado.orden.map((id) => estado.objetos[id]);
@@ -18,7 +15,6 @@ export function useMetas() {
 
   // Leer por metas o por id.
   const metas = useMemo(() => getAllMetas(estado), [estado]);
-
   const metaPorId = useCallback((id) => getMetaById(estado, id), [estado]);
 
   // Retornamos una API limpia para los componentes

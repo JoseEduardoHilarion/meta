@@ -4,7 +4,7 @@ import { InputSelect } from '../form/InputSelect';
 import './Form.css';
 
 import { listaPeriodo, iconos } from '../../data/mocks.js';
-import { validarMeta } from '../../servicios/metaReglas.js';
+import { validarMeta } from '../../servicios/meta/metaReglas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
 import { FormContainer } from './FormContainer.jsx';
 

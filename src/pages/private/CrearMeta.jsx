@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router';
 import { MetaForm } from '../../components/form/MetaForm.jsx';
 import { metaVacia } from '../../data/mocks.js';
 import { Button } from '../../components/ui/Button.jsx';
-
-import { useMetasActions } from '../../components/hooks/useMetas.js';
+import { useMetasActions } from '../../servicios/meta/useMetas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
 
 export const CrearMeta = () => {

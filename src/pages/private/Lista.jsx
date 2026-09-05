@@ -1,7 +1,7 @@
-import { Outlet, useNavigate } from "react-router";
+import { Outlet, useNavigate } from 'react-router';
 
-import { Meta } from "./Meta.jsx";
-import { useMetas } from "../../components/hooks/useMetas.js";
+import { Meta } from './Meta.jsx';
+import { useMetas } from '../../servicios/meta/useMetas.js';
 
 export const Lista = () => {
   const { metas } = useMetas(); // Tu hook de lectura

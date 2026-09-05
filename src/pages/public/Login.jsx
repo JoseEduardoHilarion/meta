@@ -4,7 +4,7 @@ import { FormContainer } from '../../components/form/FormContainer.jsx';
 import { Input } from '../../components/form/Input.jsx';
 import { Button } from '../../components/ui/Button.jsx';
 
-import { validarCredenciales } from '../../servicios/metaReglas.js';
+import { validarCredenciales } from '../../servicios/meta/metaReglas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
 import { NavLink } from 'react-router';
 

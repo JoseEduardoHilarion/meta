@@ -3,8 +3,8 @@ import { Item } from '../../components/ui/Item.jsx';
 import { Spacer } from '../../components/ui/Spacer.jsx';
 import { ProgressBar } from '../../components/ui/ProgressBar.jsx';
 import { Icono } from '../../components/ui/Icono.jsx';
+import { useMetasActions } from '../../servicios/meta/useMetas.js';
 
-import { useMetasActions } from '../../components/hooks/useMetas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
 
 export const Meta = ({
