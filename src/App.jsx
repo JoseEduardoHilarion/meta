@@ -1,15 +1,15 @@
 import { BrowserRouter } from 'react-router';
-import { Memoria } from './servicios/meta/Memoria.jsx';
+import { MetaMemoria } from './servicios/meta/MetaMemoria.jsx';
 import { Toaster } from './components/ui/Toaster.jsx';
 import { AppRouter } from './routes/AppRouter.jsx';
 
 export function App() {
   return (
-    <Memoria>
+    <MetaMemoria>
       <Toaster />
       <BrowserRouter>
         <AppRouter />
       </BrowserRouter>
-    </Memoria>
+    </MetaMemoria>
   );
 }

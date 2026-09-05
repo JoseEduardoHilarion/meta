@@ -1,5 +1,5 @@
 import { useReducer, useEffect } from 'react';
-import { MetasStateContext, MetasDispatchContext } from './MetasContext.js';
+import { MetasStateContext, MetasDispatchContext } from './metasContext.js';
 
 function metasReducer(state, action) {
   switch (action.type) {
@@ -77,7 +77,7 @@ const memoriaLocal = localStorage.getItem('metas_app');
 // Si hay algo, lo transformamos de texto a objeto. Si no, usamos el vacío.
 const estadoInicial = memoriaLocal ? JSON.parse(memoriaLocal) : respaldoVacio;
 
-export const Memoria = ({ children }) => {
+export const MetaMemoria = ({ children }) => {
   /*const [state, dispatch] = useReducer(metasReducer, listaMock, (lista) => {
     return metasReducer(estadoInicial, {
       type: 'INICIALIZAR',

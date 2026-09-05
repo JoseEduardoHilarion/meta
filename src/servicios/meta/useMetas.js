@@ -1,6 +1,5 @@
-import { useContext, useMemo } from 'react';
-import { MetasStateContext, MetasDispatchContext } from './MetasContext.js';
-import { useCallback } from 'react';
+import { useContext, useMemo, useCallback } from 'react';
+import { MetasStateContext, MetasDispatchContext } from './metasContext.js';
 import { adaptarMetaParaFormulario } from './metaReglas.js';
 
 // Transforma el diccionario y el orden en un array simple para el .map()
