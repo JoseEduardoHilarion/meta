@@ -22,20 +22,17 @@ export const Login = () => {
   const handleBlur = (e) => {
     const { name } = e.target;
     const { errores } = authReglas(form, name);
-    authRe;
     setErroresCampos((prev) => ({ ...prev, ...errores }));
   };
 
   const handleLogin = () => {
     const { esValido, errores } = authReglas(form);
     if (!esValido) {
-      // Si hay un error colgado, notificamos y frenamos
       setErroresCampos(errores);
       notificar(
         '⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.',
         'error',
       );
-      return;
     }
     ///onSubmit(form); // Si todo está impecable, viaja al padre limpio
   };

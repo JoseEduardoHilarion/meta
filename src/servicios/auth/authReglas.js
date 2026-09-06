@@ -13,13 +13,15 @@ export function authReglas(datos, campo = null) {
       else errores.password = '';
     },
     password2: () => {
-      if (!datos.password2?.trim())
-        errores.password2 = 'Debe ingresar Contraseña password';
-      else errores.password2 = '';
+      if (name in datos) {
+        if (!datos.password2?.trim())
+          errores.password2 = 'Debe ingresar Contraseña password';
+        else errores.password2 = '';
+      }
     },
   };
   const igualdadPassword = () => {
-    if (datos.password !== datos.password2)
+    if ('password2' in datos && datos.password !== datos.password2)
       errores.password2 = 'Las contraseñas deben ser iguales ';
   };
 
