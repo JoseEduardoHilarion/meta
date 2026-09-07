@@ -77,18 +77,23 @@ const memoriaLocal = localStorage.getItem('metas_app');
 // Si hay algo, lo transformamos de texto a objeto. Si no, usamos el vacío.
 const estadoInicial = memoriaLocal ? JSON.parse(memoriaLocal) : respaldoVacio;
 
+const URL_BASE = 'http://localhost:3000';
+const endpointMetas = 'goals';
+const obtenerMetas = () =>
+  fetch(`${URL_BASE}/${endpointMetas}`).then((res) => res.json());
+
 export const MetaMemoria = ({ children }) => {
-  /*const [state, dispatch] = useReducer(metasReducer, listaMock, (lista) => {
-    return metasReducer(estadoInicial, {
-      type: 'INICIALIZAR',
-      payload: lista,
-    });
-  });*/
   const [state, dispatch] = useReducer(metasReducer, estadoInicial);
   // Cada vez que 'state' cambie, este efecto guarda la lista ordenada completa
   useEffect(() => {
-    localStorage.setItem('metas_app', JSON.stringify(state));
-  }, [state]);
+    //localStorage.setItem('metas_app', JSON.stringify(state));
+    obtenerMetas().then((metas) =>
+      dispatch({
+        type: 'INICIALIZAR',
+        payload: metas,
+      }),
+    );
+  }, []);
 
   return (
     <MetasStateContext.Provider value={state}>

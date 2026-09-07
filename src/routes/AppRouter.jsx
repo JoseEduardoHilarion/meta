@@ -13,19 +13,17 @@ import { Autenticar } from '../servicios/auth/Autenticar.jsx';
 export function AppRouter() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/lista" />} />
       <Route element={<Layout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="*" element={<NoEncontrado />} />
       </Route>
       <Route element={<Layout privado />}>
-        <Route element={<Autenticar />}>
-          <Route path="/lista" element={<Lista />}>
-            <Route path=":id" element={<ActualizarMeta />} />
-          </Route>
-          <Route path="/nueva" element={<CrearMeta />} />
+        <Route path="/" element={<Navigate to="/lista" />} />
+        <Route path="/lista" element={<Lista />}>
+          <Route path=":id" element={<ActualizarMeta />} />
         </Route>
+        <Route path="/nueva" element={<CrearMeta />} />
       </Route>
     </Routes>
   );

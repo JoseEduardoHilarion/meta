@@ -24,6 +24,8 @@ export function useMetas() {
 }
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
+const URL_BASE = 'http://localhost:3000';
+const endpointMetas = 'goals';
 export function useMetasActions() {
   const dispatch = useContext(MetasDispatchContext);
   if (!dispatch)
@@ -31,13 +33,28 @@ export function useMetasActions() {
 
   // Crear (Create)
   const crearMeta = (nuevaMeta) => {
-    const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
-    const nuevaMetaS = adaptarMetaParaFormulario({ id, ...nuevaMeta });
-
-    dispatch({
-      type: 'CREAR',
-      payload: { id, ...nuevaMetaS },
-    });
+    //const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
+    const nuevaMetaS = adaptarMetaParaFormulario(nuevaMeta);
+    fetch(`${URL_BASE}/${endpointMetas}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(nuevaMetaS),
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+        else throw new Error(`Error HTTP: ${res.status}`);
+      })
+      .then((metaAgregada) =>
+        dispatch({
+          type: 'CREAR',
+          payload: metaAgregada,
+        }),
+      )
+      .catch((error) => {
+        console.log('ERROR: ' + error);
+      });
   };
 
   // Actualizar (Update)
