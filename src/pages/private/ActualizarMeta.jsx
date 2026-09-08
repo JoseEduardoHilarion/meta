@@ -23,12 +23,17 @@ export const ActualizarMeta = () => {
   }, [meta, navegar]);
 
   const handleActualizar = (datosModificados) => {
-    actualizarMeta(datosModificados);
-    notificar(
-      'OK, se pudo modificar la meta: ' + datosModificados.detalles,
-      'success',
-    );
-    navegar('/Lista');
+    actualizarMeta(datosModificados)
+      .then(() => {
+        notificar(
+          'OK, se pudo modificar la meta: ' + datosModificados.detalles,
+          'success',
+        );
+        navegar('/Lista');
+      })
+      .catch((error) => {
+        console.log('ERROR: ' + error);
+      });
   };
 
   const handleEliminar = () => {
@@ -57,4 +62,20 @@ export const ActualizarMeta = () => {
       />
     </Modal>
   );
+};
+
+const mensajesError = {
+  400: 'Los datos enviados no son válidos.',
+  401: 'Debes iniciar sesión.',
+  403: 'No tienes permiso.',
+  404: 'No se encontró la meta.',
+  500: 'Error interno del servidor.',
+  desconocido: 'Ocurrió un error inesperado.',
+};
+const manejarError = (error) => {
+  let mensaje = mensajesError[error.status];
+
+  if (mensaje === undefined) mensaje = mensajesError['desconocido'];
+
+  return mensaje;
 };

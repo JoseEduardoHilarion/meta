@@ -59,12 +59,26 @@ export function useMetasActions() {
 
   // Actualizar (Update)
   const actualizarMeta = (datosActualizados) => {
-    const nuevaMetaS = adaptarMetaParaFormulario({ ...datosActualizados });
+    const nuevaMetaS = adaptarMetaParaFormulario(datosActualizados);
+    const id = datosActualizados.id;
 
-    dispatch({
-      type: 'ACTUALIZAR',
-      payload: nuevaMetaS,
-    });
+    return fetch(`${URL_BASE}/${endpointMetas}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(nuevaMetaS),
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+        else throw new Error(`Error HTTP: ${res.status}`);
+      })
+      .then((metaActualizada) =>
+        dispatch({
+          type: 'ACTUALIZAR',
+          payload: metaActualizada,
+        }),
+      );
   };
 
   // Borrar (Delete)

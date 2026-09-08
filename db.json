@@ -10,6 +10,16 @@
       "meta": "1",
       "plazo": "2030-01-01",
       "completado": "0"
+    },
+    {
+      "id": "DuCnzhQeo1M",
+      "detalles": "Elias Hilarion",
+      "eventos": "1",
+      "periodo": "día",
+      "icono": "🏃",
+      "meta": "1",
+      "plazo": "2030-01-01",
+      "completado": "0"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
