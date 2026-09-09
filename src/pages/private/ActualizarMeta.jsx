@@ -32,7 +32,9 @@ export const ActualizarMeta = () => {
         navegar('/Lista');
       })
       .catch((error) => {
-        console.log('ERROR: ' + error);
+        notificar(
+          'NO se pudo Modificar por el siguiente error: ' + manejarError(error),
+        );
       });
   };
 
@@ -72,10 +74,16 @@ const mensajesError = {
   500: 'Error interno del servidor.',
   desconocido: 'Ocurrió un error inesperado.',
 };
+class ErrorHttp extends Error {
+  constructor(message, status) {
+    super(message);
+    this.status = status;
+  }
+}
 const manejarError = (error) => {
-  let mensaje = mensajesError[error.status];
-
-  if (mensaje === undefined) mensaje = mensajesError['desconocido'];
-
-  return mensaje;
+  return !(error instanceof ErrorHttp)
+    ? 'No se pudo conectar con el servidor.'
+    : error.status in mensajesError
+      ? mensajesError[error.status]
+      : mensajesError.desconocido;
 };
