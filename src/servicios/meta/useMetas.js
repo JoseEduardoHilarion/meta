@@ -1,6 +1,6 @@
 import { useContext, useMemo, useCallback } from 'react';
 import { MetasStateContext, MetasDispatchContext } from './metasContext.js';
-import { adaptarMetaParaFormulario } from './metaReglas.js';
+import { bd } from '../../backend_basedatos/clases.js';
 
 // Transforma el diccionario y el orden en un array simple para el .map()
 const getAllMetas = (estado) => estado.orden.map((id) => estado.objetos[id]);
@@ -24,71 +24,34 @@ export function useMetas() {
 }
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-const URL_BASE = 'http://localhost:3000';
-const endpointMetas = 'goals';
 export function useMetasActions() {
   const dispatch = useContext(MetasDispatchContext);
   if (!dispatch)
     throw new Error('useMetasActions debe usarse dentro de MetasProvider');
-
-  // Crear (Create)
   const crearMeta = (nuevaMeta) => {
-    //const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
-    const nuevaMetaS = adaptarMetaParaFormulario(nuevaMeta);
-    fetch(`${URL_BASE}/${endpointMetas}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(nuevaMetaS),
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-        else throw new Error(`Error HTTP: ${res.status}`);
-      })
-      .then((metaAgregada) =>
-        dispatch({
-          type: 'CREAR',
-          payload: metaAgregada,
-        }),
-      )
-      .catch((error) => {
-        console.log('ERROR: ' + error);
-      });
+    return bd.crearMeta(nuevaMeta).then((metaAgregada) =>
+      dispatch({
+        type: 'CREAR',
+        payload: metaAgregada,
+      }),
+    );
   };
-
-  // Actualizar (Update)
   const actualizarMeta = (datosActualizados) => {
-    const nuevaMetaS = adaptarMetaParaFormulario(datosActualizados);
-    const id = datosActualizados.id;
-
-    return fetch(`${URL_BASE}/${endpointMetas}/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(nuevaMetaS),
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-        else throw new Error(`Error HTTP: ${res.status}`);
-      })
-      .then((metaActualizada) =>
-        dispatch({
-          type: 'ACTUALIZAR',
-          payload: metaActualizada,
-        }),
-      );
+    return bd.actualizarMeta(datosActualizados).then((metaActualizada) =>
+      dispatch({
+        type: 'ACTUALIZAR',
+        payload: metaActualizada,
+      }),
+    );
   };
-
-  // Borrar (Delete)
   const borrarMeta = (id) => {
-    dispatch({
-      type: 'BORRAR',
-      payload: id,
+    return bd.borrarMeta(id).then(() => {
+      dispatch({
+        type: 'BORRAR',
+        payload: id,
+      });
     });
   };
-
   // Retornamos una API limpia para los componentes
   return {
     crearMeta,

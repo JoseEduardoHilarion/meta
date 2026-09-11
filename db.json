@@ -3,23 +3,33 @@
   "goals": [
     {
       "id": "iSOpFU9O8cQ",
-      "detalles": "yyyy",
-      "eventos": "1",
+      "detalles": "yyyy hola soy jose eduardo hilarion",
+      "eventos": 1,
       "periodo": "día",
       "icono": "🏃",
-      "meta": "1",
-      "plazo": "2030-01-01",
-      "completado": "0"
+      "meta": 1,
+      "plazo": "undefined",
+      "completado": 1
     },
     {
       "id": "DuCnzhQeo1M",
-      "detalles": "Elias Hilarion",
-      "eventos": "1",
+      "detalles": "Elias Hilarion el rengo del papai",
+      "eventos": 1,
       "periodo": "día",
       "icono": "🏃",
-      "meta": "1",
+      "meta": 6,
+      "plazo": "2026-09-26",
+      "completado": 2
+    },
+    {
+      "id": "GqqoENoODYQ",
+      "detalles": "ghfghfdgh jajajajajajaj",
+      "eventos": 1,
+      "periodo": "mes",
+      "icono": "🏃",
+      "meta": 1,
       "plazo": "2030-01-01",
-      "completado": "0"
+      "completado": 0
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

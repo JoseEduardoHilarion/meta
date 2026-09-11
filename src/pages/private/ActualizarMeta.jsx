@@ -32,16 +32,19 @@ export const ActualizarMeta = () => {
         navegar('/Lista');
       })
       .catch((error) => {
-        notificar(
-          'NO se pudo Modificar por el siguiente error: ' + manejarError(error),
-        );
+        notificar('NO se pudo Modificar por el siguiente error: ' + error);
       });
   };
 
   const handleEliminar = () => {
-    borrarMeta(id);
-    notificar('Ok, se ELIMINO la meta', 'success');
-    navegar('/Lista');
+    borrarMeta(id)
+      .then(() => {
+        notificar('Ok, se ELIMINO la meta', 'success');
+        navegar('/Lista');
+      })
+      .catch((error) => {
+        notificar('NO se pudo ELIMINAR por el siguiente error: ' + error);
+      });
   };
 
   if (!meta) return null;
@@ -64,26 +67,4 @@ export const ActualizarMeta = () => {
       />
     </Modal>
   );
-};
-
-const mensajesError = {
-  400: 'Los datos enviados no son válidos.',
-  401: 'Debes iniciar sesión.',
-  403: 'No tienes permiso.',
-  404: 'No se encontró la meta.',
-  500: 'Error interno del servidor.',
-  desconocido: 'Ocurrió un error inesperado.',
-};
-class ErrorHttp extends Error {
-  constructor(message, status) {
-    super(message);
-    this.status = status;
-  }
-}
-const manejarError = (error) => {
-  return !(error instanceof ErrorHttp)
-    ? 'No se pudo conectar con el servidor.'
-    : error.status in mensajesError
-      ? mensajesError[error.status]
-      : mensajesError.desconocido;
 };

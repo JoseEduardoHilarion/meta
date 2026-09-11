@@ -10,12 +10,17 @@ export const CrearMeta = () => {
   const { crearMeta } = useMetasActions();
   const navegar = useNavigate();
   const handleCrear = (datosFormulario) => {
-    crearMeta(datosFormulario);
-    notificar(
-      'OK, se AGREGO con exito la meta> ' + datosFormulario.detalles,
-      'success',
-    );
-    navegar('/Lista');
+    crearMeta(datosFormulario)
+      .then(() => {
+        notificar(
+          'OK, se AGREGO con exito la meta> ' + datosFormulario.detalles,
+          'success',
+        );
+        navegar('/Lista');
+      })
+      .catch((error) => {
+        notificar('NO se pudo AGREGAR por el siguiente error: ' + error);
+      });
   };
   return (
     <MetaForm
