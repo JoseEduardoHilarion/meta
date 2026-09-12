@@ -7,7 +7,6 @@ class Tabla {
     this.#endpoint = endpoint;
     this.#bd = bd;
   }
-
   listar() {
     const fetchUrl = this.#bd.urlBase + '/' + this.#endpoint;
     return fetchGenerico(fetchUrl, 'GET');
@@ -34,12 +33,10 @@ class Tabla {
 class BaseDatos {
   #urlBase;
   #usuarios;
-  #sesiones;
   #metas;
   constructor(urlBase) {
     this.#urlBase = urlBase;
     this.#usuarios = new Tabla('users', this);
-    this.#sesiones = new Tabla('sessions', this);
     this.#metas = new Tabla('goals', this);
   }
   get urlBase() {
@@ -58,7 +55,6 @@ class BaseDatos {
   }
   crearMeta(datos) {
     const meta = adaptarMetaParaBackend(datos);
-    delete meta.id;
     return this.#metas.crear(meta).then((resultado) => {
       if (resultado.exito) return adaptarMetaParaFormulario(resultado.datos);
       else throw new Error(ERRORES_BD[resultado.codigo_error]);
@@ -82,6 +78,7 @@ class BaseDatos {
     const registro = adaptarUsuarioParaBackend(reg);
     return this.#usuarios.listar().then((resultado) => {
       if (resultado.exito) {
+        //SI el Usuario EXISTE
         const existeDni = resultado.datos.some(
           (usuario) => usuario.dni === registro.dni,
         );
@@ -90,8 +87,8 @@ class BaseDatos {
         );
         if (existeDni || existeEmail)
           return {
-            ...resultado,
-            codigo_error: 'DNI_EMAIL',
+            exito: true,
+            codigo_error: 'Existe_DNI_o_EMAIL',
             datos: {
               existeDni,
               existeEmail,
@@ -99,10 +96,14 @@ class BaseDatos {
           };
         else {
           //se procede a GUARDAR USUARIO
+          registro.token = {
+            valor: '',
+            expira: 0,
+          };
           return this.#usuarios.crear(registro).then((resultado) => {
             if (resultado.exito) {
               return {
-                ...resultado,
+                exito: true,
                 codigo_error: null,
                 datos: {
                   id: resultado.datos.id,
@@ -129,17 +130,19 @@ class BaseDatos {
             datos: null,
           };
         else {
+          ///Usuario REGISTRADO vamos por el password
           if (usuarioExiste.passwordHash === usuario.passwordHash) {
-            usuarioExiste.token = generarToken();
+            usuarioExiste.token.valor = generarToken();
+            usuarioExiste.token.expira = Date.now() + 12 * HORA;
             return this.#usuarios.modificar(usuarioExiste).then((resultado) => {
               if (resultado.exito)
                 return {
-                  ...resultado,
+                  exito: true,
                   codigo_error: null,
                   datos: {
                     id: usuarioExiste.id,
                     nombre: usuarioExiste.nombre,
-                    token: usuarioExiste.token,
+                    token: usuarioExiste.token.valor,
                   },
                 };
               else return resultado;
@@ -162,6 +165,10 @@ const ERRORES_BD = {
   CONEXION: 'No hay conexión con la Base de Datos.',
   DATOS_INVALIDOS: 'Los datos enviados no son válidos.',
   REGISTRO_NO_ENCONTRADO: 'El registro no existe.',
+  /////
+  USUARIO_NO_REGISTRADO: '',
+  CONTRASENA_INCORRECTA: '',
+  Existe_DNI_o_EMAIL: '',
 };
 class ErrorHttp extends Error {
   constructor(message, status) {
@@ -211,6 +218,16 @@ function fetchGenerico(url, metodo, registro = {}) {
       };
     });
 }
+const HORA = 3600000; //EN MILISEGUNDOS
+
+function generarToken() {
+  const bytes = new Uint8Array(32);
+  crypto.getRandomValues(bytes);
+  const bytes2 = [];
+  bytes.map((numero) => bytes2.push(numero.toString(16).padStart(2, '0')));
+
+  return bytes2.join('');
+}
 function hashP(password) {
   return String(password);
 }
@@ -223,20 +240,24 @@ function adaptarUsuarioParaBackend(usuario) {
   if ('password' in usuario) auxUsuario.passwordHash = hashP(usuario.password);
   if ('passwordHash' in usuario)
     auxUsuario.passwordHash = String(usuario.passwordHash);
-  if ('token' in usuario) auxUsuario.token = String(usuario.token);
+  if ('token' in usuario) {
+    auxUsuario.token.valor = String(usuario.token.valor);
+    auxUsuario.token.expira = Number(usuario.token.expira);
+  }
   return auxUsuario;
 }
+/////////////////////////////////////////////
 function adaptarMetaParaBackend(meta) {
-  return {
-    id: String(meta.id),
-    detalles: String(meta.detalles),
-    eventos: Number(meta.eventos),
-    periodo: String(meta.periodo),
-    icono: String(meta.icono),
-    meta: Number(meta.meta),
-    plazo: String(meta.plazo),
-    completado: Number(meta.completado),
-  };
+  const auxmeta = {};
+  if ('id' in meta) auxmeta.id = String(meta.id);
+  auxmeta.detalles = String(meta.detalles);
+  auxmeta.eventos = Number(meta.eventos);
+  auxmeta.periodo = String(meta.periodo);
+  auxmeta.icono = String(meta.icono);
+  auxmeta.meta = Number(meta.meta);
+  auxmeta.plazo = String(meta.plazo);
+  auxmeta.completado = Number(meta.completado);
+  return auxmeta;
 }
 
 function adaptarMetaParaFormulario(metaBackend) {
