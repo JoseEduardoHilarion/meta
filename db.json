@@ -16,7 +16,7 @@
       "detalles": "Elias Hilarion el rengo del papai",
       "eventos": 1,
       "periodo": "día",
-      "icono": "🏃",
+      "icono": "✈️",
       "meta": 6,
       "plazo": "2026-09-26",
       "completado": 2
@@ -26,10 +26,20 @@
       "detalles": "ghfghfdgh jajajajajajaj",
       "eventos": 1,
       "periodo": "mes",
-      "icono": "🏃",
+      "icono": "💧",
       "meta": 1,
       "plazo": "2030-01-01",
       "completado": 0
+    },
+    {
+      "id": "5m2TlsjI2TY",
+      "detalles": "l",
+      "eventos": 1,
+      "periodo": "día",
+      "icono": "🍎",
+      "meta": 11,
+      "plazo": "undefined",
+      "completado": 3
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

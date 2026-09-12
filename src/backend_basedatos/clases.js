@@ -1,5 +1,3 @@
-//  else if (!(error in SyntaxError)) error_tabla = 'DATOS_INVALIDOS';)
-
 const URL_BASE = 'http://localhost:3000';
 
 class Tabla {
@@ -100,20 +98,62 @@ class BaseDatos {
             },
           };
         else {
+          //se procede a GUARDAR USUARIO
           return this.#usuarios.crear(registro).then((resultado) => {
             if (resultado.exito) {
               return {
                 ...resultado,
                 codigo_error: null,
-                datos: { resultado.id,resultado.nombre },
+                datos: {
+                  id: resultado.datos.id,
+                  nombre: resultado.datos.nombre,
+                },
               };
-            }else return resultado;
+            } else return resultado;
           });
         }
       } else return resultado;
     });
   }
-  login() {}
+  login(reg) {
+    const usuario = adaptarUsuarioParaBackend(reg);
+    return this.#usuarios.listar().then((resultado) => {
+      if (resultado.exito) {
+        const usuarioExiste = resultado.datos.find(
+          (registro) => registro.email === usuario.email,
+        );
+        if (!usuarioExiste)
+          return {
+            exito: false,
+            codigo_error: 'USUARIO_NO_REGISTRADO',
+            datos: null,
+          };
+        else {
+          if (usuarioExiste.passwordHash === usuario.passwordHash) {
+            usuarioExiste.token = generarToken();
+            return this.#usuarios.modificar(usuarioExiste).then((resultado) => {
+              if (resultado.exito)
+                return {
+                  ...resultado,
+                  codigo_error: null,
+                  datos: {
+                    id: usuarioExiste.id,
+                    nombre: usuarioExiste.nombre,
+                    token: usuarioExiste.token,
+                  },
+                };
+              else return resultado;
+            });
+          } else
+            return {
+              exito: false,
+              codigo_error: 'CONTRASENA_INCORRECTA',
+              datos: null,
+            };
+        }
+      } else return resultado;
+    });
+  }
   logout() {}
 }
 
@@ -170,6 +210,21 @@ function fetchGenerico(url, metodo, registro = {}) {
         datos: null,
       };
     });
+}
+function hashP(password) {
+  return String(password);
+}
+function adaptarUsuarioParaBackend(usuario) {
+  const auxUsuario = {};
+  if ('id' in usuario) auxUsuario.id = String(usuario.id);
+  if ('nombre' in usuario) auxUsuario.nombre = String(usuario.nombre);
+  if ('dni' in usuario) auxUsuario.dni = String(usuario.dni);
+  if ('email' in usuario) auxUsuario.email = String(usuario.email);
+  if ('password' in usuario) auxUsuario.passwordHash = hashP(usuario.password);
+  if ('passwordHash' in usuario)
+    auxUsuario.passwordHash = String(usuario.passwordHash);
+  if ('token' in usuario) auxUsuario.token = String(usuario.token);
+  return auxUsuario;
 }
 function adaptarMetaParaBackend(meta) {
   return {
