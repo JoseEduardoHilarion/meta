@@ -7,8 +7,8 @@ class Tabla {
     this.#endpoint = endpoint;
     this.#bd = bd;
   }
-  listar() {
-    const fetchUrl = this.#bd.urlBase + '/' + this.#endpoint;
+  listar(filtro = '') {
+    const fetchUrl = this.#bd.urlBase + '/' + this.#endpoint + filtro;
     return fetchGenerico(fetchUrl, 'GET');
   }
   obtener(id) {
@@ -29,6 +29,7 @@ class Tabla {
     return fetchGenerico(fetchUrl, 'DELETE');
   }
 }
+const SIN_ERROR = null;
 
 class BaseDatos {
   #urlBase;
@@ -45,34 +46,158 @@ class BaseDatos {
   cambiarUrlBase(url) {
     this.#urlBase = url;
   }
+  #validarToken(tokenValor) {
+    return this.#usuarios.listar().then((listaUsuarios) => {
+      if (listaUsuarios.exito) {
+        const usuario = listaUsuarios.datos.find(
+          (usuario) => usuario.token.valor === tokenValor,
+        );
+        if (usuario)
+          if (usuario.token.expira > Date.now())
+            return {
+              codigo_error: SIN_ERROR,
+              id: usuario.id,
+            };
+          else
+            return {
+              codigo_error: 'TOKEN_VENCIDO',
+              id: null,
+            };
+        else
+          return {
+            codigo_error: 'TOKEN_INVALIDO',
+            id: null,
+          };
+      } else
+        return {
+          codigo_error: listaUsuarios.codigo_error,
+          id: null,
+        };
+    });
+  }
   ///api publica
-  listarMetas() {
-    return this.#metas.listar().then((resultado) => {
-      if (resultado.exito)
-        return resultado.datos.map((meta) => adaptarMetaParaFormulario(meta));
-      else throw new Error(ERRORES_BD[resultado.codigo_error]);
+  listarMetas(tokenValor) {
+    return this.#validarToken(tokenValor).then((usuarioAutenticado) => {
+      if (usuarioAutenticado.codigo_error === SIN_ERROR) {
+        return this.#metas
+          .listar('?usuarioId=' + usuarioAutenticado.id)
+          .then((listaMetas) => {
+            if (listaMetas.exito)
+              return {
+                codigo_error: SIN_ERROR,
+                datos: listaMetas.datos,
+              };
+            else
+              return {
+                codigo_error: listaMetas.codigo_error,
+                datos: null,
+              };
+          });
+      } else
+        return {
+          codigo_error: usuarioAutenticado.codigo_error,
+          datos: null,
+        };
     });
   }
-  crearMeta(datos) {
-    const meta = adaptarMetaParaBackend(datos);
-    return this.#metas.crear(meta).then((resultado) => {
-      if (resultado.exito) return adaptarMetaParaFormulario(resultado.datos);
-      else throw new Error(ERRORES_BD[resultado.codigo_error]);
+  crearMeta(datos, tokenValor) {
+    return this.#validarToken(tokenValor).then((usuarioAutenticado) => {
+      if (usuarioAutenticado.codigo_error === SIN_ERROR) {
+        const meta = adaptarMetaParaBackend(datos);
+        meta.usuarioId = usuarioAutenticado.id;
+        return this.#metas.crear(meta).then((resultado) => {
+          if (resultado.exito)
+            return {
+              codigo_error: SIN_ERROR,
+              datos: adaptarMetaParaFormulario(resultado.datos),
+            };
+          else
+            return {
+              codigo_error: resultado.codigo_error,
+              datos: null,
+            };
+        });
+      } else
+        return {
+          codigo_error: usuarioAutenticado.codigo_error,
+          datos: null,
+        };
     });
   }
-  actualizarMeta(datos) {
-    return this.#metas
-      .modificar(adaptarMetaParaBackend(datos))
-      .then((resultado) => {
-        if (resultado.exito) return adaptarMetaParaFormulario(resultado.datos);
-        else throw new Error(ERRORES_BD[resultado.codigo_error]);
-      });
-  }
-  borrarMeta(id) {
-    return this.#metas.borrar(id).then((resultado) => {
-      if (!resultado.exito) throw new Error(ERRORES_BD[resultado.codigo_error]);
+  actualizarMeta(datos, tokenValor) {
+    return this.#validarToken(tokenValor).then((usuarioAutenticado) => {
+      if (usuarioAutenticado.codigo_error === SIN_ERROR) {
+        const meta = adaptarMetaParaBackend(datos);
+        return this.#metas.obtener(meta.id).then((metaBuscada) => {
+          if (metaBuscada.exito)
+            if (metaBuscada.datos.usuarioId === usuarioAutenticado.id)
+              return this.#metas.modificar(meta).then((resultado) => {
+                if (resultado.exito)
+                  return {
+                    codigo_error: SIN_ERROR,
+                    datos: adaptarMetaParaFormulario(resultado.datos),
+                  };
+                else
+                  return {
+                    codigo_error: resultado.codigo_error,
+                    datos: null,
+                  };
+              });
+            else
+              return {
+                codigo_error: 'USUARIO_INCORRECTO',
+                datos: null,
+              };
+          else
+            return {
+              codigo_error: 'REGISTRO_NO_ENCONTRADO',
+              datos: null,
+            };
+        });
+      } else
+        return {
+          codigo_error: usuarioAutenticado.codigo_error,
+          datos: null,
+        };
     });
   }
+  borrarMeta(id, tokenValor) {
+    return this.#validarToken(tokenValor).then((usuarioAutenticado) => {
+      if (usuarioAutenticado.codigo_error === SIN_ERROR) {
+        return this.#metas.obtener(id).then((metaBuscada) => {
+          if (metaBuscada.exito)
+            if (metaBuscada.datos.usuarioId === usuarioAutenticado.id)
+              return this.#metas.borrar(id).then((resultado) => {
+                if (resultado.exito)
+                  return {
+                    codigo_error: SIN_ERROR,
+                    datos: null,
+                  };
+                else
+                  return {
+                    codigo_error: resultado.codigo_error,
+                    datos: null,
+                  };
+              });
+            else
+              return {
+                codigo_error: 'USUARIO_INCORRECTO',
+                datos: null,
+              };
+          else
+            return {
+              codigo_error: 'REGISTRO_NO_ENCONTRADO',
+              datos: null,
+            };
+        });
+      } else
+        return {
+          codigo_error: usuarioAutenticado.codigo_error,
+          datos: null,
+        };
+    });
+  }
+
   ///API PUBLICA
   registrarUsuario(reg) {
     const registro = adaptarUsuarioParaBackend(reg);
@@ -169,7 +294,12 @@ const ERRORES_BD = {
   USUARIO_NO_REGISTRADO: '',
   CONTRASENA_INCORRECTA: '',
   Existe_DNI_o_EMAIL: '',
+  ////
+  TOKEN_INVALIDO: '',
+  TOKEN_VENCIDO: '',
+  USUARIO_INCORRECTO: '',
 };
+
 class ErrorHttp extends Error {
   constructor(message, status) {
     super(message);
@@ -241,6 +371,7 @@ function adaptarUsuarioParaBackend(usuario) {
   if ('passwordHash' in usuario)
     auxUsuario.passwordHash = String(usuario.passwordHash);
   if ('token' in usuario) {
+    auxUsuario.token = {};
     auxUsuario.token.valor = String(usuario.token.valor);
     auxUsuario.token.expira = Number(usuario.token.expira);
   }
@@ -250,6 +381,7 @@ function adaptarUsuarioParaBackend(usuario) {
 function adaptarMetaParaBackend(meta) {
   const auxmeta = {};
   if ('id' in meta) auxmeta.id = String(meta.id);
+  if ('usuarioId' in meta) auxmeta.usuarioId = String(meta.usuarioId);
   auxmeta.detalles = String(meta.detalles);
   auxmeta.eventos = Number(meta.eventos);
   auxmeta.periodo = String(meta.periodo);
