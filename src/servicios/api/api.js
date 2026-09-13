@@ -1,9 +1,4 @@
-import { bd } from '../../backend_basedatos/clases';
-
-const SIN_ERROR = null;
-const errores_API = {
-  TOKEN_VENCIDO: '',
-};
+import { bd } from '../../backend_basedatos/clases.js';
 
 export function listarMetas() {
   const token = obtenerToken();

@@ -1,5 +1,4 @@
-const URL_BASE = 'http://localhost:3000';
-
+import { SIN_ERROR, URL_BASE, HORA } from './constantes.js';
 class Tabla {
   #endpoint;
   #bd;
@@ -29,7 +28,6 @@ class Tabla {
     return fetchGenerico(fetchUrl, 'DELETE');
   }
 }
-const SIN_ERROR = null;
 
 class BaseDatos {
   #urlBase;
@@ -49,14 +47,14 @@ class BaseDatos {
   #validarToken(tokenValor) {
     return this.#usuarios.listar().then((listaUsuarios) => {
       if (listaUsuarios.exito) {
-        const usuario = listaUsuarios.datos.find(
+        const usuarioEncontrado = listaUsuarios.datos.find(
           (usuario) => usuario.token.valor === tokenValor,
         );
-        if (usuario)
-          if (usuario.token.expira > Date.now())
+        if (usuarioEncontrado)
+          if (usuarioEncontrado.token.expira > Date.now())
             return {
               codigo_error: SIN_ERROR,
-              id: usuario.id,
+              id: usuarioEncontrado.id,
             };
           else
             return {
@@ -75,126 +73,110 @@ class BaseDatos {
         };
     });
   }
-  ///api publica
-  listarMetas(tokenValor) {
+  ///"¿El token identifica a un usuario válido?"
+  #conTokenValido(tokenValor, estrategia) {
     return this.#validarToken(tokenValor).then((usuarioAutenticado) => {
       if (usuarioAutenticado.codigo_error === SIN_ERROR) {
-        return this.#metas
-          .listar('?usuarioId=' + usuarioAutenticado.id)
-          .then((listaMetas) => {
-            if (listaMetas.exito)
-              return {
-                codigo_error: SIN_ERROR,
-                datos: listaMetas.datos,
-              };
-            else
-              return {
-                codigo_error: listaMetas.codigo_error,
-                datos: null,
-              };
-          });
-      } else
+        return estrategia(usuarioAutenticado);
+      } else {
         return {
           codigo_error: usuarioAutenticado.codigo_error,
           datos: null,
         };
+      }
     });
   }
+  //"Tengo una respuesta de Tabla; conviértela al formato que expone BaseDatos."
+  #resultadoPublico(resultado) {
+    if (resultado.exito) {
+      return {
+        codigo_error: SIN_ERROR,
+        datos: resultado.datos,
+      };
+    } else {
+      return {
+        codigo_error: resultado.codigo_error,
+        datos: null,
+      };
+    }
+  }
+  ///api publica
+  listarMetas(tokenValor) {
+    return this.#conTokenValido(tokenValor, (usuarioAutenticado) =>
+      this.#metas
+        .listar('?usuarioId=' + usuarioAutenticado.id)
+        .then((resultadoListaMeta) =>
+          this.#resultadoPublico({
+            ...resultadoListaMeta,
+            datos: resultadoListaMeta.exito
+              ? resultadoListaMeta.datos.map((meta) =>
+                  adaptarMetaParaFormulario(meta),
+                )
+              : null,
+          }),
+        ),
+    );
+  }
   crearMeta(datos, tokenValor) {
-    return this.#validarToken(tokenValor).then((usuarioAutenticado) => {
-      if (usuarioAutenticado.codigo_error === SIN_ERROR) {
-        const meta = adaptarMetaParaBackend(datos);
-        meta.usuarioId = usuarioAutenticado.id;
-        return this.#metas.crear(meta).then((resultado) => {
-          if (resultado.exito)
-            return {
-              codigo_error: SIN_ERROR,
-              datos: adaptarMetaParaFormulario(resultado.datos),
-            };
-          else
-            return {
-              codigo_error: resultado.codigo_error,
-              datos: null,
-            };
-        });
-      } else
-        return {
-          codigo_error: usuarioAutenticado.codigo_error,
-          datos: null,
-        };
+    return this.#conTokenValido(tokenValor, (usuarioAutenticado) => {
+      const metaCrear = adaptarMetaParaBackend(datos);
+      metaCrear.usuarioId = usuarioAutenticado.id;
+      return this.#metas.crear(metaCrear).then((resultadoCrear) =>
+        this.#resultadoPublico({
+          ...resultadoCrear,
+          datos: resultadoCrear.exito
+            ? adaptarMetaParaFormulario(resultadoCrear.datos)
+            : null,
+        }),
+      );
     });
   }
   actualizarMeta(datos, tokenValor) {
-    return this.#validarToken(tokenValor).then((usuarioAutenticado) => {
-      if (usuarioAutenticado.codigo_error === SIN_ERROR) {
-        const meta = adaptarMetaParaBackend(datos);
-        return this.#metas.obtener(meta.id).then((metaBuscada) => {
-          if (metaBuscada.exito)
-            if (metaBuscada.datos.usuarioId === usuarioAutenticado.id)
-              return this.#metas.modificar(meta).then((resultado) => {
-                if (resultado.exito)
-                  return {
-                    codigo_error: SIN_ERROR,
-                    datos: adaptarMetaParaFormulario(resultado.datos),
-                  };
-                else
-                  return {
-                    codigo_error: resultado.codigo_error,
-                    datos: null,
-                  };
-              });
-            else
-              return {
-                codigo_error: 'USUARIO_INCORRECTO',
-                datos: null,
-              };
+    return this.#conTokenValido(tokenValor, (usuarioAutenticado) => {
+      const meta = adaptarMetaParaBackend(datos);
+      return this.#metas.obtener(meta.id).then((metaEncontrada) => {
+        if (metaEncontrada.exito)
+          if (metaEncontrada.datos.usuarioId === usuarioAutenticado.id)
+            return this.#metas.modificar(meta).then((resultadoModificar) =>
+              this.#resultadoPublico({
+                ...resultadoModificar,
+                datos: resultadoModificar.exito
+                  ? adaptarMetaParaFormulario(resultadoModificar.datos)
+                  : null,
+              }),
+            );
           else
             return {
-              codigo_error: 'REGISTRO_NO_ENCONTRADO',
+              codigo_error: 'USUARIO_INCORRECTO',
               datos: null,
             };
-        });
-      } else
-        return {
-          codigo_error: usuarioAutenticado.codigo_error,
-          datos: null,
-        };
+        else
+          return {
+            codigo_error: metaEncontrada.codigo_error,
+            datos: null,
+          };
+      });
     });
   }
   borrarMeta(id, tokenValor) {
-    return this.#validarToken(tokenValor).then((usuarioAutenticado) => {
-      if (usuarioAutenticado.codigo_error === SIN_ERROR) {
-        return this.#metas.obtener(id).then((metaBuscada) => {
-          if (metaBuscada.exito)
-            if (metaBuscada.datos.usuarioId === usuarioAutenticado.id)
-              return this.#metas.borrar(id).then((resultado) => {
-                if (resultado.exito)
-                  return {
-                    codigo_error: SIN_ERROR,
-                    datos: null,
-                  };
-                else
-                  return {
-                    codigo_error: resultado.codigo_error,
-                    datos: null,
-                  };
-              });
-            else
-              return {
-                codigo_error: 'USUARIO_INCORRECTO',
-                datos: null,
-              };
+    return this.#conTokenValido(tokenValor, (usuarioAutenticado) => {
+      return this.#metas.obtener(id).then((metaEncontrada) => {
+        if (metaEncontrada.exito)
+          if (metaEncontrada.datos.usuarioId === usuarioAutenticado.id)
+            return this.#metas
+              .borrar(id)
+              .then((metaBorrada) => this.#resultadoPublico(metaBorrada));
           else
             return {
-              codigo_error: 'REGISTRO_NO_ENCONTRADO',
+              codigo_error: 'USUARIO_INCORRECTO',
               datos: null,
             };
-        });
-      } else
-        return {
-          codigo_error: usuarioAutenticado.codigo_error,
-          datos: null,
-        };
+        else
+          return {
+            codigo_error: metaEncontrada.codigo_error,
+            datos: null,
+          };
+      });
     });
   }
 
@@ -203,102 +185,107 @@ class BaseDatos {
     const registro = adaptarUsuarioParaBackend(reg);
     return this.#usuarios.listar().then((resultado) => {
       if (resultado.exito) {
-        //SI el Usuario EXISTE
         const existeDni = resultado.datos.some(
           (usuario) => usuario.dni === registro.dni,
         );
         const existeEmail = resultado.datos.some(
           (usuario) => usuario.email === registro.email,
         );
-        if (existeDni || existeEmail)
-          return {
-            exito: true,
-            codigo_error: 'Existe_DNI_o_EMAIL',
-            datos: {
-              existeDni,
-              existeEmail,
-            },
-          };
-        else {
+        if (!existeDni && !existeEmail) {
           //se procede a GUARDAR USUARIO
           registro.token = {
             valor: '',
             expira: 0,
           };
-          return this.#usuarios.crear(registro).then((resultado) => {
-            if (resultado.exito) {
-              return {
-                exito: true,
-                codigo_error: null,
-                datos: {
-                  id: resultado.datos.id,
-                  nombre: resultado.datos.nombre,
-                },
-              };
-            } else return resultado;
-          });
-        }
-      } else return resultado;
-    });
-  }
-  login(reg) {
-    const usuario = adaptarUsuarioParaBackend(reg);
-    return this.#usuarios.listar().then((resultado) => {
-      if (resultado.exito) {
-        const usuarioExiste = resultado.datos.find(
-          (registro) => registro.email === usuario.email,
-        );
-        if (!usuarioExiste)
+          return this.#usuarios.crear(registro).then((resultado) =>
+            this.#resultadoPublico({
+              ...resultado,
+              datos: resultado.exito
+                ? {
+                    id: resultado.datos.id,
+                    nombre: resultado.datos.nombre,
+                  }
+                : null,
+            }),
+          );
+        } else
           return {
-            exito: false,
-            codigo_error: 'USUARIO_NO_REGISTRADO',
+            codigo_error: 'Existe_DNI_o_EMAIL',
             datos: null,
           };
-        else {
-          ///Usuario REGISTRADO vamos por el password
-          if (usuarioExiste.passwordHash === usuario.passwordHash) {
-            usuarioExiste.token.valor = generarToken();
-            usuarioExiste.token.expira = Date.now() + 12 * HORA;
-            return this.#usuarios.modificar(usuarioExiste).then((resultado) => {
-              if (resultado.exito)
-                return {
-                  exito: true,
-                  codigo_error: null,
-                  datos: {
-                    id: usuarioExiste.id,
-                    nombre: usuarioExiste.nombre,
-                    token: usuarioExiste.token.valor,
-                  },
-                };
-              else return resultado;
-            });
-          } else
-            return {
-              exito: false,
-              codigo_error: 'CONTRASENA_INCORRECTA',
-              datos: null,
-            };
-        }
-      } else return resultado;
+      } else
+        return {
+          codigo_error: resultado.codigo_error,
+          datos: null,
+        };
     });
   }
-  logout() {}
-}
+  obtenerToken(reg) {
+    const usuario = adaptarUsuarioParaBackend(reg);
+    return this.#usuarios
+      .listar('?email=' + usuario.email)
+      .then((resultado) => {
+        if (resultado.exito) {
+          if (resultado.datos.length > 0) {
+            const usuarioEncontrado = resultado.datos[0];
+            if (usuarioEncontrado.passwordHash === usuario.passwordHash) {
+              usuarioEncontrado.token.valor = generarToken();
+              usuarioEncontrado.token.expira = Date.now() + 12 * HORA;
+              return this.#usuarios
+                .modificar(usuarioEncontrado)
+                .then((resultadoModificarUsuario) =>
+                  this.#resultadoPublico({
+                    ...resultadoModificarUsuario,
+                    datos: resultadoModificarUsuario.exito
+                      ? {
+                          id: resultadoModificarUsuario.datos.id,
+                          nombre: resultadoModificarUsuario.datos.nombre,
+                          token: resultadoModificarUsuario.datos.token.valor,
+                        }
+                      : null,
+                  }),
+                );
+            } else
+              return {
+                codigo_error: 'CONTRASENA_INCORRECTA',
+                datos: null,
+              };
+          } else
+            return {
+              codigo_error: 'USUARIO_NO_REGISTRADO',
+              datos: null,
+            };
+        } else
+          return {
+            codigo_error: resultado.codigo_error,
+            datos: null,
+          };
+      });
+  }
 
-const ERRORES_BD = {
-  SERVIDOR: 'No se pudo comunicar con Base de Datos.',
-  CONEXION: 'No hay conexión con la Base de Datos.',
-  DATOS_INVALIDOS: 'Los datos enviados no son válidos.',
-  REGISTRO_NO_ENCONTRADO: 'El registro no existe.',
-  /////
-  USUARIO_NO_REGISTRADO: '',
-  CONTRASENA_INCORRECTA: '',
-  Existe_DNI_o_EMAIL: '',
-  ////
-  TOKEN_INVALIDO: '',
-  TOKEN_VENCIDO: '',
-  USUARIO_INCORRECTO: '',
-};
+  anularToken(tokenValor) {
+    return this.#conTokenValido(tokenValor, (usuarioAutenticado) => {
+      return this.#usuarios
+        .obtener(usuarioAutenticado.id)
+        .then((usuarioEncontrado) => {
+          if (usuarioEncontrado.exito) {
+            const auxUsuario = usuarioEncontrado.datos;
+            auxUsuario.token.valor = '';
+            auxUsuario.token.expira = 0;
+            return this.#usuarios
+              .modificar(auxUsuario)
+              .then((resultadoModificar) =>
+                this.#resultadoPublico(resultadoModificar),
+              );
+          } else
+            return {
+              codigo_error: usuarioEncontrado.codigo_error,
+              datos: null,
+            };
+        });
+    });
+  }
+}
 
 class ErrorHttp extends Error {
   constructor(message, status) {
@@ -348,7 +335,6 @@ function fetchGenerico(url, metodo, registro = {}) {
       };
     });
 }
-const HORA = 3600000; //EN MILISEGUNDOS
 
 function generarToken() {
   const bytes = new Uint8Array(32);

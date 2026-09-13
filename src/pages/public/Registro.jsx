@@ -9,13 +9,15 @@ import { authReglas } from '../../servicios/auth/authReglas.js';
 
 export const Registro = () => {
   const [form, setForm] = useState({
-    usuario: '',
+    nombre: '',
+    dni: '',
+    email: '',
     password: '',
     password2: '',
   });
 
   const [erroresCampos, setErroresCampos] = useState({});
-  const { usuario, password, password2 } = form;
+  const { nombre, dni, email, password, password2 } = form;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,12 +52,32 @@ export const Registro = () => {
         <>
           <Input
             column
-            label="Correo electrónico o Nombre de usuario"
-            name="usuario"
-            value={usuario}
+            label="Nombre del Usuario"
+            name="nombre"
+            value={nombre}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={erroresCampos.usuario}
+            error={erroresCampos.nombre}
+            required
+          />
+          <Input
+            column
+            label="DNI del usuario"
+            name="dni"
+            value={dni}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={erroresCampos.dni}
+            required
+          />
+          <Input
+            column
+            label="Correo electrónico"
+            name="email"
+            value={email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={erroresCampos.email}
             required
           />
           <Input

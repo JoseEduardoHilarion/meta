@@ -61,7 +61,6 @@ function metasReducer(state, action) {
   }
 }
 
-// Definimos el respaldo por si el LocalStorage está vacío (Primera vez del usuario)
 const estadoInicial = {
   orden: [],
   objetos: {},
