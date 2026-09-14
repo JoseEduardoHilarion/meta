@@ -18,7 +18,7 @@ export const ActualizarMeta = () => {
 
   useEffect(() => {
     if (!meta) {
-      navegar('/Lista', { replace: true });
+      navegar('/lista', { replace: true });
     }
   }, [meta, navegar]);
 
@@ -29,7 +29,7 @@ export const ActualizarMeta = () => {
           'OK, se pudo modificar la meta: ' + datosModificados.detalles,
           'success',
         );
-        navegar('/Lista');
+        navegar('/lista');
       })
       .catch((error) => {
         notificar('NO se pudo Modificar por el siguiente error: ' + error);
@@ -40,7 +40,7 @@ export const ActualizarMeta = () => {
     borrarMeta(id)
       .then(() => {
         notificar('Ok, se ELIMINO la meta', 'success');
-        navegar('/Lista');
+        navegar('/lista');
       })
       .catch((error) => {
         notificar('NO se pudo ELIMINAR por el siguiente error: ' + error);
@@ -49,7 +49,7 @@ export const ActualizarMeta = () => {
 
   if (!meta) return null;
   return (
-    <Modal alCerrar={() => navegar('/Lista')}>
+    <Modal alCerrar={() => navegar('/lista')}>
       <MetaForm
         initialValues={meta}
         onSubmit={handleActualizar}
@@ -61,7 +61,7 @@ export const ActualizarMeta = () => {
               Guardar Cambios
             </Button>
             <Button onClick={handleEliminar}>Eliminar</Button>
-            <Button onClick={() => navegar('/Lista')}>Cancelar</Button>
+            <Button onClick={() => navegar('/lista')}>Cancelar</Button>
           </>
         }
       />

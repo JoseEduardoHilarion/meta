@@ -18,12 +18,14 @@ export function AppRouter() {
         <Route path="/registro" element={<Registro />} />
         <Route path="*" element={<NoEncontrado />} />
       </Route>
-      <Route element={<Layout privado />}>
-        <Route path="/" element={<Navigate to="/lista" />} />
-        <Route path="/lista" element={<Lista />}>
-          <Route path=":id" element={<ActualizarMeta />} />
+      <Route element={<Autenticar />}>
+        <Route element={<Layout privado />}>
+          <Route path="/" element={<Navigate to="/lista" />} />
+          <Route path="/lista" element={<Lista />}>
+            <Route path=":id" element={<ActualizarMeta />} />
+          </Route>
+          <Route path="/nueva" element={<CrearMeta />} />
         </Route>
-        <Route path="/nueva" element={<CrearMeta />} />
       </Route>
     </Routes>
   );

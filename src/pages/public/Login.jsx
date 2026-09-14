@@ -8,10 +8,15 @@ import { authReglas } from '../../servicios/auth/authReglas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
 import { NavLink } from 'react-router';
 
+import { bd } from '../../backend_basedatos/clases.js';
+import { ERRORES_BD, SIN_ERROR } from '../../backend_basedatos/constantes.js';
+import { useAuthActions } from '../../servicios/auth/AuthMemoria.jsx';
+
 export const Login = () => {
   const [form, setForm] = useState({ usuario: '', password: '' });
   const [erroresCampos, setErroresCampos] = useState({});
   const { usuario, password } = form;
+  const { Login } = useAuthActions();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,14 +32,25 @@ export const Login = () => {
 
   const handleLogin = () => {
     const { esValido, errores } = authReglas(form);
-    if (!esValido) {
+    if (esValido)
+      bd.obtenerToken(form).then((resultado) => {
+        if (resultado.codigo_error === SIN_ERROR) {
+          Login(resultado.datos);
+          navegar('/lista', { replace: true });
+        } else
+          notificar(
+            '⚠️ NO se pudo Loguear el Usuario: Error ' +
+              ERRORES_BD[resultado.codigo_error],
+            'error',
+          );
+      });
+    else {
       setErroresCampos(errores);
       notificar(
         '⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.',
         'error',
       );
     }
-    ///onSubmit(form); // Si todo está impecable, viaja al padre limpio
   };
 
   return (

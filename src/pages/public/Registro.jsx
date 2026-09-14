@@ -6,6 +6,9 @@ import { Button } from '../../components/ui/Button.jsx';
 
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
 import { authReglas } from '../../servicios/auth/authReglas.js';
+import { useAuthActions } from '../../servicios/auth/AuthMemoria.jsx';
+import { ERRORES_BD, SIN_ERROR } from '../../backend_basedatos/constantes.js';
+import { useNavigate } from 'react-router';
 
 export const Registro = () => {
   const [form, setForm] = useState({
@@ -18,6 +21,8 @@ export const Registro = () => {
 
   const [erroresCampos, setErroresCampos] = useState({});
   const { nombre, dni, email, password, password2 } = form;
+  const { Registrar } = useAuthActions();
+  const navegar = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,22 +31,31 @@ export const Registro = () => {
   };
   //Validación en caliente al salir (onBlur) usando tu validador central
   const handleBlur = () => {
-    const { errores } = authReglas(form);
+    const { errores } = authReglas(form, name);
     setErroresCampos(errores);
   };
 
   const handleSubmit = () => {
     const { esValido, errores } = authReglas(form);
-    if (!esValido) {
-      // Si hay un error colgado, notificamos el primero y frenamos
+    if (esValido)
+      Registrar(form).then((resultado) => {
+        if (resultado.codigo_error === SIN_ERROR) {
+          notificar('Se registro el Usuario :' + resultado.datos.nombre);
+          navegar('/lista', { replace: true });
+        } else
+          notificar(
+            '⚠️ NO se pudo registrar el Usuario: Error ' +
+              ERRORES_BD[resultado.codigo_error],
+            'error',
+          );
+      });
+    else {
       setErroresCampos(errores);
       notificar(
         '⚠️ Por favor, revisá los campos marcados en rojo antes de continuar.',
         'error',
       );
-      return;
     }
-    ///onSubmit(form); // Si todo está impecable, viaja al padre limpio
   };
 
   return (
@@ -105,9 +119,12 @@ export const Registro = () => {
         </>
       }
       footer={
-        <Button className="dark" type="submit">
-          Registrar
-        </Button>
+        <>
+          <Button className="dark" type="submit">
+            Registrar
+          </Button>
+          <Button onClick={() => navegar('/lista')}>Cancelar</Button>
+        </>
       }
     />
   );

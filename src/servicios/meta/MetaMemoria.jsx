@@ -1,7 +1,5 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer } from 'react';
 import { MetasStateContext, MetasDispatchContext } from './metasContext.js';
-import { bd } from '../../backend_basedatos/clases.js';
-import { notificar } from '../sistemaNotificaciones.js';
 
 function metasReducer(state, action) {
   switch (action.type) {
@@ -67,19 +65,6 @@ const estadoInicial = {
 };
 export const MetaMemoria = ({ children }) => {
   const [state, dispatch] = useReducer(metasReducer, estadoInicial);
-  useEffect(() => {
-    bd.listarMetas()
-      .then((metas) =>
-        dispatch({
-          type: 'INICIALIZAR',
-          payload: metas,
-        }),
-      )
-      .catch((error) => {
-        notificar('problemas con la INICIALIZACION : ' + error.message);
-      });
-  }, []);
-
   return (
     <MetasStateContext.Provider value={state}>
       <MetasDispatchContext.Provider value={dispatch}>

@@ -1,8 +1,8 @@
-import { Navigate } from 'react-router';
-import { useAuth } from './AuthMemoria';
+import { Navigate, Outlet } from 'react-router';
+import { useAuth } from './AuthMemoria.jsx';
 
 export const Autenticar = () => {
-  const estaAutenticado = useAuth();
+  const usuarioAutenticado = useAuth();
 
-  return estaAutenticado ? <Outlet /> : <Navigate to="/login" replace />;
+  return usuarioAutenticado ? <Outlet /> : <Navigate to="/login" replace />;
 };
