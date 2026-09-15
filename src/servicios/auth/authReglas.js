@@ -2,10 +2,9 @@
 export function authReglas(datos, campo = null) {
   const errores = {};
   const reglas = {
-    nombre: () => {
-      if (!datos.nombre?.trim())
-        errores.nombre = 'Debe ingresar nombre de Usuario o bien correo';
-      else errores.nombre = '';
+    email: () => {
+      if (!datos.email?.trim()) errores.email = 'Debe ingresar el correo';
+      else errores.email = '';
     },
     password: () => {
       if (!datos.password?.trim())
@@ -13,7 +12,7 @@ export function authReglas(datos, campo = null) {
       else errores.password = '';
     },
     password2: () => {
-      if (name in datos) {
+      if (password2 in datos) {
         if (!datos.password2?.trim())
           errores.password2 = 'Debe ingresar Contraseña password';
         else errores.password2 = '';

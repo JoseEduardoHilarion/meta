@@ -1,45 +1,94 @@
 {
-  "users": [],
+  "users": [
+    {
+      "nombre": "2",
+      "dni": "2",
+      "email": "jose",
+      "passwordHash": "jose",
+      "token": {
+        "valor": "dabc8c1c7509e0522b1c4c8082e47c63129849fd448ecf2c3d667d94d19045dc",
+        "expira": 1789505706140
+      },
+      "id": "sPw-7woagFk"
+    },
+    {
+      "nombre": "",
+      "dni": "",
+      "email": "paola",
+      "passwordHash": "paola",
+      "token": {
+        "valor": "781af804ec800f9d0f535fbdd04e0802c4cc30f968dfb5d3c8df7ba126a38a74",
+        "expira": 1789496514832
+      },
+      "id": "v_Iznxqc8vY"
+    }
+  ],
   "goals": [
     {
       "id": "iSOpFU9O8cQ",
-      "detalles": "yyyy hola soy jose eduardo hilarion",
+      "detalles": "ttttttttttttttttttttt",
       "eventos": 1,
       "periodo": "día",
       "icono": "🏃",
       "meta": 1,
       "plazo": "undefined",
-      "completado": 1
+      "completado": 1,
+      "usuarioId": "sPw-7woagFk"
     },
     {
       "id": "DuCnzhQeo1M",
-      "detalles": "Elias Hilarion el rengo del papai",
+      "detalles": "paola andrea hilarion",
       "eventos": 1,
       "periodo": "día",
       "icono": "✈️",
       "meta": 6,
       "plazo": "2026-09-26",
-      "completado": 2
+      "completado": 2,
+      "usuarioId": "v_Iznxqc8vY"
     },
     {
       "id": "GqqoENoODYQ",
-      "detalles": "ghfghfdgh jajajajajajaj",
+      "detalles": "paola andrea hilarion",
       "eventos": 1,
       "periodo": "mes",
       "icono": "💧",
       "meta": 1,
       "plazo": "2030-01-01",
-      "completado": 0
+      "completado": 0,
+      "usuarioId": "v_Iznxqc8vY"
     },
     {
       "id": "5m2TlsjI2TY",
-      "detalles": "l",
+      "detalles": "paola andrea hilarion",
       "eventos": 1,
       "periodo": "día",
       "icono": "🍎",
       "meta": 11,
       "plazo": "undefined",
-      "completado": 3
+      "completado": 3,
+      "usuarioId": "v_Iznxqc8vY"
+    },
+    {
+      "id": "CHvljG_OZF4",
+      "detalles": "bbbb",
+      "eventos": 1,
+      "periodo": "día",
+      "icono": "🏃",
+      "meta": 1,
+      "plazo": "2030-01-01",
+      "completado": 0,
+      "usuarioId": "sPw-7woagFk"
+    },
+    {
+      "id": "R4KfJ7Hw_hI",
+      "detalles": "ffffhola soy jjose eduardo hilarion",
+      "eventos": 1,
+      "periodo": "semana",
+      "icono": "🏃",
+      "meta": 1,
+      "plazo": "2030-01-01",
+      "completado": 0,
+      "usuarioId": "sPw-7woagFk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

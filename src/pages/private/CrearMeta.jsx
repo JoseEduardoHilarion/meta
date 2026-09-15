@@ -5,22 +5,21 @@ import { metaVacia } from '../../data/mocks.js';
 import { Button } from '../../components/ui/Button.jsx';
 import { useMetasActions } from '../../servicios/meta/useMetas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
+import { ERRORES_BD, SIN_ERROR } from '../../backend_basedatos/constantes.js';
 
 export const CrearMeta = () => {
   const { crearMeta } = useMetasActions();
   const navegar = useNavigate();
   const handleCrear = (datosFormulario) => {
-    crearMeta(datosFormulario)
-      .then(() => {
+    crearMeta(datosFormulario).then((resultado) => {
+      if (resultado.codigo_error === SIN_ERROR) {
         notificar(
           'OK, se AGREGO con exito la meta> ' + datosFormulario.detalles,
           'success',
         );
         navegar('/Lista');
-      })
-      .catch((error) => {
-        notificar('NO se pudo AGREGAR por el siguiente error: ' + error);
-      });
+      } else notificar(ERRORES_BD[resultado.codigo_error], 'error');
+    });
   };
   return (
     <MetaForm
@@ -32,7 +31,7 @@ export const CrearMeta = () => {
           <Button className="dark" type="submit">
             Crear
           </Button>
-          <Button onClick={() => navegar('/Lista')}>Cancelar</Button>
+          <Button onClick={() => navegar('/lista')}>Cancelar</Button>
         </>
       }
     />

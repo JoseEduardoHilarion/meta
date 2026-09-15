@@ -6,17 +6,20 @@ import { Button } from '../../components/ui/Button.jsx';
 
 import { authReglas } from '../../servicios/auth/authReglas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 
-import { bd } from '../../backend_basedatos/clases.js';
 import { ERRORES_BD, SIN_ERROR } from '../../backend_basedatos/constantes.js';
 import { useAuthActions } from '../../servicios/auth/AuthMemoria.jsx';
+import { useMetasActions } from '../../servicios/meta/useMetas.js';
 
 export const Login = () => {
-  const [form, setForm] = useState({ usuario: '', password: '' });
+  const [form, setForm] = useState({ email: '', password: '' });
   const [erroresCampos, setErroresCampos] = useState({});
-  const { usuario, password } = form;
+  const { email, password } = form;
+  const navegar = useNavigate();
+
   const { Login } = useAuthActions();
+  const { inicializarMetas } = useMetasActions();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,16 +36,16 @@ export const Login = () => {
   const handleLogin = () => {
     const { esValido, errores } = authReglas(form);
     if (esValido)
-      bd.obtenerToken(form).then((resultado) => {
-        if (resultado.codigo_error === SIN_ERROR) {
-          Login(resultado.datos);
-          navegar('/lista', { replace: true });
-        } else
-          notificar(
-            '⚠️ NO se pudo Loguear el Usuario: Error ' +
-              ERRORES_BD[resultado.codigo_error],
-            'error',
+      Login(form).then((resultadoLogin) => {
+        if (resultadoLogin.codigo_error === SIN_ERROR) {
+          inicializarMetas(resultadoLogin.datos.token).then(
+            (resultadoMetas) => {
+              if (resultadoMetas.codigo_error === SIN_ERROR)
+                navegar('/lista', { replace: true });
+              else notificar(ERRORES_BD[resultadoMetas.codigo_error], 'error');
+            },
           );
+        } else notificar(ERRORES_BD[resultadoLogin.codigo_error], 'error');
       });
     else {
       setErroresCampos(errores);
@@ -61,12 +64,12 @@ export const Login = () => {
         <>
           <Input
             column
-            label="Correo electrónico o Nombre de usuario"
-            name="usuario"
-            value={usuario}
+            label="Ingrese el Correo electrónico"
+            name="email"
+            value={email}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={erroresCampos.usuario}
+            error={erroresCampos.email}
             required
           />
           <Input

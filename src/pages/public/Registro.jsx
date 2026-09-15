@@ -41,7 +41,7 @@ export const Registro = () => {
       Registrar(form).then((resultado) => {
         if (resultado.codigo_error === SIN_ERROR) {
           notificar('Se registro el Usuario :' + resultado.datos.nombre);
-          navegar('/lista', { replace: true });
+          navegar('/login', { replace: true });
         } else
           notificar(
             '⚠️ NO se pudo registrar el Usuario: Error ' +

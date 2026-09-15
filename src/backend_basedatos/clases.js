@@ -1,4 +1,4 @@
-import { SIN_ERROR, URL_BASE, HORA } from './constantes.js';
+import { SIN_ERROR, URL_BASE, HORA, ERRORES_BD } from './constantes.js';
 class Tabla {
   #endpoint;
   #bd;
@@ -136,18 +136,19 @@ class BaseDatos {
       const meta = adaptarMetaParaBackend(datos);
       return this.#metas.obtener(meta.id).then((metaEncontrada) => {
         if (metaEncontrada.exito)
-          if (metaEncontrada.datos.usuarioId === usuarioAutenticado.id)
-            return this.#metas.modificar(meta).then((resultadoModificar) =>
-              this.#resultadoPublico({
+          if (metaEncontrada.datos.usuarioId === usuarioAutenticado.id) {
+            meta.usuarioId = usuarioAutenticado.id;
+            return this.#metas.modificar(meta).then((resultadoModificar) => {
+              return this.#resultadoPublico({
                 ...resultadoModificar,
                 datos: resultadoModificar.exito
                   ? adaptarMetaParaFormulario(resultadoModificar.datos)
                   : null,
-              }),
-            );
-          else
+              });
+            });
+          } else
             return {
-              codigo_error: 'USUARIO_INCORRECTO',
+              codigo_error: 'USUARIO_NO_REGISTRADO',
               datos: null,
             };
         else
@@ -168,7 +169,7 @@ class BaseDatos {
               .then((metaBorrada) => this.#resultadoPublico(metaBorrada));
           else
             return {
-              codigo_error: 'USUARIO_INCORRECTO',
+              codigo_error: 'USUARIO_NO_REGISTRADO',
               datos: null,
             };
         else
@@ -220,7 +221,7 @@ class BaseDatos {
         };
     });
   }
-  obtenerToken(reg) {
+  generarToken(reg) {
     const usuario = adaptarUsuarioParaBackend(reg);
     return this.#usuarios
       .listar('?email=' + usuario.email)
@@ -262,31 +263,33 @@ class BaseDatos {
           };
       });
   }
-
   anularToken(tokenValor) {
-    return this.#conTokenValido(tokenValor, (usuarioAutenticado) => {
-      return this.#usuarios
-        .obtener(usuarioAutenticado.id)
-        .then((usuarioEncontrado) => {
-          if (usuarioEncontrado.exito) {
-            const auxUsuario = usuarioEncontrado.datos;
-            auxUsuario.token.valor = '';
-            auxUsuario.token.expira = 0;
-            return this.#usuarios
-              .modificar(auxUsuario)
-              .then((resultadoModificar) =>
-                this.#resultadoPublico(resultadoModificar),
-              );
-          } else
-            return {
-              codigo_error: usuarioEncontrado.codigo_error,
-              datos: null,
-            };
-        });
+    return this.#usuarios.listar().then((listaUsuarios) => {
+      if (listaUsuarios.exito) {
+        const usuarioEncontrado = listaUsuarios.datos.find(
+          (usuario) => usuario.token.valor === tokenValor,
+        );
+        if (usuarioEncontrado) {
+          usuarioEncontrado.token.valor = '';
+          usuarioEncontrado.token.expira = 0;
+          return this.#usuarios
+            .modificar(usuarioEncontrado)
+            .then((resultadoModificar) =>
+              this.#resultadoPublico(resultadoModificar),
+            );
+        } else
+          return {
+            codigo_error: 'TOKEN_INVALIDO',
+            datos: null,
+          };
+      } else
+        return {
+          codigo_error: listaUsuarios.codigo_error,
+          datos: null,
+        };
     });
   }
 }
-
 class ErrorHttp extends Error {
   constructor(message, status) {
     super(message);

@@ -7,6 +7,7 @@ import { Modal } from '../../components/ui/Modal.jsx';
 
 import { useMetas, useMetasActions } from '../../servicios/meta/useMetas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
+import { ERRORES_BD, SIN_ERROR } from '../../backend_basedatos/constantes.js';
 
 export const ActualizarMeta = () => {
   const { id } = useParams();
@@ -23,28 +24,24 @@ export const ActualizarMeta = () => {
   }, [meta, navegar]);
 
   const handleActualizar = (datosModificados) => {
-    actualizarMeta(datosModificados)
-      .then(() => {
+    actualizarMeta(datosModificados).then((resultado) => {
+      if (resultado.codigo_error === SIN_ERROR) {
         notificar(
           'OK, se pudo modificar la meta: ' + datosModificados.detalles,
           'success',
         );
         navegar('/lista');
-      })
-      .catch((error) => {
-        notificar('NO se pudo Modificar por el siguiente error: ' + error);
-      });
+      } else notificar(ERRORES_BD[resultado.codigo_error], 'error');
+    });
   };
 
   const handleEliminar = () => {
-    borrarMeta(id)
-      .then(() => {
+    borrarMeta(id).then((resultado) => {
+      if (resultado.codigo_error === SIN_ERROR) {
         notificar('Ok, se ELIMINO la meta', 'success');
         navegar('/lista');
-      })
-      .catch((error) => {
-        notificar('NO se pudo ELIMINAR por el siguiente error: ' + error);
-      });
+      } else notificar(ERRORES_BD[resultado.codigo_error], 'error');
+    });
   };
 
   if (!meta) return null;

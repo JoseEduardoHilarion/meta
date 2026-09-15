@@ -33,17 +33,30 @@ export const AuthMemoria = ({ children }) => {
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuthActions = () => {
   const dispatch = useContext(AuthDispatchContext);
+  const usuarioLogueado = useAuth();
+
   if (!dispatch)
     throw new Error('useAuthActions debe usarse dentro de AuthProvider');
+
   const Login = (usuario) => {
-    dispatch({ type: 'LOGIN', payload: usuario });
+    return bd.generarToken(usuario).then((resultado) => {
+      if (resultado.codigo_error === SIN_ERROR)
+        dispatch({ type: 'LOGIN', payload: resultado.datos });
+      return resultado;
+    });
   };
   const Logout = () => {
-    dispatch({ type: 'LOGOUT' });
+    if (usuarioLogueado) {
+      return bd.anularToken(usuarioLogueado.token).then((resultado) => {
+        if (resultado.codigo_error === SIN_ERROR) dispatch({ type: 'LOGOUT' });
+        return resultado;
+      });
+    }
   };
   const Registrar = (usuario) => {
     return bd.registrarUsuario(usuario);
   };
+
   return { Login, Logout, Registrar };
 };
 

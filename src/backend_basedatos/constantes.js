@@ -8,7 +8,6 @@ export const ERRORES_BD = {
   DATOS_INVALIDOS: 'Los datos enviados no son válidos.',
   REGISTRO_NO_ENCONTRADO: 'El registro no existe.',
   /////
-  USUARIO_INCORRECTO: 'Usuario es Incorrecto',
   USUARIO_NO_REGISTRADO: 'El Usuario no esta REGISTRADO',
   //////
   CONTRASENA_INCORRECTA: 'Contraseña incorrecta',

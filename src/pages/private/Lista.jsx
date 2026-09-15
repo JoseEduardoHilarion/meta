@@ -13,7 +13,7 @@ export const Lista = () => {
           key={meta.id}
           {...meta}
           onClick={() => {
-            navegar(`/Lista/${meta.id}`);
+            navegar(`/lista/${meta.id}`);
           }}
         />
       ))}

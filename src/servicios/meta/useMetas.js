@@ -1,6 +1,8 @@
 import { useContext, useMemo, useCallback } from 'react';
 import { MetasStateContext, MetasDispatchContext } from './metasContext.js';
 import { bd } from '../../backend_basedatos/clases.js';
+import { SIN_ERROR } from '../../backend_basedatos/constantes.js';
+import { useAuth } from '../auth/AuthMemoria.jsx';
 
 // Transforma el diccionario y el orden en un array simple para el .map()
 const getAllMetas = (estado) => estado.orden.map((id) => estado.objetos[id]);
@@ -26,30 +28,50 @@ export function useMetas() {
 /////////////////////////////////////////////////////////////////////////
 export function useMetasActions() {
   const dispatch = useContext(MetasDispatchContext);
+  const usuarioLogueado = useAuth();
+
   if (!dispatch)
     throw new Error('useMetasActions debe usarse dentro de MetasProvider');
+  const inicializarMetas = (token) => {
+    return bd.listarMetas(token).then((resultado) => {
+      if (resultado.codigo_error === SIN_ERROR)
+        dispatch({
+          type: 'INICIALIZAR',
+          payload: resultado.datos,
+        });
+      return resultado;
+    });
+  };
   const crearMeta = (nuevaMeta) => {
-    return bd.crearMeta(nuevaMeta).then((metaAgregada) =>
-      dispatch({
-        type: 'CREAR',
-        payload: metaAgregada,
-      }),
-    );
+    return bd.crearMeta(nuevaMeta, usuarioLogueado.token).then((resultado) => {
+      if (resultado.codigo_error === SIN_ERROR)
+        dispatch({
+          type: 'CREAR',
+          payload: resultado.datos,
+        });
+      return resultado;
+    });
   };
   const actualizarMeta = (datosActualizados) => {
-    return bd.actualizarMeta(datosActualizados).then((metaActualizada) =>
-      dispatch({
-        type: 'ACTUALIZAR',
-        payload: metaActualizada,
-      }),
-    );
+    return bd
+      .actualizarMeta(datosActualizados, usuarioLogueado.token)
+      .then((resultado) => {
+        if (resultado.codigo_error === SIN_ERROR)
+          dispatch({
+            type: 'ACTUALIZAR',
+            payload: resultado.datos,
+          });
+        return resultado;
+      });
   };
   const borrarMeta = (id) => {
-    return bd.borrarMeta(id).then(() => {
-      dispatch({
-        type: 'BORRAR',
-        payload: id,
-      });
+    return bd.borrarMeta(id, usuarioLogueado.token).then((resultado) => {
+      if (resultado.codigo_error === SIN_ERROR)
+        dispatch({
+          type: 'BORRAR',
+          payload: id,
+        });
+      return resultado;
     });
   };
   // Retornamos una API limpia para los componentes
@@ -57,5 +79,6 @@ export function useMetasActions() {
     crearMeta,
     actualizarMeta,
     borrarMeta,
+    inicializarMetas,
   };
 }
