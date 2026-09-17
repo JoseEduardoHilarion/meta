@@ -6,8 +6,8 @@
       "email": "jose",
       "passwordHash": "jose",
       "token": {
-        "valor": "dabc8c1c7509e0522b1c4c8082e47c63129849fd448ecf2c3d667d94d19045dc",
-        "expira": 1789505706140
+        "valor": "c0e3951bed88e91079a2c5a5d14cebdc276aeabad3e68b91dae8d94679c8d320",
+        "expira": 1789616677766
       },
       "id": "sPw-7woagFk"
     },
@@ -17,10 +17,21 @@
       "email": "paola",
       "passwordHash": "paola",
       "token": {
-        "valor": "781af804ec800f9d0f535fbdd04e0802c4cc30f968dfb5d3c8df7ba126a38a74",
-        "expira": 1789496514832
+        "valor": "f4bb9db08cfdfde1c912e827224df00edde533590d8475a5f874506fec3e537c",
+        "expira": 1789658628516
       },
       "id": "v_Iznxqc8vY"
+    },
+    {
+      "nombre": "tati",
+      "dni": "334234242",
+      "email": "tati",
+      "passwordHash": "tati",
+      "token": {
+        "valor": "f46ffa6f90334b7330d8d2726bf0b6b57f676d066287b6239e3630d8889545f4",
+        "expira": 1789616730732
+      },
+      "id": "52Dz6896nn8"
     }
   ],
   "goals": [
@@ -37,24 +48,13 @@
     },
     {
       "id": "DuCnzhQeo1M",
-      "detalles": "paola andrea hilarion",
+      "detalles": "paola andrea hilarion, hola paolaita",
       "eventos": 1,
       "periodo": "día",
       "icono": "✈️",
       "meta": 6,
       "plazo": "2026-09-26",
       "completado": 2,
-      "usuarioId": "v_Iznxqc8vY"
-    },
-    {
-      "id": "GqqoENoODYQ",
-      "detalles": "paola andrea hilarion",
-      "eventos": 1,
-      "periodo": "mes",
-      "icono": "💧",
-      "meta": 1,
-      "plazo": "2030-01-01",
-      "completado": 0,
       "usuarioId": "v_Iznxqc8vY"
     },
     {
@@ -70,7 +70,7 @@
     },
     {
       "id": "CHvljG_OZF4",
-      "detalles": "bbbb",
+      "detalles": "bebe de jose eduardo",
       "eventos": 1,
       "periodo": "día",
       "icono": "🏃",
@@ -80,15 +80,48 @@
       "usuarioId": "sPw-7woagFk"
     },
     {
-      "id": "R4KfJ7Hw_hI",
-      "detalles": "ffffhola soy jjose eduardo hilarion",
+      "id": "YJAV-xbC2GM",
+      "detalles": "esta la ultima meta que ingrese con USUUARIO JOSE",
+      "eventos": 1,
+      "periodo": "día",
+      "icono": "🏃",
+      "meta": 1,
+      "plazo": "undefined",
+      "completado": 1,
+      "usuarioId": "sPw-7woagFk"
+    },
+    {
+      "detalles": "mi memta tati",
+      "eventos": 1,
+      "periodo": "día",
+      "icono": "🏃",
+      "meta": 1,
+      "plazo": "2030-01-01",
+      "completado": 0,
+      "usuarioId": "52Dz6896nn8",
+      "id": "o2l8Cy0uthY"
+    },
+    {
+      "detalles": "fffff",
+      "eventos": 1,
+      "periodo": "día",
+      "icono": "🏃",
+      "meta": 1,
+      "plazo": "2030-01-01",
+      "completado": 0,
+      "usuarioId": "52Dz6896nn8",
+      "id": "bymiUJGf44k"
+    },
+    {
+      "detalles": "fgsdgfd",
       "eventos": 1,
       "periodo": "semana",
       "icono": "🏃",
       "meta": 1,
       "plazo": "2030-01-01",
       "completado": 0,
-      "usuarioId": "sPw-7woagFk"
+      "usuarioId": "52Dz6896nn8",
+      "id": "82Gr0yqnhTc"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

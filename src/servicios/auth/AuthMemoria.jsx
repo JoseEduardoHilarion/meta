@@ -1,6 +1,7 @@
 import { useReducer, createContext, useContext } from 'react';
 import { bd } from '../../backend_basedatos/clases.js';
 import { SIN_ERROR } from '../../backend_basedatos/constantes.js';
+import { useRef, useEffect } from 'react';
 
 const AuthStateContext = createContext();
 const AuthDispatchContext = createContext();
@@ -21,6 +22,21 @@ const estadoInicial = {
 };
 export const AuthMemoria = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, estadoInicial);
+
+  const temporizador = useRef(null);
+
+  useEffect(() => {
+    if (temporizador.current) clearTimeout(temporizador.current);
+
+    if (state.usuario) {
+      const tiempoRestante = state.usuario.token.expira - Date.now();
+      temporizador.current = setTimeout(() => {
+        dispatch({ type: 'LOGOUT' });
+      }, tiempoRestante);
+    }
+    return () => clearTimeout(temporizador.current);
+  }, [state.usuario]);
+
   return (
     <AuthStateContext.Provider value={state}>
       <AuthDispatchContext.Provider value={dispatch}>
@@ -47,12 +63,11 @@ export const useAuthActions = () => {
   };
   const Logout = () => {
     if (usuarioLogueado) {
-      return bd.anularToken(usuarioLogueado.token).then((resultado) => {
-        if (resultado.codigo_error === SIN_ERROR) dispatch({ type: 'LOGOUT' });
-        return resultado;
-      });
+      dispatch({ type: 'LOGOUT' });
+      bd.anularToken(usuarioLogueado.token);
     }
   };
+
   const Registrar = (usuario) => {
     return bd.registrarUsuario(usuario);
   };
