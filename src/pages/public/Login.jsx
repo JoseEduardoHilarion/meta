@@ -38,7 +38,7 @@ export const Login = () => {
     if (esValido)
       Login(form).then((resultadoLogin) => {
         if (resultadoLogin.codigo_error === SIN_ERROR) {
-          inicializarMetas(resultadoLogin.datos.token).then(
+          inicializarMetas(resultadoLogin.datos.token.valor).then(
             (resultadoMetas) => {
               if (resultadoMetas.codigo_error === SIN_ERROR)
                 navegar('/lista', { replace: true });

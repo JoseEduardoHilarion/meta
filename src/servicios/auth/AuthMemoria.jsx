@@ -1,7 +1,7 @@
 import { useReducer, createContext, useContext } from 'react';
 import { bd } from '../../backend_basedatos/clases.js';
 import { SIN_ERROR } from '../../backend_basedatos/constantes.js';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 
 const AuthStateContext = createContext();
 const AuthDispatchContext = createContext();
@@ -22,24 +22,27 @@ const estadoInicial = {
 };
 export const AuthMemoria = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, estadoInicial);
-
   const temporizador = useRef(null);
+
+  const logoutInterno = useCallback(() => {
+    dispatch({ type: 'LOGOUT' });
+    bd.anularToken(state.usuario.token.valor);
+  }, [state.usuario]);
 
   useEffect(() => {
     if (temporizador.current) clearTimeout(temporizador.current);
-
     if (state.usuario) {
       const tiempoRestante = state.usuario.token.expira - Date.now();
       temporizador.current = setTimeout(() => {
-        dispatch({ type: 'LOGOUT' });
+        logoutInterno();
       }, tiempoRestante);
     }
     return () => clearTimeout(temporizador.current);
-  }, [state.usuario]);
+  }, [state.usuario, logoutInterno]);
 
   return (
     <AuthStateContext.Provider value={state}>
-      <AuthDispatchContext.Provider value={dispatch}>
+      <AuthDispatchContext.Provider value={{ dispatch, logoutInterno }}>
         {children}
       </AuthDispatchContext.Provider>
     </AuthStateContext.Provider>
@@ -48,7 +51,7 @@ export const AuthMemoria = ({ children }) => {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuthActions = () => {
-  const dispatch = useContext(AuthDispatchContext);
+  const { dispatch, logoutInterno } = useContext(AuthDispatchContext);
   const usuarioLogueado = useAuth();
 
   if (!dispatch)
@@ -63,8 +66,7 @@ export const useAuthActions = () => {
   };
   const Logout = () => {
     if (usuarioLogueado) {
-      dispatch({ type: 'LOGOUT' });
-      bd.anularToken(usuarioLogueado.token);
+      logoutInterno();
     }
   };
 

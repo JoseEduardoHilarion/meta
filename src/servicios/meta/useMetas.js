@@ -43,18 +43,20 @@ export function useMetasActions() {
     });
   };
   const crearMeta = (nuevaMeta) => {
-    return bd.crearMeta(nuevaMeta, usuarioLogueado.token).then((resultado) => {
-      if (resultado.codigo_error === SIN_ERROR)
-        dispatch({
-          type: 'CREAR',
-          payload: resultado.datos,
-        });
-      return resultado;
-    });
+    return bd
+      .crearMeta(nuevaMeta, usuarioLogueado.token.valor)
+      .then((resultado) => {
+        if (resultado.codigo_error === SIN_ERROR)
+          dispatch({
+            type: 'CREAR',
+            payload: resultado.datos,
+          });
+        return resultado;
+      });
   };
   const actualizarMeta = (datosActualizados) => {
     return bd
-      .actualizarMeta(datosActualizados, usuarioLogueado.token)
+      .actualizarMeta(datosActualizados, usuarioLogueado.token.valor)
       .then((resultado) => {
         if (resultado.codigo_error === SIN_ERROR)
           dispatch({
@@ -65,7 +67,7 @@ export function useMetasActions() {
       });
   };
   const borrarMeta = (id) => {
-    return bd.borrarMeta(id, usuarioLogueado.token).then((resultado) => {
+    return bd.borrarMeta(id, usuarioLogueado.token.valor).then((resultado) => {
       if (resultado.codigo_error === SIN_ERROR)
         dispatch({
           type: 'BORRAR',

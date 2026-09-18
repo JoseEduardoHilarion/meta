@@ -231,8 +231,8 @@ class BaseDatos {
             const usuarioEncontrado = resultado.datos[0];
             if (usuarioEncontrado.passwordHash === usuario.passwordHash) {
               usuarioEncontrado.token.valor = generarToken();
-              //usuarioEncontrado.token.expira = Date.now() + 12 * HORA;
-              usuarioEncontrado.token.expira = Date.now() + 60 * 1000;
+              usuarioEncontrado.token.expira = Date.now() + 12 * HORA;
+              //usuarioEncontrado.token.expira = Date.now() + 60 * 1000;
               return this.#usuarios
                 .modificar(usuarioEncontrado)
                 .then((resultadoModificarUsuario) =>

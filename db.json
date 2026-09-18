@@ -6,8 +6,8 @@
       "email": "jose",
       "passwordHash": "jose",
       "token": {
-        "valor": "c0e3951bed88e91079a2c5a5d14cebdc276aeabad3e68b91dae8d94679c8d320",
-        "expira": 1789616677766
+        "valor": "01f6282f2cb2b231eb70126b2c1d3be3c911635f021d94698173dfbefc94b06b",
+        "expira": 1789702714854
       },
       "id": "sPw-7woagFk"
     },
@@ -17,8 +17,8 @@
       "email": "paola",
       "passwordHash": "paola",
       "token": {
-        "valor": "f4bb9db08cfdfde1c912e827224df00edde533590d8475a5f874506fec3e537c",
-        "expira": 1789658628516
+        "valor": "",
+        "expira": 0
       },
       "id": "v_Iznxqc8vY"
     },
@@ -28,8 +28,8 @@
       "email": "tati",
       "passwordHash": "tati",
       "token": {
-        "valor": "f46ffa6f90334b7330d8d2726bf0b6b57f676d066287b6239e3630d8889545f4",
-        "expira": 1789616730732
+        "valor": "",
+        "expira": 0
       },
       "id": "52Dz6896nn8"
     }
@@ -47,19 +47,8 @@
       "usuarioId": "sPw-7woagFk"
     },
     {
-      "id": "DuCnzhQeo1M",
-      "detalles": "paola andrea hilarion, hola paolaita",
-      "eventos": 1,
-      "periodo": "día",
-      "icono": "✈️",
-      "meta": 6,
-      "plazo": "2026-09-26",
-      "completado": 2,
-      "usuarioId": "v_Iznxqc8vY"
-    },
-    {
       "id": "5m2TlsjI2TY",
-      "detalles": "paola andrea hilarion",
+      "detalles": "paola andrea hilarion, no te hagas",
       "eventos": 1,
       "periodo": "día",
       "icono": "🍎",
@@ -122,6 +111,17 @@
       "completado": 0,
       "usuarioId": "52Dz6896nn8",
       "id": "82Gr0yqnhTc"
+    },
+    {
+      "detalles": "paolita la loquita",
+      "eventos": 1,
+      "periodo": "semana",
+      "icono": "🏃",
+      "meta": 1,
+      "plazo": "2030-01-01",
+      "completado": 0,
+      "usuarioId": "v_Iznxqc8vY",
+      "id": "zLCc22R8AsA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
