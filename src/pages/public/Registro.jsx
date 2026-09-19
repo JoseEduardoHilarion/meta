@@ -7,7 +7,10 @@ import { Button } from '../../components/ui/Button.jsx';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
 import { authReglas } from '../../servicios/auth/authReglas.js';
 import { useAuthActions } from '../../servicios/auth/AuthMemoria.jsx';
-import { ERRORES_BD, SIN_ERROR } from '../../backend_basedatos/constantes.js';
+import {
+  ERRORES_APLICACION,
+  SIN_ERROR,
+} from '../../backend_basedatos/constantes.js';
 import { useNavigate } from 'react-router';
 
 export const Registro = () => {
@@ -21,7 +24,7 @@ export const Registro = () => {
 
   const [erroresCampos, setErroresCampos] = useState({});
   const { nombre, dni, email, password, password2 } = form;
-  const { Registrar } = useAuthActions();
+  const { registrar } = useAuthActions();
   const navegar = useNavigate();
 
   const handleChange = (e) => {
@@ -38,14 +41,14 @@ export const Registro = () => {
   const handleSubmit = () => {
     const { esValido, errores } = authReglas(form);
     if (esValido)
-      Registrar(form).then((resultado) => {
+      registrar(form).then((resultado) => {
         if (resultado.codigo_error === SIN_ERROR) {
           notificar('Se registro el Usuario :' + resultado.datos.nombre);
           navegar('/login', { replace: true });
         } else
           notificar(
             '⚠️ NO se pudo registrar el Usuario: Error ' +
-              ERRORES_BD[resultado.codigo_error],
+              ERRORES_APLICACION[resultado.codigo_error],
             'error',
           );
       });

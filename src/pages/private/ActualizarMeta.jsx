@@ -7,7 +7,10 @@ import { Modal } from '../../components/ui/Modal.jsx';
 
 import { useMetas, useMetasActions } from '../../servicios/meta/useMetas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
-import { ERRORES_BD, SIN_ERROR } from '../../backend_basedatos/constantes.js';
+import {
+  ERRORES_APLICACION,
+  SIN_ERROR,
+} from '../../backend_basedatos/constantes.js';
 
 export const ActualizarMeta = () => {
   const { id } = useParams();
@@ -31,7 +34,7 @@ export const ActualizarMeta = () => {
           'success',
         );
         navegar('/lista');
-      } else notificar(ERRORES_BD[resultado.codigo_error], 'error');
+      } else notificar(ERRORES_APLICACION[resultado.codigo_error], 'error');
     });
   };
 
@@ -40,7 +43,7 @@ export const ActualizarMeta = () => {
       if (resultado.codigo_error === SIN_ERROR) {
         notificar('Ok, se ELIMINO la meta', 'success');
         navegar('/lista');
-      } else notificar(ERRORES_BD[resultado.codigo_error], 'error');
+      } else notificar(ERRORES_APLICACION[resultado.codigo_error], 'error');
     });
   };
 

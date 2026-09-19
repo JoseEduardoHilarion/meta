@@ -113,7 +113,9 @@
   input,
   select,
   textarea,
+  span,
   a {
+    font-size: inherit;
     color: inherit;
     /* Hereda el --text-main del body */
     font-family: inherit;

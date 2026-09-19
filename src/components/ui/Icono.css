@@ -1,4 +1,24 @@
 @layer components {
+  .cartel {
+    display: none;
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    white-space: nowrap;
+  }
+  .contenedor-icono {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    &:hover .cartel {
+      display: block;
+    }
+  }
+
   .icono {
     /* IMPORTANTE: Rehabilitamos el centrado */
     display: flex;
@@ -7,13 +27,9 @@
 
     width: 3.8rem;
     height: 3.8rem;
-    overflow: hidden;
 
     /*EMOJIES o caracteres, vean del tamaño correcto */
     font-size: 2.5rem;
-    line-height: 1;
-    /* Evita que el interlineado mueva el emoji hacia abajo */
-
     & img {
       width: 100%;
       height: 100%;

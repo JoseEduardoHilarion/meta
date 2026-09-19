@@ -3,6 +3,7 @@ import { MetasStateContext, MetasDispatchContext } from './metasContext.js';
 import { bd } from '../../backend_basedatos/clases.js';
 import { SIN_ERROR } from '../../backend_basedatos/constantes.js';
 import { useAuth } from '../auth/AuthMemoria.jsx';
+import { useControlSesion } from '../useControlSesion.js';
 
 // Transforma el diccionario y el orden en un array simple para el .map()
 const getAllMetas = (estado) => estado.orden.map((id) => estado.objetos[id]);
@@ -24,6 +25,8 @@ export function useMetas() {
     metaPorId,
   };
 }
+
+useControlSesion;
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 export function useMetasActions() {
@@ -42,7 +45,7 @@ export function useMetasActions() {
       return resultado;
     });
   };
-  const crearMeta = (nuevaMeta) => {
+  const crearMeta = useControlSesion((nuevaMeta) => {
     return bd
       .crearMeta(nuevaMeta, usuarioLogueado.token.valor)
       .then((resultado) => {
@@ -53,8 +56,8 @@ export function useMetasActions() {
           });
         return resultado;
       });
-  };
-  const actualizarMeta = (datosActualizados) => {
+  });
+  const actualizarMeta = useControlSesion((datosActualizados) => {
     return bd
       .actualizarMeta(datosActualizados, usuarioLogueado.token.valor)
       .then((resultado) => {
@@ -65,8 +68,8 @@ export function useMetasActions() {
           });
         return resultado;
       });
-  };
-  const borrarMeta = (id) => {
+  });
+  const borrarMeta = useControlSesion((id) => {
     return bd.borrarMeta(id, usuarioLogueado.token.valor).then((resultado) => {
       if (resultado.codigo_error === SIN_ERROR)
         dispatch({
@@ -75,7 +78,7 @@ export function useMetasActions() {
         });
       return resultado;
     });
-  };
+  });
   // Retornamos una API limpia para los componentes
   return {
     crearMeta,

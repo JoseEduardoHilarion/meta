@@ -5,7 +5,10 @@ import { metaVacia } from '../../data/mocks.js';
 import { Button } from '../../components/ui/Button.jsx';
 import { useMetasActions } from '../../servicios/meta/useMetas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
-import { ERRORES_BD, SIN_ERROR } from '../../backend_basedatos/constantes.js';
+import {
+  ERRORES_APLICACION,
+  SIN_ERROR,
+} from '../../backend_basedatos/constantes.js';
 
 export const CrearMeta = () => {
   const { crearMeta } = useMetasActions();
@@ -18,7 +21,7 @@ export const CrearMeta = () => {
           'success',
         );
         navegar('/Lista');
-      } else notificar(ERRORES_BD[resultado.codigo_error], 'error');
+      } else notificar(ERRORES_APLICACION[resultado.codigo_error], 'error');
     });
   };
   return (

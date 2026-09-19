@@ -43,9 +43,7 @@ export const Meta = ({
       onClick={onClick}
       className="m-2 rounded-sm"
     >
-      <Icono variant="inset" className="circulo">
-        {icono}
-      </Icono>
+      <Icono variant="inset" className="circulo" source={icono} />
       <div>
         <p className="txt-xl m-2">
           {eventos}

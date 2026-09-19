@@ -15,4 +15,9 @@ export const ERRORES_BD = {
   ////
   TOKEN_INVALIDO: 'Token invalido',
   TOKEN_VENCIDO: 'Token vencido',
+  //////
+};
+export const ERRORES_APLICACION = {
+  ...ERRORES_BD,
+  SESION_INVALIDA: 'La sesión no es válida.',
 };

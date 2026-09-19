@@ -1,18 +1,18 @@
 {
   "users": [
     {
-      "nombre": "2",
-      "dni": "2",
+      "nombre": "jose",
+      "dni": "",
       "email": "jose",
       "passwordHash": "jose",
       "token": {
-        "valor": "01f6282f2cb2b231eb70126b2c1d3be3c911635f021d94698173dfbefc94b06b",
-        "expira": 1789702714854
+        "valor": "6fe8be787445e08612772f7317ecd6f95455d3e4ce06d4cd943c4a246c758430",
+        "expira": 1789858755897
       },
       "id": "sPw-7woagFk"
     },
     {
-      "nombre": "",
+      "nombre": "paola",
       "dni": "",
       "email": "paola",
       "passwordHash": "paola",
@@ -28,8 +28,8 @@
       "email": "tati",
       "passwordHash": "tati",
       "token": {
-        "valor": "",
-        "expira": 0
+        "valor": "baa09ddb12d9ce57553fe05cdc43f7f1caefe420b55e84078dc6b37e6bd31855",
+        "expira": 1789783277613
       },
       "id": "52Dz6896nn8"
     }
@@ -37,7 +37,7 @@
   "goals": [
     {
       "id": "iSOpFU9O8cQ",
-      "detalles": "ttttttttttttttttttttt",
+      "detalles": "eto esta muy mal, me escuchastes",
       "eventos": 1,
       "periodo": "día",
       "icono": "🏃",
@@ -59,24 +59,13 @@
     },
     {
       "id": "CHvljG_OZF4",
-      "detalles": "bebe de jose eduardo",
+      "detalles": "bebe de jose eduardorrr",
       "eventos": 1,
       "periodo": "día",
       "icono": "🏃",
       "meta": 1,
       "plazo": "2030-01-01",
       "completado": 0,
-      "usuarioId": "sPw-7woagFk"
-    },
-    {
-      "id": "YJAV-xbC2GM",
-      "detalles": "esta la ultima meta que ingrese con USUUARIO JOSE",
-      "eventos": 1,
-      "periodo": "día",
-      "icono": "🏃",
-      "meta": 1,
-      "plazo": "undefined",
-      "completado": 1,
       "usuarioId": "sPw-7woagFk"
     },
     {
@@ -91,26 +80,26 @@
       "id": "o2l8Cy0uthY"
     },
     {
-      "detalles": "fffff",
+      "id": "bymiUJGf44k",
+      "detalles": "fffffuuu",
       "eventos": 1,
       "periodo": "día",
       "icono": "🏃",
       "meta": 1,
       "plazo": "2030-01-01",
       "completado": 0,
-      "usuarioId": "52Dz6896nn8",
-      "id": "bymiUJGf44k"
+      "usuarioId": "52Dz6896nn8"
     },
     {
-      "detalles": "fgsdgfd",
+      "id": "82Gr0yqnhTc",
+      "detalles": "fgsdgfdggg",
       "eventos": 1,
       "periodo": "semana",
       "icono": "🏃",
       "meta": 1,
       "plazo": "2030-01-01",
       "completado": 0,
-      "usuarioId": "52Dz6896nn8",
-      "id": "82Gr0yqnhTc"
+      "usuarioId": "52Dz6896nn8"
     },
     {
       "detalles": "paolita la loquita",
@@ -122,6 +111,17 @@
       "completado": 0,
       "usuarioId": "v_Iznxqc8vY",
       "id": "zLCc22R8AsA"
+    },
+    {
+      "id": "o2Y_ws_gfJA",
+      "detalles": "uuuu COMO PUEDE PASAR",
+      "eventos": 1,
+      "periodo": "día",
+      "icono": "🏃",
+      "meta": 1,
+      "plazo": "2030-01-01",
+      "completado": 0,
+      "usuarioId": "sPw-7woagFk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

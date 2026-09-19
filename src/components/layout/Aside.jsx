@@ -21,9 +21,7 @@ export const Aside = ({ esMovil, cerrarMenu }) => {
         className={cn('fw-bold', esActivo('/lista'))}
         onClick={() => handleLinkClick('/lista')}
       >
-        <Icono>
-          <img src="/img/lista.svg" alt="Lista de Metas" />
-        </Icono>
+        <Icono source={<img src="/img/lista.svg" alt="Lista de Metas" />} />
         <h3 className="p-2">Lista de Metas</h3>
       </Item>
 
@@ -32,9 +30,7 @@ export const Aside = ({ esMovil, cerrarMenu }) => {
         className={cn('fw-bold', esActivo('/nueva'))}
         onClick={() => handleLinkClick('/nueva')}
       >
-        <Icono>
-          <img src="/img/nueva.svg" alt="Nueva Meta" />
-        </Icono>
+        <Icono source={<img src="/img/nueva.svg" alt="Nueva Meta" />} />
         <h3 className="p-2">Nueva Meta</h3>
       </Item>
     </div>

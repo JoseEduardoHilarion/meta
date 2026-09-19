@@ -57,24 +57,24 @@ export const useAuthActions = () => {
   if (!dispatch)
     throw new Error('useAuthActions debe usarse dentro de AuthProvider');
 
-  const Login = (usuario) => {
+  const login = (usuario) => {
     return bd.generarToken(usuario).then((resultado) => {
       if (resultado.codigo_error === SIN_ERROR)
         dispatch({ type: 'LOGIN', payload: resultado.datos });
       return resultado;
     });
   };
-  const Logout = () => {
+  const logout = () => {
     if (usuarioLogueado) {
       logoutInterno();
     }
   };
 
-  const Registrar = (usuario) => {
+  const registrar = (usuario) => {
     return bd.registrarUsuario(usuario);
   };
 
-  return { Login, Logout, Registrar };
+  return { login, logout, registrar };
 };
 
 // eslint-disable-next-line react-refresh/only-export-components

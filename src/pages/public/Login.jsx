@@ -8,7 +8,10 @@ import { authReglas } from '../../servicios/auth/authReglas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
 import { NavLink, useNavigate } from 'react-router';
 
-import { ERRORES_BD, SIN_ERROR } from '../../backend_basedatos/constantes.js';
+import {
+  ERRORES_APLICACION,
+  SIN_ERROR,
+} from '../../backend_basedatos/constantes.js';
 import { useAuthActions } from '../../servicios/auth/AuthMemoria.jsx';
 import { useMetasActions } from '../../servicios/meta/useMetas.js';
 
@@ -18,7 +21,7 @@ export const Login = () => {
   const { email, password } = form;
   const navegar = useNavigate();
 
-  const { Login } = useAuthActions();
+  const { login } = useAuthActions();
   const { inicializarMetas } = useMetasActions();
 
   const handleChange = (e) => {
@@ -36,16 +39,21 @@ export const Login = () => {
   const handleLogin = () => {
     const { esValido, errores } = authReglas(form);
     if (esValido)
-      Login(form).then((resultadoLogin) => {
+      login(form).then((resultadoLogin) => {
         if (resultadoLogin.codigo_error === SIN_ERROR) {
           inicializarMetas(resultadoLogin.datos.token.valor).then(
             (resultadoMetas) => {
               if (resultadoMetas.codigo_error === SIN_ERROR)
                 navegar('/lista', { replace: true });
-              else notificar(ERRORES_BD[resultadoMetas.codigo_error], 'error');
+              else
+                notificar(
+                  ERRORES_APLICACION[resultadoMetas.codigo_error],
+                  'error',
+                );
             },
           );
-        } else notificar(ERRORES_BD[resultadoLogin.codigo_error], 'error');
+        } else
+          notificar(ERRORES_APLICACION[resultadoLogin.codigo_error], 'error');
       });
     else {
       setErroresCampos(errores);
