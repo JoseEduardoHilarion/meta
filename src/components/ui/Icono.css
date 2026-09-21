@@ -30,6 +30,9 @@
 
     /*EMOJIES o caracteres, vean del tamaño correcto */
     font-size: 2.5rem;
+    line-height: 1;
+    overflow: hidden;
+
     & img {
       width: 100%;
       height: 100%;

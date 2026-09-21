@@ -20,7 +20,7 @@ export const CrearMeta = () => {
           'OK, se AGREGO con exito la meta> ' + datosFormulario.detalles,
           'success',
         );
-        navegar('/Lista');
+        navegar('/lista');
       } else notificar(ERRORES_APLICACION[resultado.codigo_error], 'error');
     });
   };

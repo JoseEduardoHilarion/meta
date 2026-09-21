@@ -6,8 +6,8 @@
       "email": "jose",
       "passwordHash": "jose",
       "token": {
-        "valor": "6fe8be787445e08612772f7317ecd6f95455d3e4ce06d4cd943c4a246c758430",
-        "expira": 1789858755897
+        "valor": "",
+        "expira": 0
       },
       "id": "sPw-7woagFk"
     },
@@ -17,8 +17,8 @@
       "email": "paola",
       "passwordHash": "paola",
       "token": {
-        "valor": "",
-        "expira": 0
+        "valor": "792fff7cfa9d14d8f7e26f9411028d3298f4dc13f1f93a7f25d4897b8efd2a39",
+        "expira": 1789993217467
       },
       "id": "v_Iznxqc8vY"
     },

@@ -6,7 +6,6 @@ export const Icono = ({
   children,
   clickable,
   cartel = '',
-  source,
   className,
   ...rest
 }) => {
@@ -20,9 +19,8 @@ export const Icono = ({
       )}
       {...rest}
     >
-      <div className="icono">{source}</div>
+      <div className="icono">{children}</div>
       {cartel && <span className="cartel">{cartel}</span>}
-      {children}
     </div>
   );
 };

@@ -1,16 +1,15 @@
-import { useAuthActions } from '/src/servicios/auth/AuthMemoria.jsx';
+import { useAuthActions } from './auth/AuthMemoria';
 
 export const useControlSesion = (funcion) => {
-  const { Logout } = useAuthActions();
+  const { logout } = useAuthActions();
   return (...parametros) => {
     return funcion(...parametros).then((resultado) => {
-      console.log(resultado);
       if (
         resultado.codigo_error === 'TOKEN_VENCIDO' ||
         resultado.codigo_error === 'TOKEN_INVALIDO'
       ) {
-        Logout();
-        resultado.codigo_error = 'SESION_INVALIDA';
+        logout();
+        return { ...resultado, codigo_error: 'SESION_INVALIDA' };
       }
       return resultado;
     });

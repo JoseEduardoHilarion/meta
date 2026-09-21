@@ -30,12 +30,13 @@ export const Registro = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     const nuevoForm = { ...form, [name]: value };
-    setForm(() => nuevoForm);
+    setForm(nuevoForm);
   };
   //Validación en caliente al salir (onBlur) usando tu validador central
-  const handleBlur = () => {
+  const handleBlur = (e) => {
+    const { name } = e.target;
     const { errores } = authReglas(form, name);
-    setErroresCampos(errores);
+    setErroresCampos((prev) => ({ ...prev, ...errores }));
   };
 
   const handleSubmit = () => {

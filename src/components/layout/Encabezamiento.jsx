@@ -29,17 +29,19 @@ export const Encabezamiento = () => {
         >
           ☰
         </Button>
-        <Icono source={<img src="/img/logo.svg" alt="logo" />} />
+        <Icono>
+          <img src="/img/logo.svg" alt="logo" />
+        </Icono>
         <h2>METAS APP</h2>
         <Spacer />
-        <Icono
-          clickable
-          onClick={logout}
-          source={<img src="/img/perfil.svg" alt="Perfil" />}
-          cartel="Cerrar Sesion"
-        >
-          {usuarioLogueado && <h3>{usuarioLogueado.nombre}</h3>}
-        </Icono>
+        {usuarioLogueado && (
+          <>
+            <h3>{usuarioLogueado.nombre}</h3>
+            <Icono clickable onClick={logout} cartel="Cerrar Sesion">
+              <img src="/img/perfil.svg" alt="Perfil" />
+            </Icono>
+          </>
+        )}
         <ThemeToggle />
       </Item>
       <Drawer isOpen={menuAbierto} onClose={cerrarMenu}>
