@@ -1,0 +1,5 @@
+guía Principios: Las pruebas deben ser tener la forma en que se usa su software.
+
+1 Componentes de renderización, entonces debería tratar con nodos DOM, y NO con Instancias de componentes.
+2 La forma en que el usuario lo usaría
+3 Las implementaciones de utilidad y las API deben ser simples y flexibles.
