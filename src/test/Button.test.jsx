@@ -1,5 +1,3 @@
-// src/test/Button.test.jsx
-import { describe, test, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Button } from '../components/ui/Button';
@@ -18,19 +16,6 @@ describe('Button', () => {
 
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
-
-  /*test('no llama onClick cuando está deshabilitado', async () => {
-    const handleClick = vi.fn();
-
-    render(
-      <Button onClick={handleClick} disabled>
-        Guardar
-      </Button>,
-    );
-    await userEvent.click(screen.getByText('Guardar'));
-
-    expect(handleClick).not.toHaveBeenCalled();
-  });*/
 
   test('aplica la clase CSS que recibe', () => {
     render(<Button className="mi-clase">Guardar</Button>);

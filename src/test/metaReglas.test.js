@@ -1,5 +1,3 @@
-// src/test/metaReglas.test.js
-import { describe, test, expect } from 'vitest';
 import { metaReglas } from '../servicios/meta/metaReglas';
 
 describe('metaReglas', () => {

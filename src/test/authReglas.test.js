@@ -1,5 +1,3 @@
-// src/test/authReglas.test.js
-import { describe, test, expect } from 'vitest';
 import { authReglas } from '../servicios/auth/authReglas';
 
 describe('authReglas', () => {

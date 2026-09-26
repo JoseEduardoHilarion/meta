@@ -4,7 +4,17 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
+import vitest from '@vitest/eslint-plugin';
+
 export default defineConfig([
+  {
+    files: ['src/test/**/*.{js,jsx}'],
+    plugins: { vitest },
+    rules: vitest.configs.recommended.rules,
+    languageOptions: {
+      globals: vitest.environments.env.globals,
+    },
+  },
   globalIgnores(['dist']),
   {
     files: ['**/*.{js,jsx}'],
@@ -29,15 +39,3 @@ export default defineConfig([
     },
   },
 ]);
-
-describe('metaReglas', () => {
-  // agrupa tests relacionados
-  // es como una carpeta con nombre
-
-  test('rechaza descripción vacía', () => {
-    // un caso concreto a verificar
-    // "si pasa esto..."
-
-    expect(esValido).toBe(false); // "...espero este resultado"
-  });
-});

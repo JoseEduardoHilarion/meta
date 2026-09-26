@@ -1,7 +1,6 @@
-// src/test/Login.test.jsx
-import { describe, test, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
 import { Login } from '../pages/public/Login';
 import { SIN_ERROR } from '../backend_basedatos/constantes';
 
