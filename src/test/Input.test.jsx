@@ -1,9 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { Input } from '../components/form/Input';
-
-// src/test/Input.test.jsx — agregá este test al describe existente
 import { userEvent } from '@testing-library/user-event';
-import { vi } from 'vitest';
+
+import { Input } from '../components/form/Input';
 
 describe('Input', () => {
   test('llama onChange cuando el usuario escribe', async () => {

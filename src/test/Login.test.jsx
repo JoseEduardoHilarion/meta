@@ -5,11 +5,13 @@ import { Login } from '../pages/public/Login';
 import { SIN_ERROR } from '../backend_basedatos/constantes';
 
 // ─── MOCKS ───────────────────────────────────────────────
-// Funciones espía que reemplazan los módulos reales
-const mockNavegar = vi.fn();
-const mockLogin = vi.fn();
-const mockInicializarMetas = vi.fn();
-const mockNotificar = vi.fn();
+const { mockNavegar, mockLogin, mockInicializarMetas, mockNotificar } =
+  vi.hoisted(() => ({
+    mockNavegar: vi.fn(),
+    mockLogin: vi.fn(),
+    mockInicializarMetas: vi.fn(),
+    mockNotificar: vi.fn(),
+  }));
 
 // vi.mock reemplaza el módulo entero por lo que vos definís
 // Login llama useNavigate() — le damos nuestra función espía

@@ -17,8 +17,8 @@
       "email": "paola",
       "passwordHash": "paola",
       "token": {
-        "valor": "792fff7cfa9d14d8f7e26f9411028d3298f4dc13f1f93a7f25d4897b8efd2a39",
-        "expira": 1789993217467
+        "valor": "",
+        "expira": 0
       },
       "id": "v_Iznxqc8vY"
     },
@@ -32,6 +32,17 @@
         "expira": 1789783277613
       },
       "id": "52Dz6896nn8"
+    },
+    {
+      "nombre": "",
+      "dni": "555555",
+      "email": "toto",
+      "passwordHash": "toto",
+      "token": {
+        "valor": "ae55f791f4d2599a90fc66723278b484fe908afc07d237987208c0d4833bb994",
+        "expira": 1790577906500
+      },
+      "id": "LCqDjowKYys"
     }
   ],
   "goals": [
@@ -40,7 +51,7 @@
       "detalles": "eto esta muy mal, me escuchastes",
       "eventos": 1,
       "periodo": "día",
-      "icono": "🏃",
+      "icono": "💧",
       "meta": 1,
       "plazo": "undefined",
       "completado": 1,
@@ -102,25 +113,25 @@
       "usuarioId": "52Dz6896nn8"
     },
     {
+      "id": "zLCc22R8AsA",
       "detalles": "paolita la loquita",
       "eventos": 1,
       "periodo": "semana",
-      "icono": "🏃",
+      "icono": "📚",
       "meta": 1,
       "plazo": "2030-01-01",
       "completado": 0,
-      "usuarioId": "v_Iznxqc8vY",
-      "id": "zLCc22R8AsA"
+      "usuarioId": "v_Iznxqc8vY"
     },
     {
       "id": "o2Y_ws_gfJA",
       "detalles": "uuuu COMO PUEDE PASAR",
       "eventos": 1,
       "periodo": "día",
-      "icono": "🏃",
+      "icono": "🍎",
       "meta": 1,
-      "plazo": "2030-01-01",
-      "completado": 0,
+      "plazo": "undefined",
+      "completado": 1,
       "usuarioId": "sPw-7woagFk"
     }
   ],
