@@ -5,6 +5,7 @@ import { metaVacia } from '../../data/mocks.js';
 import { Button } from '../../components/ui/Button.jsx';
 import { useMetasActions } from '../../servicios/meta/useMetas.js';
 import { notificar } from '../../servicios/sistemaNotificaciones.js';
+
 import {
   ERRORES_APLICACION,
   SIN_ERROR,

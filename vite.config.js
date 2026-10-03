@@ -7,6 +7,7 @@ export default defineConfig({
     host: true,
     port: 5173,
   },
+
   test: {
     environment: 'jsdom', // simula el browser
     globals: true, // describe, test, expect sin importar

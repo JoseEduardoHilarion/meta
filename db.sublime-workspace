@@ -1,0 +1,675 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"pas",
+				"password2"
+			],
+			[
+				"no",
+				"nowrap"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"tra",
+				"translateX()"
+			],
+			[
+				"us",
+				"usuarioLogueado"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"r",
+				"registrar"
+			],
+			[
+				"resulta",
+				"resultadoModificar"
+			],
+			[
+				"usu",
+				"usuarioId"
+			],
+			[
+				"c",
+				"codigo_error"
+			],
+			[
+				"re",
+				"resultado"
+			],
+			[
+				"co",
+				"codigo_error"
+			],
+			[
+				"existe",
+				"existeEmail"
+			],
+			[
+				"exi",
+				"existeDni"
+			],
+			[
+				"exis",
+				"existe_email"
+			],
+			[
+				"reu",
+				"return"
+			],
+			[
+				"B",
+				"BaseDatos"
+			],
+			[
+				"u",
+				"urlBase"
+			],
+			[
+				"str",
+				"String"
+			],
+			[
+				"uses",
+				"useState"
+			],
+			[
+				"nuev",
+				"nuevaMetaS"
+			],
+			[
+				"nu",
+				"nuevaMeta"
+			],
+			[
+				"pa",
+				"password2"
+			],
+			[
+				"SpaceR",
+				"Spacer"
+			],
+			[
+				"Inpu",
+				"Input"
+			],
+			[
+				"FO",
+				"footer"
+			],
+			[
+				"imp",
+				"impcomp\timport-component"
+			],
+			[
+				"for",
+				"FormContainer"
+			],
+			[
+				"For",
+				"FormContainer"
+			],
+			[
+				"Form",
+				"Form"
+			],
+			[
+				"FormContain",
+				"FormContainer"
+			],
+			[
+				"FormContaine",
+				"FormContainer"
+			],
+			[
+				"h",
+				"handleSubmit"
+			],
+			[
+				"on",
+				"onSubmit"
+			],
+			[
+				"he",
+				"header"
+			],
+			[
+				"L",
+				"ListaNotas"
+			],
+			[
+				"use",
+				"useContext"
+			],
+			[
+				"fu",
+				"fun\tFunction"
+			],
+			[
+				"cl",
+				"className?"
+			],
+			[
+				"n",
+				"notaVacia"
+			],
+			[
+				"se",
+				"setNota"
+			],
+			[
+				"v",
+				"value"
+			],
+			[
+				"con",
+				"contextoNotas"
+			],
+			[
+				"cons",
+				"const"
+			],
+			[
+				"cre",
+				"createContext"
+			],
+			[
+				"bor",
+				"border"
+			],
+			[
+				"fl",
+				"flex-direction"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"cla",
+				"className?"
+			],
+			[
+				"t",
+				"titulo"
+			],
+			[
+				"N",
+				"Nota()"
+			],
+			[
+				"p",
+				"p"
+			],
+			[
+				"ti",
+				"titulo"
+			],
+			[
+				"ju",
+				"justify-content"
+			],
+			[
+				"fo",
+				"footer"
+			],
+			[
+				"wh",
+				"white"
+			],
+			[
+				"d",
+				"descripcion"
+			],
+			[
+				"b",
+				"br"
+			],
+			[
+				"meta",
+				"metaPorId"
+			],
+			[
+				"na",
+				"navegar"
+			],
+			[
+				"met",
+				"metaExistente"
+			],
+			[
+				"useP",
+				"useParams"
+			],
+			[
+				"me",
+				"metaVacia"
+			],
+			[
+				"m",
+				"MetaForm"
+			],
+			[
+				"f",
+				"form"
+			],
+			[
+				"s",
+				"String(value)"
+			],
+			[
+				"De",
+				"DetalleMeta"
+			],
+			[
+				"ou",
+				"Outlet"
+			],
+			[
+				"navi",
+				"Navigate"
+			],
+			[
+				"typ",
+				"type"
+			],
+			[
+				"es",
+				"estadoInicial"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Snippet: ",
+				"Snippet: react-func"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"markp",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"p",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"pa",
+				"Package Control: Advanced Install Packages"
+			],
+			[
+				"lsp e",
+				"LSP: Enable Language Server in Project"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"i",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"package control ",
+				"Package Control: Install Package"
+			],
+			[
+				"Reindent Lines",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"Reindent L",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"Terminus: Open Default Shell",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"Package Control ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: Install Package",
+				"Package Control: Install Package"
+			],
+			[
+				"Install Package Control",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 423.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/josse/.configtde/sublime-text/Packages/ESLint/ESLint.sublime-settings",
+		"/home/josse/.configtde/sublime-text/Packages/JsPrettier/JsPrettier.sublime-settings",
+		"/home/josse/.configtde/sublime-text/Packages/User/JsPrettier.sublime-settings",
+		"/home/josse/Documentos/PROGRAMACION/meta/src/backend_basedatos/clases.js",
+		"/home/josse/Documentos/PROGRAMACION/meta/src/backend_basedatos/baseDatos.js",
+		"/home/jose/wifi.txt",
+		"/media/jose/d2be117f-dd03-4404-97fd-5d99c0f4e2f3/home/josse/.xsession-errors",
+		"/home/jose/DISTTRO NUEVA/mis_programas.txt",
+		"/home/jose/DISTTRO NUEVA/misprogramas.txt",
+		"/home/jose/DISTTRO NUEVA/txt.txt",
+		"/home/jose/DISTTRO NUEVA/antix.txt",
+		"/home/jose/antix.txt",
+		"/home/jose/Descargas/mis_programas.txt",
+		"/home/jose/Descargas/misprogramas.txt",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/pages/public/Registro.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/test/Registro.test.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/form/InputSelect.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/form/MetaForm.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/form/FormContainer.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/test/Login.test.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/types/screen.d.ts",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/pnpm-lock.yaml",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/test/setup.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/test/metaReglas.test.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/eslint.config.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/package.json",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/vite.config.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/test/authReglas.test.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/test/Button.test.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/test/Input.test.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/test/prueba.test.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/principios.txt",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/prueba.test.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/UNO.md",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/.gitignore",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/guia-testing-react.pdf",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/sistemaNotificaciones.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/pages/public/Login.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/ui/Button.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/pages/private/ActualizarMeta.jsx",
+		"/home/jose/Documentos/Academia X/jose.md",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/App.test.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/Nuevo/metasapp/src/reportWebVitals.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/vite.config.ts",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/react-app-env.d.ts",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/reportWebVitals.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/setupTests.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/test/Input2.test.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/metas3/src/components/ui/UNO.md",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/metas3/src/components/ui/Icono.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/ui/Icono.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/ui/Icono.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/ui/Item.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/ui/Item.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/ui/Modal.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/ui/Modal.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/auth/authReglas.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/layout/Encabezamiento.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/layout/Layout.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/pages/private/Lista.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/auth/AuthMemoria.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/meta/useMetas.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/useControlSesion.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/pages/private/CrearMeta.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/pages/private/Meta.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/layout/Aside.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/metas3/src/components/ui/Icono.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/metas original/src/components/ui/Item.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/meta/MetaMemoria.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/meta/metasContext.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/layout/Encabezamiento.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/backend_basedatos/clases.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/db.json",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/styles/reset_base.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/styles/utilities.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/styles/ui-core.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/components/ui/Button.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/backend_basedatos/constantes.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/pages/private/NoEncontrado.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/useControlar.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/auth/Autenticar.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/dist/index.html",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/dist/assets/index-BLVrZdUe.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/dist/assets/index-CmzpWjKd.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/publico/acceso/Acceso.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/tipos/MetaTipo.ts",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/arquitectura.svg",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/compartidos/Pie.module.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/compartidos/Pie.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/compartidos/Modal.tsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/compartidos/Layout.module.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/compartidos/Layout.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/compartidos/Encabezado.module.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/compartidos/Encabezado.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/compartidos/Credenciales.tsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/compartidos/Credenciales.module.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/compartidos/Autenticar.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/compartidos/Aside.module.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/compartidos/Aside.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/privado/nueva/Detalles.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/privado/lista/Meta.tsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/privado/lista/Meta.test.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/privado/lista/Meta.module.css",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/privado/lista/Lista.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/componentes/publico/registro/Registro.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/App.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/index.tsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/memoria/Auth.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/memoria/Metas.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/servicios/Auth.ts",
+		"/home/jose/Documentos/Academia X/Academia X - Bootcamp.html",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/routes/AppRouter.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/main.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/App.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/api/api.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/backend_basedatos/baseDatos.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/node_modules/.pnpm/typescript@6.0.3/node_modules/typescript/lib/lib.es5.d.ts",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/data/mocks.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/meta/metaReglas.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/servicios/Metas.ts",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/meta/basedatos.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/meta/aux.js",
+		"/home/jose/.bashrc",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/07 Proyecto/02 Implementación/metasapp/src/tipos/CredencialesTipo.ts",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/auth/authContext.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/auth/AuthContext.js",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/meta/metaMemoria.jsx",
+		"/home/jose/Documentos/Academia X/Codigo/REACT/EJERCICIOS/meta/src/servicios/meta/Memoria.jsx"
+	],
+	"find":
+	{
+		"height": 32.0
+	},
+	"find_in_files":
+	{
+		"height": 144.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 32.0
+	},
+	"input":
+	{
+		"height": 68.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.LSP Log Panel":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.SublimeLinter":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.diagnostics":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"output.find_results":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"pinned_build_system": "Packages/User/JavaScript.sublime-build",
+	"project": "db.sublime-project",
+	"replace":
+	{
+		"height": 60.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"lsp_show_inlay_hints": false
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 234.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

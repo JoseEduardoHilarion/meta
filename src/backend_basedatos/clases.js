@@ -9,6 +9,7 @@ class Tabla {
   listar(filtro = '') {
     const fetchUrl = this.#bd.urlBase + '/' + this.#endpoint + filtro;
     return fetchGenerico(fetchUrl, 'GET');
+
   }
   obtener(id) {
     const fetchUrl = this.#bd.urlBase + '/' + this.#endpoint + '/' + id;
@@ -39,6 +40,8 @@ class BaseDatos {
     this.#metas = new Tabla('goals', this);
   }
   get urlBase() {
+
+
     return this.#urlBase;
   }
   cambiarUrlBase(url) {
@@ -110,8 +113,8 @@ class BaseDatos {
             ...resultadoListaMeta,
             datos: resultadoListaMeta.exito
               ? resultadoListaMeta.datos.map((meta) =>
-                  adaptarMetaParaFormulario(meta),
-                )
+                adaptarMetaParaFormulario(meta),
+              )
               : null,
           }),
         ),
@@ -203,9 +206,9 @@ class BaseDatos {
               ...resultado,
               datos: resultado.exito
                 ? {
-                    id: resultado.datos.id,
-                    nombre: resultado.datos.nombre,
-                  }
+                  id: resultado.datos.id,
+                  nombre: resultado.datos.nombre,
+                }
                 : null,
             }),
           );
@@ -240,10 +243,10 @@ class BaseDatos {
                     ...resultadoModificarUsuario,
                     datos: resultadoModificarUsuario.exito
                       ? {
-                          id: resultadoModificarUsuario.datos.id,
-                          nombre: resultadoModificarUsuario.datos.nombre,
-                          token: resultadoModificarUsuario.datos.token,
-                        }
+                        id: resultadoModificarUsuario.datos.id,
+                        nombre: resultadoModificarUsuario.datos.nombre,
+                        token: resultadoModificarUsuario.datos.token,
+                      }
                       : null,
                   }),
                 );
