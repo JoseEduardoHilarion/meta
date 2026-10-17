@@ -6,8 +6,8 @@
       "email": "jose",
       "passwordHash": "jose",
       "token": {
-        "valor": "17a92f694f30cc58aa89bd562ec7d63487e5d03585b6590c0601d339e2e56890",
-        "expira": 1791786262136
+        "valor": "da1d75227c28edc74fd41d09d67fd0a5facc9469deb8e9497ee368e94f4d14b2",
+        "expira": 1792243650450
       },
       "id": "sPw-7woagFk"
     },
@@ -125,7 +125,7 @@
     },
     {
       "id": "o2Y_ws_gfJA",
-      "detalles": "uuuu COMO PUEDE PASAR",
+      "detalles": "hhhhhhhhhhhh",
       "eventos": 1,
       "periodo": "día",
       "icono": "🍎",
